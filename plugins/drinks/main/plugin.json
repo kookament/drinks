@@ -6,5 +6,5 @@
     "lib.backbone"
   ],
 
-  "endpoint": "scripts/_endpoint.coffee"
+  "endpoint": "_endpoint.coffee"
 }
