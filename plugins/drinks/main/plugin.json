@@ -1,3 +1,10 @@
 {
-  "uri": "drinks.main"
+  "uri": "drinks.main",
+
+  "dependencies": [
+    "lib.jquery",
+    "lib.backbone"
+  ],
+
+  "endpoint": "scripts/_endpoint.coffee"
 }
