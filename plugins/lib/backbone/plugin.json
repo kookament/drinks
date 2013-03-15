@@ -1,0 +1,7 @@
+{
+  "uri": "lib.backbone",
+
+  "dependencies": [
+    "lib.underscore"
+  ]
+}

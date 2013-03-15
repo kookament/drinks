@@ -1,0 +1,9 @@
+{
+  "uri": "drinks.list",
+
+  "dependencies": [
+    "lib.jquery",
+    "lib.backbone",
+    "lib.handlebars"
+  ]
+}
