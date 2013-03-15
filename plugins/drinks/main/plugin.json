@@ -3,7 +3,9 @@
 
   "dependencies": [
     "lib.jquery",
-    "lib.backbone"
+    "lib.backbone",
+
+    "drinks.list"
   ],
 
   "endpoint": "_endpoint.coffee"

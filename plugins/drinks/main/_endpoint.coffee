@@ -1,2 +1,7 @@
+_debug = {}
+
 $(document).ready ->
-  console.log 'Hello, world.'
+  main = new drinks.main.Drinks
+
+  _debug.main = main
+  _debug.models = main.models
