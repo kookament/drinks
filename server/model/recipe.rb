@@ -1,4 +1,5 @@
-require 'recipe_dao'
+require $db + 'recipe_dao'
+
 class Recipe 
    def new id, name, ingredients, instructions
      @id = id
