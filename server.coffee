@@ -24,9 +24,6 @@ app.get '/', (req, res) ->
     .filter((f) -> f.match /\.coffee$/)
     .map((f) -> f.replace /\.coffee$/, '.js')
     .value()
-  scripts = scripts.concat _.chain(fs.readdirSync './javascript')
-    .filter((f) -> f.match /\.js$/)
-    .value()
   res.send root_html(scripts: scripts)
 
 app.listen PORT
