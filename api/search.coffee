@@ -12,21 +12,24 @@ class Drink
 
 # Do we want to have unique identifiers for all drinks, or just use their names?
 _tag_to_drink = {}
+_all_drinks = []
 
 exports.index = ->
   spreadsheet = xlsx.parse __dirname + '/../data/cocktails.xlsx'
   # This also grabs the header row -- we'll have to get rid of that.
   for row in spreadsheet.worksheets[0].data
     d = new Drink(row)
-    for t in d.tags then _tag_to_drink[t] = d
+    for t in d.tags then (_tag_to_drink[t] ?= []).push d
+    _all_drinks.push d
   console.log 'initialized search index'
 
 _tags = (query) ->
   return [] unless query.tags
-  tags = query.tags.split ','
+  tags = _.map query.tags.split(','), (t) -> t.trim()
   results = []
   for t in tags
-    results = results.concat _tag_to_drink[t]
+    if _tag_to_drink[t]
+      results = results.concat _tag_to_drink[t]
   return _.uniq results
 
 _searches =
@@ -38,5 +41,7 @@ exports.search = (query) ->
     result = result.concat f(query)
   return result
 
-exports.tags = ->
+exports.tags = (substr) ->
+  if substr?
+    return _.filter _.keys(_tag_to_drink), (t) -> t.slice(0, substr.length) == substr
   return _.keys _tag_to_drink

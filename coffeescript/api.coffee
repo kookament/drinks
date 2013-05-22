@@ -5,7 +5,11 @@ API_URL = '/api'
 _default_handler = ->
   console.log arguments
 
-api.search = (query, success, fail) ->
+api.forTags = (tags, success, fail) ->
+  return unless tags
+  if not _.isArray tags
+    tags = [tags]
+  query = { tags: tags.join ',' }
   req = $.ajax API_URL + '/search',
     type: 'GET'
     data: query
