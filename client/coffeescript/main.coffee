@@ -10,18 +10,11 @@ class DrinksList extends list.ListView
     super
     @inspectModel?.set 'drink', m
 
-class Drink extends Backbone.Model
-  defaults: ->
-    name: ''
-    tags: []
-    ingredients: []
-    description: ''
-
 $(document).ready ->
   $('body').html Handlebars.templates['main']()
 
   resultsBundle = list.bundle
-    itemClass: Drink
+    itemClass: drink.Drink
     viewClass: DrinksList
   resultsBundle.view.render()
 

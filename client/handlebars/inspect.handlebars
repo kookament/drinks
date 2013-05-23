@@ -1,2 +1,6 @@
 <div class="name">{{name}}</div>
-<div class="ingredients">{{ingredients}}</div>
+<ul class="ingredients-list">
+  {{#each ingredients}}
+  <li class="ingredient">{{{ingredient .}}}</li>
+  {{/each}}
+</ul>
