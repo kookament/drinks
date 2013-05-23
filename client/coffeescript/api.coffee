@@ -1,11 +1,11 @@
-api = window.api ?= {}
+exports = window.api ?= {}
 
 API_URL = '/api'
 
 _default_handler = ->
   console.log arguments
 
-api.forTags = (tags, success, fail) ->
+exports.forTags = (tags, success, fail) ->
   return unless tags
   if not _.isArray tags
     tags = [tags]

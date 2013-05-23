@@ -1,11 +1,11 @@
-search = window.search ?= {}
+exports = window.search ?= {}
 
-class search.TagsModel extends Backbone.Model
+class exports.TagsModel extends Backbone.Model
   defaults: ->
     universe: []
     current: []
 
-class search.SearchBarView extends Backbone.View
+class exports.SearchBarView extends Backbone.View
   className: 'search-bar'
 
   events:
@@ -17,7 +17,7 @@ class search.SearchBarView extends Backbone.View
 
   render: ->
     @rendered = true
-    @$el.html Handlebars.templates.search()
+    @$el.html Handlebars.templates['search']()
     @$search = @$ 'input[type="hidden"]'
     @$search.width 400
     @_updateUniverse()
@@ -32,7 +32,7 @@ class search.SearchBarView extends Backbone.View
   _search: ->
     @tagsModel.set 'current', @$search.select2('val')
 
-class search.SearchController
+class exports.SearchController
   constructor: (options) ->
     _.extend @, options, Backbone.Events
 
@@ -49,12 +49,12 @@ class search.SearchController
     console.error arguments
 
 # options: required: resultsModel
-search.bundle = (options) ->
+exports.bundle = (options) ->
   options ?= {}
-  tagsModel = new search.TagsModel
-  view = new search.SearchBarView
+  tagsModel = new exports.TagsModel
+  view = new exports.SearchBarView
     tagsModel: tagsModel
-  controller = new search.SearchController
+  controller = new exports.SearchController
     tagsModel: tagsModel
     resultsModel: options.resultsModel
 

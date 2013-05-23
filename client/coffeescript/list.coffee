@@ -1,20 +1,19 @@
-list = window.list ?= {}
+exports = window.list ?= {}
 
-class list.ListItemModel extends Backbone.Model
+class exports.ListItemModel extends Backbone.Model
   defaults: ->
     text: ''
 
-class list.ListModel extends Backbone.Model
+class exports.ListModel extends Backbone.Model
   defaults: ->
-    # loading: false
     items: new Backbone.Collection
 
   initialize: ->
-    m = @get('model') ? list.ListItemModel
+    m = @get('model') ? exports.ListItemModel
     @get('items').model = m
     @unset 'model'
 
-class list.ListView extends Backbone.View
+class exports.ListView extends Backbone.View
   className: 'list-view'
 
   initialize: ->
@@ -35,11 +34,11 @@ class list.ListView extends Backbone.View
     return $('<div class="list-item"/>').text item.get('text')
 
 # options: itemClass, listClass, viewClass
-list.bundle = (options) ->
+exports.bundle = (options) ->
   options ?= {}
-  model = new (options.listClass ? list.ListModel)
-    model: (options.itemClass ? list.ListItemModel)
-  view = new (options.viewClass ? list.ListView)
+  model = new (options.listClass ? exports.ListModel)
+    model: (options.itemClass ? exports.ListItemModel)
+  view = new (options.viewClass ? exports.ListView)
     model: model
   return {
     model: model

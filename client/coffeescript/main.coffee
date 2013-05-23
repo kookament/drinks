@@ -13,19 +13,24 @@ class DrinksList extends list.ListView
     console.log $(ev.target).html()
 
 $(document).ready ->
-  $('body').html Handlebars.templates.main()
+  $('body').html Handlebars.templates['main']()
 
-  results = list.bundle
+  resultsBundle = list.bundle
     viewClass: DrinksList
-  results.view.render()
+  resultsBundle.view.render()
 
-  bar = search.bundle
-    resultsModel: results.model
-  bar.view.render()
+  searchBarBundle = search.bundle
+    resultsModel: resultsBundle.model
+  searchBarBundle.view.render()
 
-  $('.search-panel').append bar.view.$el
-  $('.search-panel').append results.view.$el
+  $('.search-panel').append searchBarBundle.view.$el
+  $('.search-panel').append resultsBundle.view.$el
+
+  inspectBundle = inspect.bundle()
+  inspectBundle.view.render()
+
+  $('.inspect-panel').append inspectBundle.view.$el
 
   tagRequest = $.ajax '/api/tags'
   tagRequest.done (data) ->
-    bar.tagsModel.set 'universe', data
+    searchBarBundle.tagsModel.set 'universe', data
