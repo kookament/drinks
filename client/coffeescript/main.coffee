@@ -1,21 +1,32 @@
+class DrinksList extends list.ListView
+  className: 'list-view drink-list'
+
+  events:
+    'click .drink-title': 'clickDrink'
+
+  generateItemElement: (item) ->
+    $i = super
+    $i.html $('<div class="drink-title">').text(item.get 'text')
+    return $i
+
+  clickDrink: (ev) ->
+    console.log $(ev.target).html()
+
+class MainView extends Backbone.View
+  className: 'main-view'
+
+  render: ->
+    @$el.html Handlebars.templates.main()
+
 $(document).ready ->
-  class DrinksList extends list.ListView
-    className: 'list-view drink-list'
+  view = new MainView
+  view.render()
 
-    events:
-      'click .drink-title': 'clickDrink'
-
-    generateItemElement: (item) ->
-      $i = super
-      $i.html $('<div class="drink-title">').text(item.get 'text')
-      return $i
-
-    clickDrink: (ev) ->
-      console.log $(ev.target).html()
+  $('body').html view.$el
 
   $body = $('body')
-  $search = $('<input type="hidden"/>').appendTo $body
-  $submit = $('<input type="submit"/>').appendTo $body
+  $search = $('input[type="hidden"]')
+  $submit = $('input[type="submit"]')
 
   results = new list.bundle
     viewClass: DrinksList
