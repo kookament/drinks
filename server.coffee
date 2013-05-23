@@ -4,6 +4,7 @@ express = require 'express'
 handlebars = require 'handlebars'
 connect_coffee_script = require 'connect-coffee-script'
 connect_less = require 'connect-less'
+connect_handlebars = require 'connect-handlebars'
 url = require 'url'
 
 search = require './api/search.coffee'
@@ -20,7 +21,9 @@ app.use '/', connect_coffee_script
 
 app.use '/', connect_less
   src: __dirname + '/less'
-  dest: __dirname + '/compiler-cache'
+  dst: __dirname + '/compiler-cache'
+
+app.use '/templates.js', connect_handlebars __dirname + '/handlebars'
 
 app.use express.static(__dirname + '/javascript')
 app.use express.static(__dirname + '/css')

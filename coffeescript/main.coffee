@@ -1,9 +1,24 @@
 $(document).ready ->
+  class DrinksList extends list.ListView
+    className: 'list-view drink-list'
+
+    events:
+      'click .drink-title': 'clickDrink'
+
+    generateItemElement: (item) ->
+      $i = super
+      $i.html $('<div class="drink-title">').text(item.get 'text')
+      return $i
+
+    clickDrink: (ev) ->
+      console.log $(ev.target).html()
+
   $body = $('body')
   $search = $('<input type="hidden"/>').appendTo $body
   $submit = $('<input type="submit"/>').appendTo $body
 
-  results = new list.bundle()
+  results = new list.bundle
+    viewClass: DrinksList
   results.view.render()
 
   $body.append results.view.$el

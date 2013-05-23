@@ -34,10 +34,12 @@ class list.ListView extends Backbone.View
   generateItemElement: (item) ->
     return $('<div class="list-item"/>').text item.get('text')
 
-list.bundle = (m) ->
-  model = new list.ListModel
-    model: m
-  view = new list.ListView
+# options: itemClass, listClass, viewClass
+list.bundle = (options) ->
+  options ?= {}
+  model = new (options.listClass ? list.ListModel)
+    model: (options.itemClass ? list.ListItemModel)
+  view = new (options.viewClass ? list.ListView)
     model: model
   return {
     model: model

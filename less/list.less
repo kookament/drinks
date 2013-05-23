@@ -1,0 +1,16 @@
+@list-item-border: 1px solid grey;
+
+.list-view {
+  .list-item {
+    border: @list-item-border;
+    border-bottom: none;
+
+    &:last-child {
+      border-bottom: @list-item-border;
+    }
+
+    > * {
+      padding: 6px;
+    }
+  }
+}
