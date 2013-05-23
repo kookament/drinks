@@ -6,13 +6,14 @@
 
 			"folder_exclude_patterns": [
 				"node_modules",
-				"server"
+				"server-ruby"
 			],
 
 			"file_exclude_patterns": [
 				".gitignore",
 				"*.sublime-project",
-				"*.sublime-workspace"
+				"*.sublime-workspace",
+				"*.xlsx"
 			]
 		}
 	]

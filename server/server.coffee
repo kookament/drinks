@@ -7,7 +7,7 @@ connect_less = require 'connect-less'
 connect_handlebars = require 'connect-handlebars'
 url = require 'url'
 
-search = require './api/search.coffee'
+search = require './search.coffee'
 
 PORT = 3000
 
@@ -16,30 +16,30 @@ app = express()
 # Resources -------------------------------------
 # Why does binding this to /scripts not work?
 app.use '/', connect_coffee_script
-  src: __dirname + '/coffeescript'
+  src: __dirname + '/../client/coffeescript'
   dest: __dirname + '/compiler-cache'
 
 app.use '/', connect_less
-  src: __dirname + '/less'
+  src: __dirname + '/../client/less'
   dst: __dirname + '/compiler-cache'
 
-app.use '/templates.js', connect_handlebars __dirname + '/handlebars'
+app.use '/templates.js', connect_handlebars __dirname + '/../client/handlebars'
 
-app.use express.static(__dirname + '/javascript')
-app.use express.static(__dirname + '/css')
-app.use express.static(__dirname + '/img')
+app.use express.static(__dirname + '/../client/javascript')
+app.use express.static(__dirname + '/../client/css')
+app.use express.static(__dirname + '/../client/img')
 
 app.use express.static(__dirname + '/compiler-cache')
 
 # Root ------------------------------------------
 app.get '/', (req, res) ->
   # Move this out when we aren't in 'dev mode' anymore.
-  root_html = handlebars.compile(fs.readFileSync 'root.handlebars', 'utf-8')
-  scripts = _.chain(fs.readdirSync './coffeescript')
+  root_html = handlebars.compile(fs.readFileSync __dirname + '/root.handlebars', 'utf-8')
+  scripts = _.chain(fs.readdirSync __dirname + '/../client/coffeescript')
     .filter((f) -> f.match /\.coffee$/)
     .map((f) -> f.replace /\.coffee$/, '.js')
     .value()
-  styles = _.chain(fs.readdirSync './less')
+  styles = _.chain(fs.readdirSync __dirname + '/../client/less')
     .filter((f) -> f.match /\.less$/)
     .map((f) -> f.replace /\.less$/, '.css')
     .value()
