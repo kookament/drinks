@@ -14,7 +14,7 @@ class exports.InspectView extends Backbone.View
     if not @model.get 'drink'
       @$el.html Handlebars.templates['inspect-empty']()
     else
-      @$el.html Handlebars.templates['inspect'] @model.get('drink')
+      @$el.html Handlebars.templates['inspect'] @model.get('drink').attributes
 
 # No options yet.
 exports.bundle = (options) ->
