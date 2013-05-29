@@ -3,11 +3,22 @@ body {
   font-weight: 400;
 }
 
-.drink-list {
-  .list-item  {
-    &:hover, &.selected {
-      cursor: pointer;
-      background-color: lightgrey;
+.search-header {
+  width: 100%;
+}
+
+.results-panel, .inspect-panel {
+  display: inline-block;
+}
+
+.results-panel {
+  width: 30%;
+  .drink-list {
+    .list-item  {
+      &:hover, &.selected {
+        cursor: pointer;
+        background-color: lightgrey;
+      }
     }
   }
 }

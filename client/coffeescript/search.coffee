@@ -19,15 +19,17 @@ class exports.SearchBarView extends Backbone.View
     @rendered = true
     @$el.html Handlebars.templates['search']()
     @$search = @$ 'input[type="hidden"]'
-    @$search.width 400
     @_updateUniverse()
 
   _updateUniverse: ->
     @$search.select2
+      width: '100%'
       placeholder: 'enter some tags'
       tags: @tagsModel.get('universe')
       createSearchChoice: -> # Prevent user from creating novel tags.
       openOnEnter: false
+      minimumInputLength: 1
+      formatInputTooShort: false
 
   _search: ->
     @tagsModel.set 'current', @$search.select2('val')

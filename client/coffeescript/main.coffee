@@ -22,8 +22,8 @@ $(document).ready ->
     resultsModel: resultsBundle.model
   searchBarBundle.view.render()
 
-  $('.search-panel').append searchBarBundle.view.$el
-  $('.search-panel').append resultsBundle.view.$el
+  $('.search-header').append searchBarBundle.view.$el
+  $('.results-panel').append resultsBundle.view.$el
 
   inspectBundle = inspect.bundle()
   inspectBundle.view.render()

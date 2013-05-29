@@ -1,12 +1,12 @@
 @list-item-border: 1px solid grey;
 
 .list-view {
+  border: @list-item-border;
   .list-item {
-    border: @list-item-border;
-    border-bottom: none;
+    border-bottom: @list-item-border;
 
     &:last-child {
-      border-bottom: @list-item-border;
+      border-bottom: none;
     }
 
     > * {
