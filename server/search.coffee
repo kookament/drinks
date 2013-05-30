@@ -23,23 +23,26 @@ exports.index = ->
     _all_drinks.push d
   console.log 'initialized search index'
 
+# Takes two arrays, returns a boolean if the first is a subset of the second.
+# Assumes unordered. O(nm) for array lengths n, m.
+_subset = (small, large) ->
+  for s in small
+    if not (s in large)
+      return false
+  return true
+
 _tags = (query) ->
   return [] unless query.tags
   tags = _.map query.tags.split(','), (t) -> t.trim()
   results = []
-  for t in tags
-    if _tag_to_drink[t]
-      results = results.concat _tag_to_drink[t]
+  # This is nice and slow. How to index for subset checks?
+  for d in _all_drinks
+    if _subset d.tags, tags
+      results.push d
   return _.uniq results
 
-_searches =
-  tags: _tags
-
 exports.search = (query) ->
-  result = []
-  for type, f of _searches
-    result = result.concat f(query)
-  return result
+  return _tags(query)
 
 exports.tags = (substr) ->
   if substr?

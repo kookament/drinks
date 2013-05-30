@@ -25,7 +25,6 @@ _formatDrink = (d) ->
         piece[_conversions[ingredient[curr.i + 1]]] = ingredient.substring curr.i + 2, curr.j
         splitIngredient.push piece
       prev = curr
-    console.log splitIngredient
     ingredients.push splitIngredient
   return _.defaults { ingredients: ingredients }, d
 
