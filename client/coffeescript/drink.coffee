@@ -5,4 +5,6 @@ class exports.Drink extends Backbone.Model
     name: ''
     tags: []
     ingredients: []
-    description: ''
+    instructions: ''
+    notes: ''
+    missing: 0

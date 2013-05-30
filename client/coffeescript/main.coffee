@@ -3,7 +3,7 @@ class DrinksList extends list.ListView
 
   generateItemElement: (item) ->
     $item = super
-    $item.html $('<div class="drink-title">').text(item.get 'text')
+    $item.html Handlebars.templates['drink-list-item'](item.attributes)
     return $item
 
   clickItem: (m, ev) ->
