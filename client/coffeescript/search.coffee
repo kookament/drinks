@@ -22,7 +22,7 @@ class exports.SearchBarView extends Backbone.View
   _updateUniverse: ->
     @$search.select2
       width: '100%'
-      placeholder: 'enter some tags'
+      placeholder: 'what ingredients do you have?'
       tags: @tagsModel.get('universe')
       createSearchChoice: -> # Prevent user from creating novel tags.
       openOnEnter: false
@@ -47,7 +47,6 @@ class exports.SearchController
     _.each _.keys(data), (i) ->
       drinks = drinks.concat _.map(data[i], (d) -> _.defaults { text : d.name, missing: i }, d)
     @resultsModel.get('items').reset drinks
-    console.log @resultsModel.get('items')
 
   _fail: =>
     console.error arguments

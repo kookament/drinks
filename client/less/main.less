@@ -1,3 +1,5 @@
+@list-item-border: 1px solid grey;
+
 body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
@@ -22,8 +24,9 @@ body {
 
 .results-panel {
   width: 30%;
+  border-right: @list-item-border;
   .drink-list {
-    .list-item  {
+    .list-item:not(.message)  {
       &:hover, &.selected {
         cursor: pointer;
         background-color: lightgrey;

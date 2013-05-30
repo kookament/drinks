@@ -27,9 +27,13 @@ class exports.ListView extends Backbone.View
   renderItems: ->
     return unless @rendered
     $l = $('<div/>')
-    for m in @model.get('items').models
-      $item = @generateItemElement m
-      $l.append $item if $item
+    if @model.get('items').length
+      for m in @model.get('items').models
+        $item = @generateItemElement m
+        $l.append $item if $item
+      $l.append Handlebars.templates['no-more-list-items']()
+    else
+      $l.append Handlebars.templates['empty-list-placeholder']()
     @$el.empty().append $l.children()
 
   renderSelection: ->

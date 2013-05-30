@@ -1,16 +1,18 @@
 @list-item-border: 1px solid grey;
 
 .list-view {
-  border: @list-item-border;
   .list-item {
     border-bottom: @list-item-border;
-
-    &:last-child {
-      border-bottom: none;
-    }
 
     > * {
       padding: 6px;
     }
+  }
+
+  .list-item.message {
+    border-bottom: none;
+    text-align: center;
+
+    color: #ccc;
   }
 }
