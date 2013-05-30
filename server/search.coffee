@@ -70,7 +70,7 @@ _tags = (query) ->
   return results
 
 exports.search = (query) ->
-  return _.pick _tags(query), [0, 1]
+  return _.pick _tags(query), [0..2]
 
 exports.tags = (substr) ->
   if substr?

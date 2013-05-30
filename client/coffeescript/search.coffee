@@ -44,7 +44,7 @@ class exports.SearchController
   _success: (data) =>
     # Results is assumed to be a ListModel.
     drinks = []
-    _.each [0..1], (i) ->
+    _.each _.keys(data), (i) ->
       drinks = drinks.concat _.map(data[i], (d) -> _.defaults { text : d.name, missing: i }, d)
     @resultsModel.get('items').reset drinks
     console.log @resultsModel.get('items')
