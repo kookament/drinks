@@ -13,16 +13,17 @@ _conversions =
 _formatDrink = (d) ->
   ingredients = []
   for ingredient in d.ingredients
+    {text, tag} = ingredient
     prev = { i: 0, j: -1}
     splitIngredient = []
     while prev.i != -1
       curr = {}
-      curr.i = ingredient.indexOf '{', prev.j
-      curr.j = ingredient.indexOf '}', curr.i
-      splitIngredient.push ingredient.substring prev.j + 1, (if curr.i != -1 then curr.i else ingredient.length)
+      curr.i = text.indexOf '{', prev.j
+      curr.j = text.indexOf '}', curr.i
+      splitIngredient.push text.substring prev.j + 1, (if curr.i != -1 then curr.i else text.length)
       if curr.i != -1 and curr.j != -1
         piece = {}
-        piece[_conversions[ingredient[curr.i + 1]]] = ingredient.substring curr.i + 2, curr.j
+        piece[_conversions[text[curr.i + 1]]] = text.substring curr.i + 2, curr.j
         splitIngredient.push piece
       prev = curr
     ingredients.push splitIngredient
