@@ -8,9 +8,6 @@ class exports.TagsModel extends Backbone.Model
 class exports.SearchBarView extends Backbone.View
   className: 'search-bar'
 
-  events:
-    'click input[type="submit"]': '_search'
-
   initialize: ->
     @tagsModel = @options.tagsModel
     @listenTo @tagsModel, 'change:universe', @_updateUniverse
@@ -19,6 +16,7 @@ class exports.SearchBarView extends Backbone.View
     @rendered = true
     @$el.html Handlebars.templates['search']()
     @$search = @$ 'input[type="hidden"]'
+    @$search.on 'change', @_search
     @_updateUniverse()
 
   _updateUniverse: ->
@@ -31,7 +29,7 @@ class exports.SearchBarView extends Backbone.View
       minimumInputLength: 1
       formatInputTooShort: false
 
-  _search: ->
+  _search: =>
     @tagsModel.set 'current', @$search.select2('val')
 
 class exports.SearchController
