@@ -11,3 +11,9 @@ Handlebars.registerHelper 'ingredient', (context) ->
     else
       console.error "Unrecognized ingredient piece: #{piece}."
   return ingredient
+
+Handlebars.registerHelper 'gt', (l, r, options) ->
+  if l > r
+    options.fn this
+  else
+    options.inverse this

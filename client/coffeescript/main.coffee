@@ -1,10 +1,19 @@
 class DrinksList extends list.ListView
   className: 'list-view drink-list'
 
+  initialize: ->
+    super
+    @listenTo @model.get('items'), 'add remove reset', @_updateSelection
+
   generateItemElement: (item) ->
     $item = super
     $item.html Handlebars.templates['drink-list-item'](item.attributes)
     return $item
+
+  _updateSelection: ->
+    return if not @inspectModel?.get('drink')?
+    drink = @model.get('items').findWhere { name : @inspectModel.get('drink').get('name') }
+    @inspectModel.set 'drink', drink
 
   clickItem: (m, ev) ->
     super

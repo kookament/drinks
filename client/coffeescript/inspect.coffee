@@ -27,6 +27,7 @@ _formatDrink = (d) ->
         splitIngredient.push piece
       prev = curr
     ingredients.push splitIngredient
+  console.log ingredients
   return _.defaults { ingredients: ingredients }, d
 
 class exports.InspectView extends Backbone.View
