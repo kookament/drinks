@@ -1,0 +1,41 @@
+// TODO: Avoid referring directly to bower_components here.
+require.config({
+  packages: [
+    {
+      name: 'cs',
+      location: '../bower_components/require-cs',
+      main: 'cs'
+    },
+    {
+      name: 'coffee-script',
+      location: '../bower_components/coffee-script',
+      main: 'index'
+    }
+  ],
+  paths : {
+    backbone : '../bower_components/backbone/backbone',
+    underscore : '../bower_components/underscore/underscore',
+    jquery : '../bower_components/jquery/jquery',
+    marionette : '../bower_components/marionette/lib/backbone.marionette'
+  },
+  shim : {
+    jquery : {
+      exports : 'jQuery'
+    },
+    underscore : {
+      exports : '_'
+    },
+    backbone : {
+      deps : ['jquery', 'underscore'],
+      exports : 'Backbone'
+    },
+    marionette : {
+      deps : ['jquery', 'underscore', 'backbone'],
+      exports : 'Marionette'
+    }
+  }
+});
+
+require(['cs!app/app'], function(main) {
+  main();
+});

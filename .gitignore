@@ -4,3 +4,4 @@ node_modules
 ~$*.xlsx
 *.sublime-workspace
 compiler-cache
+bower_components
