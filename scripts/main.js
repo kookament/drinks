@@ -18,6 +18,7 @@ require.config({
     jquery: '../bower_components/jquery/jquery',
     marionette: '../bower_components/marionette/lib/backbone.marionette',
     handlebars: '../bower_components/handlebars/handlebars',
+    'backbone.mutators': '../bower_components/backbone.mutators/backbone.mutators',
     // for require-handlebars-plugin
     hbs: '../bower_components/require-handlebars-plugin/hbs',
     i18nprecompile: '../bower_components/require-handlebars-plugin/hbs/i18nprecompile',

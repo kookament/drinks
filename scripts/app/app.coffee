@@ -1,6 +1,6 @@
 define [ 'marionette'
          'cs!./search-list'],
-(Marionette) ->
+(Marionette, SearchList) ->
   return ->
     app = new Marionette.Application
 
@@ -9,6 +9,15 @@ define [ 'marionette'
       results: '#search-results'
       instructions: '#instructions'
 
+    listCollection = new SearchList.ResultCollection
+    listView = new SearchList.ResultListView
+      collection: listCollection
+
     app.start()
+
+    app.results.show(listView)
+
+    listCollection.add
+      name: 'drink1'
 
     return app
