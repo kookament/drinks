@@ -13,9 +13,11 @@
     "backbone.wreqr": "~0.2.0",
     "backbone": "~1.0.0",
     "coffee-script": "https://raw.github.com/jashkenas/coffee-script/1.6.2/extras/coffee-script.js",
+    "handlebars": "git://github.com/components/handlebars.js.git#~1.0.0",
     "jquery": "git://github.com/components/jquery.git#~2.0.3",
     "marionette": "git://github.com/marionettejs/backbone.marionette.git#~1.0.4",
     "require-cs": "git://github.com/jrburke/require-cs.git#~0.4.4",
-    "requirejs": "git://github.com/jrburke/requirejs.git#~2.1.8"
+    "requirejs": "git://github.com/jrburke/requirejs.git#~2.1.8",
+    "require-handlebars-plugin": "git://github.com/SlexAxton/require-handlebars-plugin.git#~0.4.0"
   }
 }

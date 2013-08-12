@@ -12,30 +12,42 @@ require.config({
       main: 'index'
     }
   ],
-  paths : {
-    backbone : '../bower_components/backbone/backbone',
-    underscore : '../bower_components/underscore/underscore',
-    jquery : '../bower_components/jquery/jquery',
-    marionette : '../bower_components/marionette/lib/backbone.marionette'
+  paths: {
+    backbone: '../bower_components/backbone/backbone',
+    underscore: '../bower_components/underscore/underscore',
+    jquery: '../bower_components/jquery/jquery',
+    marionette: '../bower_components/marionette/lib/backbone.marionette',
+    handlebars: '../bower_components/handlebars/handlebars',
+    // for require-handlebars-plugin
+    hbs: '../bower_components/require-handlebars-plugin/hbs',
+    i18nprecompile: '../bower_components/require-handlebars-plugin/hbs/i18nprecompile',
+    json2: '../bower_components/require-handlebars-plugin/hbs/json2'
   },
-  shim : {
-    jquery : {
-      exports : 'jQuery'
+  shim: {
+    jquery: {
+      exports: 'jQuery'
     },
-    underscore : {
-      exports : '_'
+    underscore: {
+      exports: '_'
     },
-    backbone : {
-      deps : ['jquery', 'underscore'],
-      exports : 'Backbone'
+    backbone: {
+      deps: [ 'jquery', 'underscore' ],
+      exports: 'Backbone'
     },
-    marionette : {
-      deps : ['jquery', 'underscore', 'backbone'],
-      exports : 'Marionette'
+    marionette: {
+      deps: [ 'jquery', 'underscore', 'backbone' ],
+      exports: 'Marionette'
+    },
+    handlebars: {
+      exports: 'Handlebars'
     }
+  },
+  hbs: {
+    disableI18n: true,
+    templateExtension: 'handlebars'
   }
 });
 
-require(['cs!app/app'], function(main) {
+require([ 'cs!app/app' ], function(main) {
   main();
 });
