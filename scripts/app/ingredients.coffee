@@ -24,7 +24,7 @@ define [ 'backbone'
     itemView: SearchResult
 
     events:
-      'change .search-bar': '_filter'
+      'input .search-bar': '_filter'
 
     constructor: ({@search}) -> super
 

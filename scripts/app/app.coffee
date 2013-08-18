@@ -25,6 +25,7 @@ define [ 'underscore'
       model: Ingredient.Model
 
     filteredIngredients = filterableDecorator ingredients
+    filteredIngredients.filter()
 
     searchController = _.extend {}, Backbone.Events
     searchController.listenTo search, 'change:search', -> search.set { loading: true }
@@ -34,7 +35,7 @@ define [ 'underscore'
           Ingredient.generateIngredientMatcher(search.get('search'), 'name')
         )
         search.set { loading: false }
-      ), 100
+      ), 150
     )
 
     searchSidebar = new Ingredient.Sidebar
