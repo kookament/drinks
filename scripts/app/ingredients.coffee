@@ -2,7 +2,8 @@ define [ 'backbone'
          'marionette'
          'cs!./drink'
          'hbs!../templates/ingredient-list-item'
-         'hbs!../templates/search-bar' ],
+         'hbs!../templates/search-bar'
+         'less!../styles/ingredients' ],
 (Backbone, Marionette, Drink, ingredient_list_item, search_bar) ->
   class Model extends Backbone.Model
     defaults:
