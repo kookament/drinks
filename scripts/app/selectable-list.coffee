@@ -1,8 +1,7 @@
 define [ 'backbone'
-         'marionette'
          'cs!./navigable-list'
          'less!../styles/selectable-list' ],
-(Backbone, Marionette, NavigableList) ->
+(Backbone, NavigableList) ->
   # understand a click event to mean toggle the selection
   class ItemView extends NavigableList.ItemView
     className: -> super + ' selectable'

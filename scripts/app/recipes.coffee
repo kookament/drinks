@@ -1,7 +1,9 @@
 define [ 'backbone'
          'marionette'
-         'hbs!../templates/recipe-list-item' ],
-(Backbone, Marionette, recipe_list_item) ->
+         'cs!./navigable-list'
+         'hbs!../templates/recipe-list-item'
+         'less!../styles/recipes' ],
+(Backbone, Marionette, NavigableList, recipe_list_item) ->
   class Model extends Backbone.Model
     defaults: ->
       name: ''
@@ -9,16 +11,15 @@ define [ 'backbone'
       instructions: ''
       notes: ''
 
-  class ItemView extends Marionette.ItemView
-    className: 'recipe-list-item'
+  class ItemView extends NavigableList.ItemView
+    className: -> super + ' recipe'
     template: recipe_list_item
 
   class NoRecipesView extends Marionette.ItemView
     className: 'no-recipes-message'
     template: '<span>no recipes :(</span>'
 
-  class ListView extends Marionette.CollectionView
-    className: 'recipes-list'
+  class ListView extends NavigableList.ListView
     itemView: ItemView
     emptyView: NoRecipesView
 
