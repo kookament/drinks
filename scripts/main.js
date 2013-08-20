@@ -30,6 +30,8 @@ require.config({
     handlebars: '../bower_components/handlebars/handlebars',
     'backbone.mutators': '../bower_components/backbone.mutators/backbone.mutators',
     fontawesome: '../bower_components/font-awesome/less',
+    text: '../bower_components/text/text',
+    json: '../bower_components/requirejs-plugins/src/json',
     // for require-handlebars-plugin
     hbs: '../bower_components/require-handlebars-plugin/hbs',
     i18nprecompile: '../bower_components/require-handlebars-plugin/hbs/i18nprecompile',

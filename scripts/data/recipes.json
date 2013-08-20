@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Caipirinha",
+    "ingredients": [
+      "cachaca | {q2}{uoz} cachaca",
+      "lime | {q1} lime",
+      "sugar | {q1}{utsp} sugar"
+    ]
+  },
+  {
+    "name": "Gin and Tonic",
+    "ingredients": [
+      "gin | {q1.5}{uoz} gin",
+      "tonic | {q3}{uoz} tonic water"
+    ]
+  }
+]
