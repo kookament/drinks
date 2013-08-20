@@ -1,106 +1,89 @@
 define [ 'backbone'
          'marionette'
+         'cs!./selectable-list'
          'cs!./drink'
          'hbs!../templates/ingredient-list-item'
-         'hbs!../templates/search-bar'
+         'hbs!../templates/search-sidebar'
          'less!../styles/ingredients' ],
-(Backbone, Marionette, Drink, ingredient_list_item, search_bar) ->
+(Backbone, Marionette, SelectableList, Drink, ingredient_list_item, search_sidebar) ->
   class Model extends Backbone.Model
     defaults:
       name: ''
       selected: false
       implies: []
 
-  class SearchResult extends Marionette.ItemView
-    className: 'ingredient-list-item'
-    template: ingredient_list_item
-    attributes:
-      tabindex: '0'
-
-    events:
-      'click': '_click'
-      'mousedown': '_mousedown'
-
-    modelEvents:
-      'change:selected': '_renderSelected'
-
-    _click: (ev) ->
-      @model.set 'selected', not @model.get('selected')
-
-    _mousedown: (ev) ->
-      # prevent focus-on-click because this has a tabindex
-      ev.preventDefault()
-
-    _renderSelected: ->
-      @$el.toggleClass 'selected', @model.get('selected')
-
-    render: ->
-      super
-      @_renderSelected()
-
   class SearchModel extends Backbone.Model
     defaults:
       loading: false
       search: ''
 
-  class Sidebar extends Marionette.CompositeView
-    className: 'search-sidebar'
-    template: search_bar
-    itemView: SearchResult
-    itemViewContainer: '.ingredient-results'
+  class ResultItemView extends SelectableList.ItemView
+    className: 'ingredient-list-item search-result'
+    template: ingredient_list_item
+
+  class NoResultsView extends Marionette.ItemView
+    template: '<div>no results</div>'
+
+  class SelectedItemView extends SelectableList.ItemView
+    className: 'ingredient-list-item'
+    template: ingredient_list_item
+
+  class NoSelectionView extends Marionette.ItemView
+    template: '<div>nothing selected</div>'
+
+  class Sidebar extends Marionette.Layout
+    template: search_sidebar
+
+    regions:
+      list: '.list-container'
 
     events:
       'input input.search-bar': '_filter'
       'keydown input.search-bar': '_inputKeydown'
-      'keydown .ingredient-list-item': '_listKeydown'
+      'keydown .list-container': '_listKeyDown'
 
-    keyhandlers:
-      '9': '_tab'
-      '13': '_enter'
-      '38': '_up'
-      '40': '_down'
+    constructor: ({@search, @searchedCollection, @selectedCollection}) -> super
 
-    constructor: ({@search}) -> super
+    onShow: ->
+      @_showSelectedList()
 
     _filter: ->
-      @search.set 'search', @$('.search-bar').val()
+      search = @$('.search-bar').val().trim()
+      oldSearch = @search.get('search')
+      @search.set 'search', search
+      if search and not oldSearch
+        @_showSearchedList()
+      else if not search and oldSearch
+        @_showSelectedList()
+
+    _showSearchedList: ->
+      @list.show new SelectableList.ListView
+        className: SelectableList.ListView::className + ' searched'
+        collection: @searchedCollection
+        itemView: ResultItemView
+        emptyView: NoResultsView
+      @list.currentView.exitTop = @_selectInput
+
+    _showSelectedList: ->
+      @list.show new SelectableList.ListView
+        className: SelectableList.ListView::className + ' selected'
+        collection: @selectedCollection
+        itemView: SelectedItemView
+        emptyView: NoSelectionView
+      @list.currentView.exitTop = @_selectInput
+
+    _selectInput: =>
+      $input = @$('input.search-bar')
+      $input.focus().val($input.val()) # bump cursor to end
 
     _inputKeydown: (ev) ->
       if ev.which == 40 # down arrow
         ev.stopPropagation()
-        $first = @$itemViewContainer.children().eq(0)
-        if $first.length
-          $first.focus()
+        @list.currentView.enterTop()
 
-    _listKeydown: (ev) ->
-      fn = this[@keyhandlers[ev.which]]
-      if fn
-        ev.stopPropagation()
-        fn.apply this, arguments
-      else if ev.which != 16 and ev.which != 17 and ev.which != 18 # shift, cttl, alt
-        @$('input.search-bar').focus()
-
-    _tab: (ev) -> # nop
-
-    _enter: (ev) ->
-      i = @$itemViewContainer.children().filter(':focus').index()
-      if i > -1 and i < @collection.length
-        m = @collection.at(i)
-        m.set 'selected', not m.get('selected')
-
-    _up: (ev) ->
-      $children = @$itemViewContainer.children()
-      i = $children.filter(':focus').index()
-      if i == 0
-        @$('input.search-bar').focus()
-      else if i > -1 and i > 0
-        $children.eq(i - 1).focus()
-
-    _down: (ev) ->
-      $children = @$itemViewContainer.children()
-      i = $children.filter(':focus').index()
-      if i > -1 and i < $children.length - 1
-        $children.eq(i + 1).focus()
+    _listKeyDown: (ev) ->
+      if ev.which != 16 and ev.which != 17 and ev.which != 18 # shift, ctrl, alt
+        @_selectInput()
 
   # todo: clean this code up a bit once the model fields have stabilized
   generateIngredientMatcher = (searchString) ->
@@ -112,7 +95,6 @@ define [ 'backbone'
   return {
     Model: Model
     SearchModel: SearchModel
-    SearchResult: SearchResult
     Sidebar: Sidebar
     generateIngredientMatcher: generateIngredientMatcher
   }

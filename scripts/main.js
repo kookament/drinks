@@ -29,6 +29,7 @@ require.config({
     marionette: '../bower_components/marionette/lib/backbone.marionette',
     handlebars: '../bower_components/handlebars/handlebars',
     'backbone.mutators': '../bower_components/backbone.mutators/backbone.mutators',
+    fontawesome: '../bower_components/font-awesome/less',
     // for require-handlebars-plugin
     hbs: '../bower_components/require-handlebars-plugin/hbs',
     i18nprecompile: '../bower_components/require-handlebars-plugin/hbs/i18nprecompile',

@@ -24,14 +24,19 @@ define [ 'underscore'
     ingredients = new Backbone.Collection ingredients,
       model: Ingredient.Model
 
-    filteredIngredients = filterableDecorator ingredients
-    filteredIngredients.filter()
+    searchedIngredients = filterableDecorator ingredients
+    searchedIngredients.filter()
+
+    selectedFilter = (m) -> m.get('selected')
+    selectedIngredients = filterableDecorator ingredients
+    selectedIngredients.filter(selectedFilter)
 
     searchController = _.extend {}, Backbone.Events
+    searchController.listenTo ingredients, 'change:selected', -> selectedIngredients.filter(selectedFilter)
     searchController.listenTo search, 'change:search', -> search.set { loading: true }
     searchController.listenTo(search, 'change:search', _.debounce (
       ->
-        filteredIngredients.filter(
+        searchedIngredients.filter(
           Ingredient.generateIngredientMatcher(search.get('search'), 'name')
         )
         search.set { loading: false }
@@ -40,7 +45,9 @@ define [ 'underscore'
 
     searchSidebar = new Ingredient.Sidebar
       search: search
-      collection: filteredIngredients
+      collection: ingredients
+      searchedCollection: searchedIngredients
+      selectedCollection: selectedIngredients
 
     app.start()
 
