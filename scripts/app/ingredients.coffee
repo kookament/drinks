@@ -3,9 +3,10 @@ define [ 'backbone'
          'cs!./selectable-list'
          'cs!./drink'
          'hbs!../templates/ingredient-list-item'
+         'hbs!../templates/search-box'
          'hbs!../templates/search-sidebar'
          'less!../styles/ingredients' ],
-(Backbone, Marionette, SelectableList, Drink, ingredient_list_item, search_sidebar) ->
+(Backbone, Marionette, SelectableList, Drink, ingredient_list_item, search_box, search_sidebar) ->
   class Model extends Backbone.Model
     defaults: ->
       name: ''
@@ -17,7 +18,7 @@ define [ 'backbone'
       loading: false
       search: ''
 
-  class IngredientItemView extends SelectableList.ItemView
+  class ResultItemView extends SelectableList.ItemView
     className: -> super + ' ingredient'
     template: ingredient_list_item
 
@@ -27,72 +28,52 @@ define [ 'backbone'
       @$('.icon').toggleClass('icon-check', selected)
       @$('.icon').toggleClass('icon-check-empty', not selected)
 
-  class ResultItemView extends IngredientItemView
-    className: -> super + ' search-result'
-
   class NoResultsView extends Marionette.ItemView
     className: 'empty-message'
     template: '<span>no results</span>'
 
-  class NoSelectionView extends Marionette.ItemView
-    className: 'empty-message'
-    template: '<span>nothing selected</span>'
+  class SearchBarView extends Marionette.ItemView
+    className: 'search-bar'
+    template: search_box
 
-  class ListView extends Marionette.Layout
+    events:
+      'input input.search-input': '_filter'
+
+    _filter: ->
+      @model.set 'search', @$('input.search-input').val().trim()
+
+    focusInput: =>
+      $input = @$('input.search-input')
+      $input.focus().val($input.val()) # bump cursor to end
+
+  class SearchSidebar extends Marionette.Layout
     className: 'ingredients-sidebar'
     template: search_sidebar
 
+    options:
+      leftArrowKey: ->
+      rightArrowKey: ->
+
     regions:
+      search: '.search-container'
       list: '.list-container'
 
     events:
-      'input input.search-bar': '_filter'
-      'keydown input.search-bar': '_inputKeydown'
+      'keydown .search-container input': '_inputKeydown'
       'keydown .list-container': '_listKeyDown'
 
-    constructor: ({@search, @searchedCollection, @selectedCollection}) -> super
-
     onShow: ->
-      @_showSelectedList()
-
-    _filter: ->
-      search = @$('.search-bar').val().trim()
-      oldSearch = @search.get('search')
-      @search.set 'search', search
-      if search and not oldSearch
-        @_showSearchedList()
-      else if not search and oldSearch
-        @_showSelectedList()
-
-    _showSearchedList: ->
-      v = new SelectableList.ListView
+      @search.show new SearchBarView
+        model: @model
+      list = new SelectableList.ListView
         # className: SelectableList.ListView::className + ' showing-searched'
-        collection: @searchedCollection
+        collection: @collection
         itemView: ResultItemView
         emptyView: NoResultsView
-      v.exitTop = @focusInput
-      v.left = @left
-      v.right = @right
-      @list.show v
-
-    _showSelectedList: ->
-      v = new SelectableList.ListView
-        # className: SelectableList.ListView::className + ' showing-selected'
-        collection: @selectedCollection
-        itemView: IngredientItemView
-        emptyView: NoSelectionView
-      v.exitTop = @focusInput
-      v.left = @left
-      v.right = @right
-      @list.show v
-
-    focusInput: =>
-      $input = @$('input.search-bar')
-      $input.focus().val($input.val()) # bump cursor to end
-
-    left: ->
-
-    right: ->
+      list.exitTop = @search.currentView.focusInput
+      list.left = @options.leftArrowKey
+      list.right = @options.rightArrowKey
+      @list.show list
 
     _inputKeydown: (ev) ->
       if ev.which == 40 # down arrow
@@ -101,18 +82,21 @@ define [ 'backbone'
 
     _listKeyDown: (ev) ->
       if ev.which != 16 and ev.which != 17 and ev.which != 18 # shift, ctrl, alt
-        @focusInput()
+        @search.currentView.focusInput()
 
   # todo: clean this code up a bit once the model fields have stabilized
   generateIngredientMatcher = (searchString) ->
-    return (m) ->
-      if m.get('name').indexOf(searchString) != -1
-        return true
-      return false
+    if not searchString
+      return -> return true
+    else
+      return (m) ->
+        if m.get('name').indexOf(searchString) != -1
+          return true
+        return false
 
   return {
     Model: Model
     SearchModel: SearchModel
-    ListView: ListView
+    SearchSidebar: SearchSidebar
     generateIngredientMatcher: generateIngredientMatcher
   }

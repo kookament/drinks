@@ -44,17 +44,15 @@ define [ 'underscore'
     searchController.listenTo selectedIngredients, 'add remove reset', ->
       recipes.reset RecipeSearch.find(selectedIngredients.pluck('name'), 1)
 
-    ingredientsSearchView = new Ingredients.ListView
-      search: search
-      collection: ingredients
-      searchedCollection: searchedIngredients
-      selectedCollection: selectedIngredients
-
     mixableRecipesView = new Recipes.ListView
       collection: recipes
 
-    ingredientsSearchView.right = -> mixableRecipesView.enterTop()
-    mixableRecipesView.left = -> ingredientsSearchView.focusInput()
+    ingredientsSearchView = new Ingredients.SearchSidebar
+      model: search
+      collection: searchedIngredients
+      rightArrowKey: -> mixableRecipesView.enterTop()
+
+    mixableRecipesView.left = -> ingredientsSearchView.search.currentView.focusInput()
 
     app.start()
 
