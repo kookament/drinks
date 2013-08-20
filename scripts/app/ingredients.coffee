@@ -18,20 +18,21 @@ define [ 'backbone'
       search: ''
 
   class ResultItemView extends SelectableList.ItemView
-    className: 'ingredient-list-item search-result'
+    className: -> super + ' ingredient search-result'
     template: ingredient_list_item
 
   class NoResultsView extends Marionette.ItemView
-    template: '<div>no results</div>'
+    template: '<div class="empty-message">no results</div>'
 
   class SelectedItemView extends SelectableList.ItemView
-    className: 'ingredient-list-item'
+    className: -> super + ' ingredient'
     template: ingredient_list_item
 
   class NoSelectionView extends Marionette.ItemView
-    template: '<div>nothing selected</div>'
+    template: '<div class="empty-message">nothing selected</div>'
 
   class Sidebar extends Marionette.Layout
+    className: 'ingredient-sidebar'
     template: search_sidebar
 
     regions:
@@ -58,7 +59,7 @@ define [ 'backbone'
 
     _showSearchedList: ->
       @list.show new SelectableList.ListView
-        className: SelectableList.ListView::className + ' searched'
+        # className: SelectableList.ListView::className + ' showing-searched'
         collection: @searchedCollection
         itemView: ResultItemView
         emptyView: NoResultsView
@@ -66,7 +67,7 @@ define [ 'backbone'
 
     _showSelectedList: ->
       @list.show new SelectableList.ListView
-        className: SelectableList.ListView::className + ' selected'
+        # className: SelectableList.ListView::className + ' showing-selected'
         collection: @selectedCollection
         itemView: SelectedItemView
         emptyView: NoSelectionView

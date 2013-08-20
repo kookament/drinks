@@ -1,14 +1,14 @@
 define [ 'underscore'
          'marionette'
          'cs!./ingredients'
-         'cs!./search-list'
-         'cs!./filterable-decorator' ],
-(_, Marionette, Ingredient, SearchList, filterableDecorator) ->
+         'cs!./filterable-decorator'
+         'less!../styles/app.less' ],
+(_, Marionette, Ingredient, filterableDecorator) ->
   return ->
     app = new Marionette.Application
 
     app.addRegions
-      ingredients: '#search-sidebar'
+      ingredients: '#ingredients'
       drinks: '#search-results'
       instructions: '#instructions'
 

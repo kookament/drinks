@@ -4,6 +4,7 @@ define [ 'backbone'
 (Backbone, Marionette) ->
   # understand a click event to mean toggle the selection
   class ItemView extends Marionette.ItemView
+    className: -> 'selectable-list-item'
     tagName: 'li'
     attributes:
       tabindex: '0'
