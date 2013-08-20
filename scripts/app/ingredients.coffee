@@ -65,24 +65,34 @@ define [ 'backbone'
         @_showSelectedList()
 
     _showSearchedList: ->
-      @list.show new SelectableList.ListView
+      v = new SelectableList.ListView
         # className: SelectableList.ListView::className + ' showing-searched'
         collection: @searchedCollection
         itemView: ResultItemView
         emptyView: NoResultsView
-      @list.currentView.exitTop = @_selectInput
+      v.exitTop = @focusInput
+      v.left = @left
+      v.right = @right
+      @list.show v
 
     _showSelectedList: ->
-      @list.show new SelectableList.ListView
+      v = new SelectableList.ListView
         # className: SelectableList.ListView::className + ' showing-selected'
         collection: @selectedCollection
         itemView: IngredientItemView
         emptyView: NoSelectionView
-      @list.currentView.exitTop = @_selectInput
+      v.exitTop = @focusInput
+      v.left = @left
+      v.right = @right
+      @list.show v
 
-    _selectInput: =>
+    focusInput: =>
       $input = @$('input.search-bar')
       $input.focus().val($input.val()) # bump cursor to end
+
+    left: ->
+
+    right: ->
 
     _inputKeydown: (ev) ->
       if ev.which == 40 # down arrow
@@ -91,7 +101,7 @@ define [ 'backbone'
 
     _listKeyDown: (ev) ->
       if ev.which != 16 and ev.which != 17 and ev.which != 18 # shift, ctrl, alt
-        @_selectInput()
+        @focusInput()
 
   # todo: clean this code up a bit once the model fields have stabilized
   generateIngredientMatcher = (searchString) ->

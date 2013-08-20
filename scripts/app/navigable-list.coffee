@@ -31,7 +31,9 @@ define [ 'backbone'
 
     _keyhandlers:
       '9': '_tab'
+      '37': 'left'
       '38': '_up'
+      '39': 'right'
       '40': '_down'
 
     keydown: (ev) ->
@@ -39,6 +41,10 @@ define [ 'backbone'
       if fn
         ev.stopPropagation()
         fn.apply this, arguments
+
+    left: -> # nop
+
+    right: -> # nop
 
     _tab: (ev) -> # nop
 

@@ -1,12 +1,17 @@
 define [ 'underscore'
          'json!../data/recipes.json' ],
 (_, recipes) ->
-  first = (i) -> i.split('|')[0].trim()
+  first = (i) ->
+    if i.indexOf('|') != -1
+      return i.split('|')[0].trim()
+    else
+      return ''
 
   ingredients = _.chain(recipes)
     .pluck('ingredients')
     .flatten(true)
     .map(first)
+    .filter(_.identity)
     .sort()
     .uniq(true)
     .value()
@@ -15,6 +20,7 @@ define [ 'underscore'
   for r in recipes
     _.chain(r.ingredients, first)
       .map(first)
+      .filter(_.identity)
       .uniq()
       .tap((i) -> r.searchableIngredients = i)
       .each((i) -> (recipesForIngredients[i] ?= []).push r)

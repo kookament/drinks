@@ -5,7 +5,7 @@ define [ 'underscore'
          'cs!./recipes'
          'cs!./recipe-search'
          'less!../styles/app.less' ],
-(_, Marionette, Ingredient, filterableDecorator, Recipes, RecipeSearch) ->
+(_, Marionette, Ingredients, filterableDecorator, Recipes, RecipeSearch) ->
   return ->
     app = new Marionette.Application
 
@@ -14,12 +14,12 @@ define [ 'underscore'
       drinks: '#drinks'
       instructions: '#instructions'
 
-    search = new Ingredient.SearchModel
+    search = new Ingredients.SearchModel
 
     ingredients = RecipeSearch.ingredients.map (n) -> { name: n }
 
     ingredients = new Backbone.Collection ingredients,
-      model: Ingredient.Model
+      model: Ingredients.Model
 
     searchedIngredients = filterableDecorator ingredients
 
@@ -36,7 +36,7 @@ define [ 'underscore'
     searchController.listenTo(search, 'change:search', _.debounce (
       ->
         searchedIngredients.filter(
-          Ingredient.generateIngredientMatcher(search.get('search'), 'name')
+          Ingredients.generateIngredientMatcher(search.get('search'), 'name')
         )
         search.set { loading: false }
       ), 150
@@ -44,7 +44,7 @@ define [ 'underscore'
     searchController.listenTo selectedIngredients, 'add remove reset', ->
       recipes.reset RecipeSearch.find(selectedIngredients.pluck('name'), 1)
 
-    ingredientsSearchView = new Ingredient.ListView
+    ingredientsSearchView = new Ingredients.ListView
       search: search
       collection: ingredients
       searchedCollection: searchedIngredients
@@ -52,6 +52,9 @@ define [ 'underscore'
 
     mixableRecipesView = new Recipes.ListView
       collection: recipes
+
+    ingredientsSearchView.right = -> mixableRecipesView.enterTop()
+    mixableRecipesView.left = -> ingredientsSearchView.focusInput()
 
     app.start()
 
