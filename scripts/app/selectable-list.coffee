@@ -5,7 +5,7 @@ define [ 'backbone'
   # understand a click event to mean toggle the selection
   class ItemView extends Marionette.ItemView
     className: -> 'selectable-list-item'
-    tagName: 'li'
+    tagName: 'tr'
     attributes:
       tabindex: '0'
 
@@ -34,17 +34,17 @@ define [ 'backbone'
   # of list, and will set the 'selected' flag on any model that is highlighted when
   # Enter is pressed
   class ListView extends Marionette.CollectionView
-    tagName: 'ul'
+    tagName: 'table'
     className: 'selectable-list'
 
     events: ->
-      'keydown li': '_keydown'
+      'keydown tr': '_keydown'
 
     enterTop: ->
-      @$el.children().first().focus()
+      @$('.selectable-list-item:first-child').focus()
 
     enterBottom: ->
-      @$el.children().last().focus()
+      @$('.selectable-list-item:last-child').focus()
 
     exitTop: -> # default no-op
 
@@ -65,26 +65,26 @@ define [ 'backbone'
     _tab: (ev) -> # nop
 
     _enter: (ev) ->
-      i = @$el.children().filter(':focus').index()
+      i = @$('.selectable-list-item').filter(':focus').index()
       if i > -1 and i < @collection.length
         m = @collection.at(i)
         m.set 'selected', not m.get('selected')
 
     _up: (ev) ->
-      $children = @$el.children()
-      i = $children.filter(':focus').index()
+      $items = @$('.selectable-list-item')
+      i = $items.filter(':focus').index()
       if i > -1
         if i > 0
-          $children.eq(i - 1).focus()
+          $items.eq(i - 1).focus()
         else
           @exitTop()
 
     _down: (ev) ->
-      $children = @$el.children()
-      i = $children.filter(':focus').index()
+      $items = @$('.selectable-list-item')
+      i = $items.filter(':focus').index()
       if i > -1
-        if i < $children.length - 1
-          $children.eq(i + 1).focus()
+        if i < $items.length - 1
+          $items.eq(i + 1).focus()
         else
           @exitBottom()
 

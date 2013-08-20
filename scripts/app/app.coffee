@@ -53,4 +53,6 @@ define [ 'underscore'
 
     app.ingredients.show(searchSidebar)
 
+    app.ingredients.currentView.$el.find('input').val('gin').trigger('input')
+
     return app

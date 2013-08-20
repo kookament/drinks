@@ -32,7 +32,7 @@ define [ 'backbone'
     template: '<div class="empty-message">nothing selected</div>'
 
   class Sidebar extends Marionette.Layout
-    className: 'ingredient-sidebar'
+    className: 'ingredients-sidebar'
     template: search_sidebar
 
     regions:
