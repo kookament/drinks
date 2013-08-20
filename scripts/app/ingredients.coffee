@@ -7,7 +7,7 @@ define [ 'backbone'
          'less!../styles/ingredients' ],
 (Backbone, Marionette, SelectableList, Drink, ingredient_list_item, search_sidebar) ->
   class Model extends Backbone.Model
-    defaults:
+    defaults: ->
       name: ''
       selected: false
       implies: []
@@ -31,12 +31,14 @@ define [ 'backbone'
     className: -> super + ' search-result'
 
   class NoResultsView extends Marionette.ItemView
-    template: '<div class="empty-message">no results</div>'
+    className: 'empty-message'
+    template: '<span>no results</span>'
 
   class NoSelectionView extends Marionette.ItemView
-    template: '<div class="empty-message">nothing selected</div>'
+    className: 'empty-message'
+    template: '<span>nothing selected</span>'
 
-  class Sidebar extends Marionette.Layout
+  class ListView extends Marionette.Layout
     className: 'ingredients-sidebar'
     template: search_sidebar
 
@@ -101,6 +103,6 @@ define [ 'backbone'
   return {
     Model: Model
     SearchModel: SearchModel
-    Sidebar: Sidebar
+    ListView: ListView
     generateIngredientMatcher: generateIngredientMatcher
   }

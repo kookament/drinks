@@ -1,28 +1,28 @@
-define [ 'underscore'
-         'json!../data/recipes.json' ],
-(_, recipes) ->
-  first = (i) -> i.split('|')[0].trim()
+define [ 'backbone'
+         'marionette'
+         'hbs!../templates/recipe-list-item' ],
+(Backbone, Marionette, recipe_list_item) ->
+  class Model extends Backbone.Model
+    defaults: ->
+      name: ''
+      ingredients: []
+      instructions: ''
+      notes: ''
 
-  ingredients = _.chain(recipes)
-    .pluck('ingredients')
-    .flatten(true)
-    .map(first)
-    .sort()
-    .uniq(true)
-    .value()
+  class ItemView extends Marionette.ItemView
+    className: 'recipe-list-item'
+    template: recipe_list_item
 
-  recipesForIngredients = {}
-  for r in recipes
-    _.chain(r.ingredients, first)
-      .map(first)
-      .uniq()
-      .each((i) -> (recipesForIngredients[i] ?= []).push r)
+  class NoRecipesView extends Marionette.ItemView
+    className: 'no-recipes-message'
+    template: '<span>no recipes :(</span>'
 
-  find = (ingredients, flex = 0) ->
-    return recipes
+  class ListView extends Marionette.CollectionView
+    className: 'recipes-list'
+    itemView: ItemView
+    emptyView: NoRecipesView
 
   return {
-    recipes: recipes
-    ingredients: ingredients
-    find: find
+    Model: Model
+    ListView: ListView
   }

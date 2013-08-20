@@ -12,8 +12,12 @@ define [ 'backbone' ],
       else
         filtered.reset collection.models
 
+    filtered.filter()
+
     # this is real inefficient
     filtered.listenTo collection, 'add remove reset', ->
       filtered.where(filtered._fn)
+
+    return filtered
 
   return filterableDecorator
