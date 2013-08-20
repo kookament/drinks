@@ -16,12 +16,7 @@ define [ 'underscore'
 
     search = new Ingredient.SearchModel
 
-    ingredients = [
-      'gin'
-      'ginger'
-      'ginger beer'
-      'cachaca'
-    ].map (n) -> { name: n }
+    ingredients = RecipeSearch.ingredients.map (n) -> { name: n }
 
     ingredients = new Backbone.Collection ingredients,
       model: Ingredient.Model
@@ -47,7 +42,7 @@ define [ 'underscore'
       ), 150
     )
     searchController.listenTo selectedIngredients, 'add remove reset', ->
-      recipes.reset RecipeSearch.find selectedIngredients
+      recipes.reset RecipeSearch.find(selectedIngredients.pluck('name'), 1)
 
     ingredientsSearchView = new Ingredient.ListView
       search: search
@@ -62,7 +57,5 @@ define [ 'underscore'
 
     app.ingredients.show(ingredientsSearchView)
     app.drinks.show(mixableRecipesView)
-
-    app.ingredients.currentView.$el.find('input').val('gin').trigger('input')
 
     return app
