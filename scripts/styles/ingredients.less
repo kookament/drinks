@@ -14,6 +14,13 @@
     .icon {
       width: 24px;
       height: inherit;
+      visibility: hidden
+    }
+
+    &.selected, &:hover, &:focus {
+      .icon {
+        visibility: visible;
+      }
     }
   }
 }

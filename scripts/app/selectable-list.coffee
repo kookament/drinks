@@ -14,7 +14,10 @@ define [ 'backbone'
       'mousedown': '_mousedown'
 
     modelEvents:
-      'change:selected': '_renderSelected'
+      'change:selected': 'renderSelected'
+
+    onShow: ->
+      @renderSelected()
 
     _click: (ev) ->
       @model.set 'selected', not @model.get('selected')
@@ -23,12 +26,8 @@ define [ 'backbone'
       # prevent focus-on-click because this has a tabindex
       ev.preventDefault()
 
-    _renderSelected: ->
+    renderSelected: ->
       @$el.toggleClass 'selected', @model.get('selected')
-
-    render: ->
-      super
-      @_renderSelected()
 
   # understands keyboard navigation, can enter/exit navigation from top or bottom
   # of list, and will set the 'selected' flag on any model that is highlighted when

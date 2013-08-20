@@ -17,16 +17,21 @@ define [ 'backbone'
       loading: false
       search: ''
 
-  class ResultItemView extends SelectableList.ItemView
-    className: -> super + ' ingredient search-result'
+  class IngredientItemView extends SelectableList.ItemView
+    className: -> super + ' ingredient'
     template: ingredient_list_item
+
+    renderSelected: ->
+      super
+      selected = @model.get('selected')
+      @$('.icon').toggleClass('icon-check', selected)
+      @$('.icon').toggleClass('icon-check-empty', not selected)
+
+  class ResultItemView extends IngredientItemView
+    className: -> super + ' search-result'
 
   class NoResultsView extends Marionette.ItemView
     template: '<div class="empty-message">no results</div>'
-
-  class SelectedItemView extends SelectableList.ItemView
-    className: -> super + ' ingredient'
-    template: ingredient_list_item
 
   class NoSelectionView extends Marionette.ItemView
     template: '<div class="empty-message">nothing selected</div>'
@@ -69,7 +74,7 @@ define [ 'backbone'
       @list.show new SelectableList.ListView
         # className: SelectableList.ListView::className + ' showing-selected'
         collection: @selectedCollection
-        itemView: SelectedItemView
+        itemView: IngredientItemView
         emptyView: NoSelectionView
       @list.currentView.exitTop = @_selectInput
 
