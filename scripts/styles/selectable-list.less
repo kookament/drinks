@@ -1,19 +1,5 @@
-.selectable-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  width: 100%;
-
-  .selectable-list-item {
-    &.selected {
-      background-color: red;
-    }
-
-    &:focus, &:hover {
-      outline: 0;
-      background-color: blue;
-      cursor: pointer;
-    }
+.navigable-list.selectable .list-item.selectable {
+  &.selected:not(:hover):not(:focus) {
+    background-color: red;
   }
 }
