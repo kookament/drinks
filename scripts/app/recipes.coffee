@@ -15,6 +15,12 @@ define [ 'backbone'
     className: -> super + ' recipe'
     template: recipe_list_item
 
+    events:
+      'focus': '_select'
+
+    _select: ->
+      @model.set 'selected', true
+
   class NoRecipesView extends Marionette.ItemView
     className: 'no-recipes-message'
     template: '<span>no recipes :(</span>'
@@ -22,6 +28,16 @@ define [ 'backbone'
   class ListView extends NavigableList.ListView
     itemView: ItemView
     emptyView: NoRecipesView
+
+    collectionEvents:
+      'change:selected': '_enforceSingleSelected'
+
+    _enforceSingleSelected: (model, selected) ->
+      if selected
+        _.chain(@collection.models)
+          .filter((m) -> m.get('selected'))
+          .without(model)
+          .each((m) -> m.set 'selected', false)
 
   return {
     Model: Model
