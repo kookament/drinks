@@ -1,24 +1,33 @@
+@import './theme.less';
+
 .ingredients-sidebar {
+  height: 100%;
+
   > * {
     width: 100%;
   }
 
-  input.search-bar {
-    padding: 4px;
+  input {
+    height: @list-item-height;
+    width: 100%;
+  }
+
+  .list-container {
+    height: ~"calc(100% - "@list-item-height~")";
+    overflow-y: scroll;
   }
 
   .list-item.ingredient {
-    height: 24px;
-    padding: 4px;
-
-    .icon {
-      width: 24px;
-      height: inherit;
-      visibility: hidden
+    .list-icon-container {
+      width: 26px;
+      .list-icon {
+        padding-left: 8px;
+        visibility: hidden;
+      }
     }
 
     &.selected, &:hover, &:focus {
-      .icon {
+      .list-icon {
         visibility: visible;
       }
     }

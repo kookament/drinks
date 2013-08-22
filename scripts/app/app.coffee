@@ -76,4 +76,6 @@ define [ 'underscore'
     app.drinks.show(mixableRecipesView)
     app.instructions.show(new Instructions.EmptyView)
 
+    $('input.search-input').focus()
+
     return app

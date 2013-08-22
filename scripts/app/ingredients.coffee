@@ -25,8 +25,8 @@ define [ 'backbone'
     renderSelected: ->
       super
       selected = @model.get('selected')
-      @$('.icon').toggleClass('icon-check', selected)
-      @$('.icon').toggleClass('icon-check-empty', not selected)
+      @$('.list-icon').toggleClass('icon-check', selected)
+      @$('.list-icon').toggleClass('icon-check-empty', not selected)
 
   class NoResultsView extends Marionette.ItemView
     className: 'empty-message'

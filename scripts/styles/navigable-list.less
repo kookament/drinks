@@ -1,3 +1,8 @@
+@import './theme.less';
+
+@default-border: 1px solid @lighter-grey;
+@dark-border: 1px solid @light-grey;
+
 .navigable-list {
   list-style: none;
   margin: 0;
@@ -6,9 +11,22 @@
   width: 100%;
 
   .list-item {
+    height: @list-item-height;
+
+    color: @almost-black;
+
+    border-top: none;
+    border-left: @dark-border;
+    border-right: @dark-border;
+    border-bottom: @default-border;
+
+    &:last-child {
+      border-bottom: @dark-border;
+    }
+
     &:focus {
       outline: 0;
-      background-color: blue;
+      border-bottom: @dark-border;
     }
 
     &:hover {
