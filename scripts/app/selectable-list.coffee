@@ -1,7 +1,8 @@
-define [ 'backbone'
+define [ 'underscore'
+         'backbone'
          'cs!./navigable-list'
          'less!../styles/selectable-list' ],
-(Backbone, NavigableList) ->
+(_, Backbone, NavigableList) ->
   # understand a click event to mean toggle the selection
   class ItemView extends NavigableList.ItemView
     className: -> super + ' selectable'
@@ -30,7 +31,7 @@ define [ 'backbone'
     keydown: (ev) ->
       if ev.which == 13 # enter
         ev.stopPropagation()
-        i = @$('.list-item').filter(':focus').index()
+        i = @$('.list-item.active').index()
         if i > -1 and i < @collection.length
           m = @collection.at(i)
           m.set 'selected', not m.get('selected')

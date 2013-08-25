@@ -57,7 +57,15 @@ define [ 'underscore'
       collection: searchedIngredients
       rightArrowKey: -> mixableRecipesView.enterTop()
 
-    mixableRecipesView.left = -> ingredientsSearchView.search.currentView.focusInput()
+    mixableRecipesView.left = ->
+      @deselect()
+      ingredientsSearchView.search.currentView.focusInput()
+
+    searchController.listenTo mixableRecipesView, 'activate', ->
+      ingredientsSearchView.list.currentView.deselect()
+
+    searchController.listenTo ingredientsSearchView, 'activate', ->
+      mixableRecipesView.deselect()
 
     searchController.listenTo recipes, 'change:selected remove reset', _.debounce (->
       selected = recipes.findWhere { selected: true }

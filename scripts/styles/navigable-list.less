@@ -10,23 +10,17 @@
 
   width: 100%;
 
+  &:focus {
+    outline: none;
+  }
+
   .list-item {
     height: @list-item-height;
-
+    border-bottom: 1px solid @lighter-grey;
     color: @almost-black;
 
-    border-top: none;
-    border-left: @dark-border;
-    border-right: @dark-border;
-    border-bottom: @default-border;
-
-    &:last-child {
-      border-bottom: @dark-border;
-    }
-
-    &:focus {
-      outline: 0;
-      border-bottom: @dark-border;
+    &.active {
+      background-color: @light-selection;
     }
 
     &:hover {

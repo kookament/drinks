@@ -65,14 +65,20 @@ define [ 'backbone'
     onShow: ->
       @search.show new SearchBarView
         model: @model
-      list = new SelectableList.ListView
+      that = this
+      list = new (class L extends SelectableList.ListView
         # className: SelectableList.ListView::className + ' showing-searched'
-        collection: @collection
+        collection: that.collection
         itemView: ResultItemView
         emptyView: NoResultsView
-      list.exitTop = @search.currentView.focusInput
-      list.left = @options.leftArrowKey
-      list.right = @options.rightArrowKey
+
+        exitTop: ->
+          @deselect()
+          that.search.currentView.focusInput()
+
+        left: that.options.leftArrowKey
+        right: that.options.rightArrowKey
+      )
       @list.show list
 
     _inputKeydown: (ev) ->

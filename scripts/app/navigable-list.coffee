@@ -6,8 +6,6 @@ define [ 'backbone'
   class ItemView extends Marionette.ItemView
     className: -> 'list-item'
     tagName: 'tr'
-    attributes:
-      tabindex: '0'
 
   # understands keyboard navigation, can enter/exit navigation from top or bottom
   # of list, and will set the 'selected' flag on any model that is highlighted when
@@ -15,22 +13,35 @@ define [ 'backbone'
   class ListView extends Marionette.CollectionView
     tagName: 'table'
     className: -> 'navigable-list'
+    attributes:
+      tabindex: 0
 
     events: ->
-      'keydown tr': 'keydown'
+      'keydown': 'keydown'
+      'click .list-item': 'click'
 
     enterTop: ->
-      @$('.list-item:first-child').focus()
+      @activate 0
 
     enterBottom: ->
-      @$('.list-item:last-child').focus()
+      @activate @collection.length - 1
+
+    activate: (i) ->
+      @$el.focus()
+      @$('.list-item.active').removeClass('active').trigger('navigate-inactive')
+      @$('.list-item').eq(i).addClass('active').trigger('navigate-active')
+      @trigger 'activate', i
+
+    deselect: ->
+      @$el.blur()
+      @$('.list-item.active').removeClass('active').trigger('navigate-inactive')
+      @trigger 'deselect'
 
     exitTop: -> # default no-op
 
     exitBottom: -> # default no-op
 
     _keyhandlers:
-      '9': '_tab'
       '37': 'left'
       '38': '_up'
       '39': 'right'
@@ -46,25 +57,26 @@ define [ 'backbone'
 
     right: -> # nop
 
-    _tab: (ev) -> # nop
-
     _up: (ev) ->
       $items = @$('.list-item')
-      i = $items.filter(':focus').index()
+      i = $items.filter('.active').index()
       if i > -1
         if i > 0
-          $items.eq(i - 1).focus()
+          @activate i - 1
         else
           @exitTop()
 
     _down: (ev) ->
       $items = @$('.list-item')
-      i = $items.filter(':focus').index()
+      i = $items.filter('.active').index()
       if i > -1
         if i < $items.length - 1
-          $items.eq(i + 1).focus()
+          @activate i + 1
         else
           @exitBottom()
+
+    click: (ev) ->
+      @activate $(ev.currentTarget).index()
 
   return {
     ItemView: ItemView
