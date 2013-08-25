@@ -1,11 +1,14 @@
-define [ 'backbone'
-         'marionette'
+define [ 'marionette'
          'less!../styles/navigable-list' ],
-(Backbone, Marionette) ->
+(Marionette) ->
   # understand a click event to mean toggle the selection
   class ItemView extends Marionette.ItemView
-    className: -> 'list-item'
     tagName: 'tr'
+    className: -> 'list-item'
+
+  class EmptyView extends Marionette.ItemView
+    tagName: 'tr'
+    className: -> 'empty-message'
 
   # understands keyboard navigation, can enter/exit navigation from top or bottom
   # of list, and will set the 'selected' flag on any model that is highlighted when
@@ -19,21 +22,26 @@ define [ 'backbone'
     events: ->
       'keydown': 'keydown'
       'click .list-item': 'click'
+      'focus': 'enterTop'
+      'blur': 'deselect'
 
-    enterTop: ->
-      @activate 0
+    enterTop: (ev) ->
+      @activate 0, ev
 
     enterBottom: ->
       @activate @collection.length - 1
 
-    activate: (i) ->
-      @$el.focus()
+    activate: (i, ev = null) ->
+      # this is gross, but I want it to enterTop when we get focused...
+      if ev?.type != 'focus' and ev?.type != 'blur'
+        @$el.focus()
       @$('.list-item.active').removeClass('active').trigger('navigate-inactive')
       @$('.list-item').eq(i).addClass('active').trigger('navigate-active')
       @trigger 'activate', i
 
-    deselect: ->
-      @$el.blur()
+    deselect: (ev = null) ->
+      if ev?.type != 'focus' and ev?.type != 'blur'
+        @$el.blur()
       @$('.list-item.active').removeClass('active').trigger('navigate-inactive')
       @trigger 'deselect'
 
@@ -42,6 +50,7 @@ define [ 'backbone'
     exitBottom: -> # default no-op
 
     _keyhandlers:
+      '9': '_tab'
       '37': 'left'
       '38': '_up'
       '39': 'right'
@@ -52,6 +61,8 @@ define [ 'backbone'
       if fn
         ev.stopPropagation()
         fn.apply this, arguments
+
+    _tab: -> # nop; swallow this event
 
     left: -> # nop
 
@@ -80,5 +91,6 @@ define [ 'backbone'
 
   return {
     ItemView: ItemView
+    EmptyView: EmptyView
     ListView: ListView
   }

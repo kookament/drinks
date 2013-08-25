@@ -57,6 +57,7 @@ define [ 'underscore'
       collection: searchedIngredients
       rightArrowKey: -> mixableRecipesView.enterTop()
 
+    # initialize more glue code for views
     mixableRecipesView.left = ->
       @deselect()
       ingredientsSearchView.search.currentView.focusInput()

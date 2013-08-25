@@ -1,9 +1,8 @@
 define [ 'backbone'
-         'marionette'
          'cs!./navigable-list'
          'hbs!../templates/recipe-list-item'
          'less!../styles/recipes' ],
-(Backbone, Marionette, NavigableList, recipe_list_item) ->
+(Backbone, NavigableList, recipe_list_item) ->
   class Model extends Backbone.Model
     defaults: ->
       name: ''
@@ -25,9 +24,8 @@ define [ 'backbone'
     _deselect: ->
       @model.set 'selected', false
 
-  class NoRecipesView extends Marionette.ItemView
-    className: 'no-recipes-message'
-    template: '<span>no recipes :(</span>'
+  class NoRecipesView extends NavigableList.EmptyView
+    template: -> '<td>no recipes :(</td>'
 
   class ListView extends NavigableList.ListView
     itemView: ItemView

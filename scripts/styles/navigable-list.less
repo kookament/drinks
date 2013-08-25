@@ -1,8 +1,5 @@
 @import './theme.less';
 
-@default-border: 1px solid @lighter-grey;
-@dark-border: 1px solid @light-grey;
-
 .navigable-list {
   list-style: none;
   margin: 0;
@@ -16,7 +13,8 @@
 
   .list-item {
     height: @list-item-height;
-    border-bottom: 1px solid @lighter-grey;
+    border-bottom: 1px solid @list-background;
+    background-color: @list-item-background;
     color: @almost-black;
 
     &.active {
@@ -26,5 +24,11 @@
     &:hover {
       cursor: pointer;
     }
+  }
+
+  .empty-message {
+    height: @list-item-height;
+    text-align: center;
+    color: darken(@list-background, 15%);
   }
 }

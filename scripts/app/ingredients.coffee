@@ -28,9 +28,8 @@ define [ 'backbone'
       @$('.list-icon').toggleClass('icon-check', selected)
       @$('.list-icon').toggleClass('icon-check-empty', not selected)
 
-  class NoResultsView extends Marionette.ItemView
-    className: 'empty-message'
-    template: '<span>no results</span>'
+  class NoResultsView extends SelectableList.EmptyView
+    template: -> '<td>no results</td>'
 
   class SearchBarView extends Marionette.ItemView
     className: 'search-bar'
@@ -87,7 +86,7 @@ define [ 'backbone'
         @list.currentView.enterTop()
 
     _listKeyDown: (ev) ->
-      if ev.which != 16 and ev.which != 17 and ev.which != 18 # shift, ctrl, alt
+      if ev.which != 16 and ev.which != 17 and ev.which != 18 and ev.which != 91 # shift, ctrl, alt, cmd
         @search.currentView.focusInput()
 
   # todo: clean this code up a bit once the model fields have stabilized

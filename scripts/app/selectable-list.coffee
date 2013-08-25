@@ -40,5 +40,6 @@ define [ 'underscore'
 
   return {
     ItemView: ItemView
+    EmptyView: NavigableList.EmptyView
     ListView: ListView
   }
