@@ -36,7 +36,11 @@ define [ 'underscore'
 
     # initialize glue code
     derivativeController = _.extend {}, Backbone.Events
-    derivativeController.listenTo ingredients, 'change:selected', (model, selected) ->
+    derivativeController.listenTo ingredients, 'change:implied', _.debounce (
+      -> availableIngredients.filter(availableFilter)
+    ), 0
+    derivativeController.listenTo ingredients, 'change:selected', _.debounce ((model, selected) ->
+      availableIngredients.filter(availableFilter)
       have = availableIngredients.pluck 'name'
       if selected
         additions = DerivativeSearch.computeAdditions model.get('name'), have
@@ -46,11 +50,9 @@ define [ 'underscore'
         removals = DerivativeSearch.computeRemovals model.get('name'), have
         for m in ingredients.filter((m) -> m.get('name') in removals)
           m.set 'implied', false
+    ), 0
 
     searchController = _.extend {}, Backbone.Events
-    searchController.listenTo ingredients, 'change:selected change:implied', _.debounce (
-      -> availableIngredients.filter(availableFilter)
-    ), 0
     searchController.listenTo search, 'change:search', -> search.set { loading: true }
     searchController.listenTo(search, 'change:search', _.debounce (
       ->

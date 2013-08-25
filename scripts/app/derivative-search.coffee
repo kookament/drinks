@@ -8,16 +8,35 @@ define [ 'underscore'
     inverse = {}
     for k, v of obj
       if not _.isArray v
-        throw new Error 'Malformed derivative directive for', k, ',', v
+        throw new Error "Malformed derivative directive for '#{k}'."
       for i in v
         (inverse[i] ?= []).push k
     return inverse
 
   inverseDerivatives = _invertDerivatives(derivatives)
 
-  computeAdditions = (added, available) -> []
+  computeAdditions = (added, available) ->
+    d = derivatives[added]
+    if d?.length
+      return d
+    else
+      return []
 
-  computeRemovals = (removed, available) -> []
+  computeRemovals = (removed, available) ->
+    d = derivatives[removed]
+    if d?.length
+      removed = []
+      for ing in d
+        makeable = false
+        for inv in inverseDerivatives[ing]
+          if inv in available
+            makeable = true
+            break
+        if not makeable
+          removed.push ing
+      return removed
+    else
+      return []
 
   return {
     computeAdditions: computeAdditions

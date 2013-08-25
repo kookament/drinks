@@ -41,5 +41,38 @@
     ],
     "instructions": "Shake with ice for a long time. Strain into a chilled {gcocktail glass}.",
     "notes": ""
+  },
+  {
+    "name": "Rum & Coke",
+    "ingredients": [
+      "white rum | {q2}{uoz} white rum",
+      "cola | {q4}{uoz} cola"
+    ],
+    "instructions": "Build ingredients in a {glowball glass} filled with ice.",
+    "notes": ""
+  },
+  {
+    "name": "Dark & Stormy",
+    "ingredients": [
+      "dark rum | {q1.5}{uoz} dark rum",
+      "ginger beer | {q3}{uoz} ginger beer"
+    ],
+    "instructions": "Pour ginger beer into a {ghighball glass} filled with ice. Top off with rum.",
+    "notes": ""
+  },
+  {
+    "name": "Long Island Iced Tea",
+    "ingredients": [
+      "vodka | {q1} {upart} vodka",
+      "tequila | {q1} {upart} tequila",
+      "gin | {q1} {upart} gin",
+      "white rum | {q1} {upart} white rum",
+      "triple sec | {q1} {upart} triple sec",
+      "lemon juice | {q2} {uparts} lemon juice",
+      "simple syrup | {q1} {part} simple syrup",
+      "cola | splash of cola"
+    ],
+    "instructions": "Mix ingredients in a {ghighball glass} over ice.",
+    "notes": ""
   }
 ]
