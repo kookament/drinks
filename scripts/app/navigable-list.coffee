@@ -78,6 +78,7 @@ define [ 'marionette'
       fn = this[@_keyhandlers[ev.which]]
       if fn
         ev.stopPropagation()
+        ev.preventDefault()
         fn.apply this, arguments
 
     _tab: -> # nop; swallow this event

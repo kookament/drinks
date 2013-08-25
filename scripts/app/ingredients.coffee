@@ -103,9 +103,11 @@ define [ 'underscore'
       if @collection.length
         if ev.which == 40 # down arrow
           ev.stopPropagation()
+          ev.preventDefault()
           @list.currentView.enterTop()
         else if ev.which == 38 # up arrow
           ev.stopPropagation()
+          ev.preventDefault()
           @list.currentView.enterBottom()
 
     _listKeyDown: (ev) ->
