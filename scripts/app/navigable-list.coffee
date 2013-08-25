@@ -25,28 +25,33 @@ define [ 'marionette'
       'focus': 'focus'
       'blur': 'blur'
 
+    grabFocus: (ev = null) ->
+      # this is gross, but I want it to enterTop when we get focused...
+      if ev?.type != 'focus' and ev?.type != 'blur'
+        @$el.focus()
+
     isActive: ->
       return !!@$('.list-item.active').length
 
     enterTop: (ev = null) ->
       if not @isActive()
         @activate 0, ev
+      else
+        @grabFocus(ev)
 
-    enterBottom: ->
+    enterBottom: (ev = null) ->
       if not @isActive()
         @activate @collection.length - 1
+      else
+        @grabFocus(ev)
 
     activate: (i, ev = null) ->
-      # this is gross, but I want it to enterTop when we get focused...
-      if ev?.type != 'focus' and ev?.type != 'blur'
-        @$el.focus()
+      @grabFocus(ev)
       @$('.list-item.active').removeClass('active').trigger('navigate-inactive')
       @$('.list-item').eq(i).addClass('active').trigger('navigate-active')
       @trigger 'activate', i
 
-    deselect: (ev = null) ->
-      if ev?.type != 'focus' and ev?.type != 'blur'
-        @$el.blur()
+    deselect: ->
       @$('.list-item.active').removeClass('active').trigger('navigate-inactive')
       @trigger 'deselect'
 
