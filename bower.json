@@ -20,7 +20,7 @@
     "require-css": "git://github.com/guybedford/require-css.git#~0.0.7",
     "require-handlebars-plugin": "git://github.com/SlexAxton/require-handlebars-plugin.git#~0.4.0",
     "require-less": "git://github.com/guybedford/require-less.git#~0.0.7",
-    "requirejs": "git://github.com/jrburke/requirejs.git#~2.1.8",
+    "requirejs": "~2.1.8",
     "normalize-css": "~2.1.2",
     "requirejs-plugins": "~1.0.2",
     "text": "requirejs/text#~2.0.10"
