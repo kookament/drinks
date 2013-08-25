@@ -1,3 +1,5 @@
+@import './theme.less';
+
 .instructions.empty {
   text-align: center;
   padding-top: 100px;
@@ -8,5 +10,17 @@
     font-size: 24px;
     padding-top: 8px;
     padding-left: 12px;
+  }
+
+  .ingredient-list {
+    list-style: none;
+
+    .ingredient {
+      color: @ingredient-color;
+
+      &.unavailable {
+        color: lighten(@ingredient-color, 50%);
+      }
+    }
   }
 }

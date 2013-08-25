@@ -58,7 +58,8 @@ require.config({
   },
   hbs: {
     disableI18n: true,
-    templateExtension: 'handlebars'
+    templateExtension: 'handlebars',
+    helperPathCallback: function(name) { return 'cs!./helpers/' + name }
   }
 });
 

@@ -2,10 +2,23 @@ define [ 'underscore'
          'json!../data/recipes.json' ],
 (_, recipes) ->
   first = (i) ->
-    if i.indexOf('|') != -1
+    if _.indexOf(i, '|') != -1
       return i.split('|')[0].trim()
     else
       return ''
+
+  formattedStringToObject = (i) ->
+    s = i.split('|', 2)
+    if s.length == 1
+      return {
+        name: ''
+        instruction: s[0].trim()
+      }
+    else
+      return {
+        name: s[0].trim()
+        instruction: s[1].trim()
+      }
 
   ingredients = _.chain(recipes)
     .pluck('ingredients')
@@ -18,12 +31,13 @@ define [ 'underscore'
 
   recipesForIngredients = {}
   for r in recipes
-    _.chain(r.ingredients, first)
+    _.chain(r.ingredients)
       .map(first)
       .filter(_.identity)
       .uniq()
       .tap((i) -> r.searchableIngredients = i)
       .each((i) -> (recipesForIngredients[i] ?= []).push r)
+    r.ingredients = _(r.ingredients).map formattedStringToObject
 
   _countSubset = (small, large) ->
     missed = 0

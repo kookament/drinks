@@ -76,20 +76,17 @@ define [ 'underscore'
 
     # initialize more glue code for views
     mixableRecipesView.left = ->
-      @deselect()
       ingredientsSearchView.search.currentView.focusInput()
 
     searchController.listenTo mixableRecipesView, 'activate', ->
       ingredientsSearchView.list.currentView.deselect()
-
-    searchController.listenTo ingredientsSearchView, 'activate', ->
-      mixableRecipesView.deselect()
 
     searchController.listenTo recipes, 'change:selected remove reset', _.debounce (->
       selected = recipes.findWhere { selected: true }
       if selected
         app.instructions.show(new Instructions.View
           model: selected
+          available: availableIngredients
         )
       else
         app.instructions.show(new Instructions.EmptyView)

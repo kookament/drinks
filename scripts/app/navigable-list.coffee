@@ -25,11 +25,16 @@ define [ 'marionette'
       'focus': 'focus'
       'blur': 'blur'
 
+    isActive: ->
+      return !!@$('.list-item.active').length
+
     enterTop: (ev = null) ->
-      @activate 0, ev
+      if not @isActive()
+        @activate 0, ev
 
     enterBottom: ->
-      @activate @collection.length - 1
+      if not @isActive()
+        @activate @collection.length - 1
 
     activate: (i, ev = null) ->
       # this is gross, but I want it to enterTop when we get focused...
