@@ -118,6 +118,7 @@ define [ 'underscore'
     if not searchString
       return -> return true
     else
+      searchString = searchString.toLowerCase()
       return (m) ->
         if m.get('name').indexOf(searchString) != -1
           return true

@@ -25,6 +25,7 @@ define [ 'underscore'
     .flatten(true)
     .map(first)
     .filter(_.identity)
+    .map((i) -> i.toLowerCase())
     .sort()
     .uniq(true)
     .value()

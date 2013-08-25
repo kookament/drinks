@@ -69,10 +69,21 @@
       "white rum | {q1} {upart} white rum",
       "triple sec | {q1} {upart} triple sec",
       "lemon juice | {q2} {uparts} lemon juice",
-      "simple syrup | {q1} {part} simple syrup",
+      "simple syrup | {q1} {upart} simple syrup",
       "cola | splash of cola"
     ],
     "instructions": "Mix ingredients in a {ghighball glass} over ice.",
+    "notes": ""
+  },
+  {
+    "name": "Chateau Romani",
+    "ingredients": [
+      "honey whiskey | {q1} {upart} honey whiskey",
+      "amaretto | {q1} {upart} amaretto",
+      "frangelico | {q1} {upart} Frangelico",
+      "milk | milk"
+    ],
+    "instructions": "Pour alcohol in a shaker with ice and shake vigorously. Strain into a small glass and fill with milk.",
     "notes": ""
   }
 ]
