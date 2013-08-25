@@ -10,10 +10,10 @@ define [ 'underscore'
     events:
       'click': '_click'
 
-    modelEvents:
+    modelEvents: ->
       'change:selected': 'renderSelected'
 
-    onShow: ->
+    onRender: ->
       @renderSelected()
 
     _click: (ev) ->

@@ -27,10 +27,14 @@
       }
     }
 
-    &.selected, &:hover, &.active {
+    &.selected, &.implied, &:hover, &.active {
       .list-icon {
         visibility: visible;
       }
+    }
+
+    &.implied:not(.selected) .list-icon {
+      color: lighten(@list-item-color, 50%);
     }
   }
 }

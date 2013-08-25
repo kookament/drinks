@@ -1,6 +1,8 @@
 drinks
 ======
 
+Requires `bower` and `npm`.
+
 To run:
 ```
 bower install

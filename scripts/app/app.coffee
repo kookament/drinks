@@ -5,8 +5,9 @@ define [ 'underscore'
          'cs!./recipes'
          'cs!./instructions'
          'cs!./recipe-search'
+         'cs!./derivative-search'
          'less!../styles/app.less' ],
-(_, Marionette, filterableDecorator, Ingredients, Recipes, Instructions, RecipeSearch) ->
+(_, Marionette, filterableDecorator, Ingredients, Recipes, Instructions, RecipeSearch, DerivativeSearch) ->
   return ->
     # initialize regions
     app = new Marionette.Application
@@ -26,16 +27,30 @@ define [ 'underscore'
 
     searchedIngredients = filterableDecorator ingredients
 
-    selectedFilter = (m) -> m.get('selected')
-    selectedIngredients = filterableDecorator ingredients
-    selectedIngredients.filter(selectedFilter)
+    availableFilter = (m) -> m.get('available')
+    availableIngredients = filterableDecorator ingredients
+    availableIngredients.filter(availableFilter)
 
     recipes = new Backbone.Collection [],
       model: Recipes.Model
 
     # initialize glue code
+    derivativeController = _.extend {}, Backbone.Events
+    derivativeController.listenTo ingredients, 'change:selected', (model, selected) ->
+      have = availableIngredients.pluck 'name'
+      if selected
+        additions = DerivativeSearch.computeAdditions model.get('name'), have
+        for m in ingredients.filter((m) -> m.get('name') in additions)
+          m.set 'implied', true
+      else
+        removals = DerivativeSearch.computeRemovals model.get('name'), have
+        for m in ingredients.filter((m) -> m.get('name') in removals)
+          m.set 'implied', false
+
     searchController = _.extend {}, Backbone.Events
-    searchController.listenTo ingredients, 'change:selected', -> selectedIngredients.filter(selectedFilter)
+    searchController.listenTo ingredients, 'change:selected change:implied', _.debounce (
+      -> availableIngredients.filter(availableFilter)
+    ), 0
     searchController.listenTo search, 'change:search', -> search.set { loading: true }
     searchController.listenTo(search, 'change:search', _.debounce (
       ->
@@ -45,8 +60,8 @@ define [ 'underscore'
         search.set { loading: false }
       ), 150
     )
-    searchController.listenTo selectedIngredients, 'add remove reset', ->
-      recipes.reset RecipeSearch.find(selectedIngredients.pluck('name'), 1)
+    searchController.listenTo availableIngredients, 'add remove reset', ->
+      recipes.reset RecipeSearch.find(availableIngredients.pluck('name'), 1)
 
     # initialize views
     mixableRecipesView = new Recipes.ListView

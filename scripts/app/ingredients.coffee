@@ -1,17 +1,22 @@
-define [ 'backbone'
+define [ 'underscore'
+         'backbone'
          'marionette'
          'cs!./selectable-list'
          'cs!./drink'
          'hbs!../templates/ingredient-list-item'
          'hbs!../templates/search-box'
          'hbs!../templates/search-sidebar'
+         'backbone.mutators'
          'less!../styles/ingredients' ],
-(Backbone, Marionette, SelectableList, Drink, ingredient_list_item, search_box, search_sidebar) ->
+(_, Backbone, Marionette, SelectableList, Drink, ingredient_list_item, search_box, search_sidebar) ->
   class Model extends Backbone.Model
     defaults: ->
       name: ''
       selected: false
-      implies: []
+      implied: false
+
+    mutators:
+      available: -> @get('selected') or @get('implied')
 
   class SearchModel extends Backbone.Model
     defaults:
@@ -22,11 +27,22 @@ define [ 'backbone'
     className: -> super + ' ingredient'
     template: ingredient_list_item
 
-    renderSelected: ->
+    modelEvents: ->
+      _.extend super, {
+        'change:selected': 'renderAvailability' # override
+        'change:implied': 'renderAvailability'
+      }
+
+    onRender: ->
       super
-      selected = @model.get('selected')
-      @$('.list-icon').toggleClass('icon-check', selected)
-      @$('.list-icon').toggleClass('icon-check-empty', not selected)
+      @renderAvailability()
+
+    renderAvailability: ->
+      @renderSelected()
+      @$el.toggleClass 'implied', @model.get('implied')
+      available = @model.get 'available'
+      @$('.list-icon').toggleClass('icon-check', available)
+      @$('.list-icon').toggleClass('icon-check-empty', not available)
 
   class NoResultsView extends SelectableList.EmptyView
     template: -> '<td>no results</td>'
