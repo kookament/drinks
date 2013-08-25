@@ -45,9 +45,11 @@ define [ 'marionette'
       @$('.list-item.active').removeClass('active').trigger('navigate-inactive')
       @trigger 'deselect'
 
-    exitTop: -> # default no-op
+    exitTop: ->
+      @enterBottom()
 
-    exitBottom: -> # default no-op
+    exitBottom: ->
+      @enterTop()
 
     _keyhandlers:
       '9': '_tab'

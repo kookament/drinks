@@ -82,12 +82,15 @@ define [ 'underscore'
         model: @model
       that = this
       list = new (class L extends SelectableList.ListView
-        # className: SelectableList.ListView::className + ' showing-searched'
         collection: that.collection
         itemView: ResultItemView
         emptyView: NoResultsView
 
         exitTop: ->
+          @deselect()
+          that.search.currentView.focusInput()
+
+        exitBottom: ->
           @deselect()
           that.search.currentView.focusInput()
 
