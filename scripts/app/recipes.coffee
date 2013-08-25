@@ -1,8 +1,9 @@
-define [ 'backbone'
+define [ 'underscore'
+         'backbone'
          'cs!./navigable-list'
          'hbs!../templates/recipe-list-item'
          'less!../styles/recipes' ],
-(Backbone, NavigableList, recipe_list_item) ->
+(_, Backbone, NavigableList, recipe_list_item) ->
   class Model extends Backbone.Model
     defaults: ->
       name: ''
@@ -30,6 +31,8 @@ define [ 'backbone'
   class ListView extends NavigableList.ListView
     itemView: ItemView
     emptyView: NoRecipesView
+
+    blur: -> # nop: want to keep .active when this happens
 
   return {
     Model: Model

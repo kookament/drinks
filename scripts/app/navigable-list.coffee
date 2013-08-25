@@ -22,10 +22,10 @@ define [ 'marionette'
     events: ->
       'keydown': 'keydown'
       'click .list-item': 'click'
-      'focus': 'enterTop'
-      'blur': 'deselect'
+      'focus': 'focus'
+      'blur': 'blur'
 
-    enterTop: (ev) ->
+    enterTop: (ev = null) ->
       @activate 0, ev
 
     enterBottom: ->
@@ -50,6 +50,12 @@ define [ 'marionette'
 
     exitBottom: ->
       @enterTop()
+
+    focus: (ev) ->
+      @enterTop(ev)
+
+    blur: (ev) ->
+      @deselect(ev)
 
     _keyhandlers:
       '9': '_tab'

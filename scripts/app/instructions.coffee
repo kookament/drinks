@@ -9,7 +9,7 @@ define [ 'backbone'
 
   class EmptyView extends Marionette.ItemView
     className: 'instructions empty'
-    template: '<span>nothing selected</span>'
+    template: -> 'select a recipe on the left'
 
   return {
     View: View
