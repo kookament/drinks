@@ -101,4 +101,13 @@ define [ 'underscore'
 
     $('input.search-input').focus()
 
+    $(window).keydown (ev) ->
+      if ev.which == 38 or ev.which == 40 # arrow up, arrow down
+        if recipes.length
+          mixableRecipesView.grabFocus()
+        else if searchedIngredients.length
+          ingredientsSearchView.list.currentView.grabFocus()
+        else
+          ingredientsSearchView.search.currentView.focusInput()
+
     return app

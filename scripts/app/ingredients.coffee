@@ -100,15 +100,17 @@ define [ 'underscore'
       @list.show list
 
     _inputKeydown: (ev) ->
-      if ev.which == 40 # down arrow
-        ev.stopPropagation()
-        @list.currentView.enterTop()
-      else if ev.which == 38 # up arrow
-        ev.stopPropagation()
-        @list.currentView.enterBottom()
+      if @collection.length
+        if ev.which == 40 # down arrow
+          ev.stopPropagation()
+          @list.currentView.enterTop()
+        else if ev.which == 38 # up arrow
+          ev.stopPropagation()
+          @list.currentView.enterBottom()
 
     _listKeyDown: (ev) ->
       if ev.which != 16 and ev.which != 17 and ev.which != 18 and ev.which != 91 # shift, ctrl, alt, cmd
+        @search.currentView.$('input').val('')
         @search.currentView.focusInput()
 
   # todo: clean this code up a bit once the model fields have stabilized
