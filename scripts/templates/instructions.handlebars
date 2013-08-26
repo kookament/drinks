@@ -1,9 +1,16 @@
-<div class="name">{{name}}</div>
+<div class="drink-name">{{name}}</div>
 <ul class="ingredient-list">
   {{#each ingredients}}
   {{ingredient this}}
   {{/each}}
 </ul>
-{{#if source}}
-<div class="source">{{source}}</div>
+{{#if source.name}}
+<div class="source">
+  source:
+  {{#if source.url}}
+  <a href="{{{source.url}}}" class="source-name" target="_blank">{{source.name}}</a>
+  {{else}}
+  <div class="source-name">{{source.name}}</div>
+  {{/if}}
+</div>
 {{/if}}

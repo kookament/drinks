@@ -13,6 +13,9 @@ define [ 'underscore'
       ingredients: []
       instructions: ''
       notes: ''
+      source:
+        name: ''
+        url: ''
       missing: 0
 
   class ItemView extends NavigableList.ItemView

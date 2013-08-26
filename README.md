@@ -36,6 +36,7 @@ This file is an array of objects with the following fields:
 - `instructions`: a human-readable string explaining how to mix the drink
 - `notes`: any human-readable notes you'd like to add about the drink (optional)
 - `source`: where the drink originally came from (optional, see `sources.json` section)
+- `url`: override the URL for this source provided by `sources.json`, if any (optional, see `sources.json` section)
 
 #### Ingredients ####
 

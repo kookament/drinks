@@ -5,9 +5,10 @@ define [ 'underscore'
          'cs!./ingredients'
          'cs!./recipes'
          'cs!./instructions'
-         'cs!./recipe-search'
          'cs!./persistence'
+         'cs!./recipe-search'
          'cs!./derivative-search'
+         'json!../data/sources.json'
          'less!../styles/app.less' ],
 (_
  Marionette
@@ -16,9 +17,10 @@ define [ 'underscore'
  Ingredients
  Recipes
  Instructions
- RecipeSearch
  Persistence
- DerivativeSearch) ->
+ RecipeSearch
+ DerivativeSearch
+ sources) ->
   # how many ingredients you can be missing and still have something come up
   _FUDGE_FACTOR = 2
 
@@ -92,6 +94,11 @@ define [ 'underscore'
           lastMissing = missing
           i++
         i++
+      for r in newRecipes
+        if sources[r.source]
+          r.source =
+            name: sources[r.source].name
+            url: r.url ? sources[r.source].url
       recipes.reset newRecipes
 
     # this is gross but I need to have $scrollContainer for below
