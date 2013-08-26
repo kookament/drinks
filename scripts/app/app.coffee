@@ -63,7 +63,10 @@ define [ 'underscore'
     persistence.load()
 
   initDerivatives = (globals) ->
-    have = globals.ingredients.pluck 'tag'
+    have = _.chain(globals.ingredients.models)
+      .filter((m) -> m.get 'selected')
+      .map((m) -> m.get 'tag')
+      .value()
     _.chain(have)
       .map((i) -> DerivativeSearch.computeAdditions i, have)
       .flatten(true)
