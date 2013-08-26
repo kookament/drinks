@@ -80,5 +80,18 @@
     ],
     "instructions": "Pour alcohol in a shaker with ice and shake vigorously. Strain into a small glass and fill with milk.",
     "source": "drunken-moogle"
+  },
+  {
+    "name": "Brinstar",
+    "ingredients": [
+      { "tag": "cachaca", "display": "{q1} {upart} cachaça" },
+      { "tag": "absinthe", "display": "{q1} {upart} absinthe" },
+      { "tag": "simple syrup", "display": "{q1} {upart} simple syrup" },
+      { "tag": "lime", "display": "{q1/2} {ulime}, cut into quarters" },
+      { "display": "sprig of mint" }
+    ],
+    "instructions": "Muddle the lime, simple syrup, and mint together in a shaker. Add ice and the alcohol and shake well. Pour the mixture into a {glowball glass}.",
+    "notes": "Brinstar is a zone overgrown with vegetation. Having very recently been introduced to a lime-y cocktail known as a caipirinha, I decided to try combining it with another leafy drink - namely, a mojito. The resulting combination, plus a little extra, wound up being a tasty creation that I’m rather proud of.",
+    "source": "drunken-moogle"
   }
 ]
