@@ -50,17 +50,17 @@ define [ 'marionette'
     isActive: ->
       return !!@$('.list-item.active').length
 
-    enterTop: (ev = null) ->
+    enter: (ev = null) ->
       if not @isActive()
-        @activate 0, ev
+        @enterTop()
       else
         @grabFocus(ev)
 
+    enterTop: (ev = null) ->
+      @activate 0, ev
+
     enterBottom: (ev = null) ->
-      if not @isActive()
-        @activate @collection.length - 1
-      else
-        @grabFocus(ev)
+      @activate @collection.reject((i) -> i instanceof HeaderModel).length - 1
 
     activate: (i, ev = null) ->
       @grabFocus(ev)
@@ -80,16 +80,20 @@ define [ 'marionette'
       @trigger 'deselect'
 
     exitTop: ->
+      @deselect()
       @enterBottom()
 
     exitBottom: ->
+      @deselect()
       @enterTop()
 
     focus: (ev) ->
-      @enterTop(ev)
+      if ev?.type != 'focus' and ev?.type != 'blur'
+        @enterTop(ev)
 
     blur: (ev) ->
-      @deselect(ev)
+      if ev?.type != 'focus' and ev?.type != 'blur'
+        @deselect(ev)
 
     _keyhandlers:
       '9': '_tab'

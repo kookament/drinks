@@ -139,7 +139,9 @@ define [ 'underscore'
     ingredientsSearchView = new Ingredients.SearchSidebar
       model: globals.search
       collection: globals.searchedIngredients
-      rightArrowKey: -> mixableRecipesView.enterTop()
+      rightArrowKey: ->
+        ingredientsSearchView.list.currentView.deselect()
+        mixableRecipesView.enter()
 
     mixableRecipesView.left = ->
       ingredientsSearchView.search.currentView.focusInput()
@@ -147,7 +149,7 @@ define [ 'underscore'
     # catch events when nothing is focused
     $(window).keydown (ev) ->
       if ev.which == 38 or ev.which == 40 # arrow up, arrow down
-        if recipes.length
+        if globals.recipes.length
           mixableRecipesView.grabFocus()
         else if searchedIngredients.length
           ingredientsSearchView.list.currentView.grabFocus()
