@@ -86,6 +86,7 @@ define [ 'underscore'
       @search.show new SearchBarView
         model: @model
       that = this
+      @list.ensureEl() # this is because we want to pull out @list.$el below and is gross
       list = new (class L extends SelectableList.ListView
         collection: that.collection
         itemView: ResultItemView
@@ -101,7 +102,7 @@ define [ 'underscore'
 
         left: that.options.leftArrowKey
         right: that.options.rightArrowKey
-      )
+      ) { $scrollContainer: @list.$el }
       @list.show list
 
     _inputKeydown: (ev) ->

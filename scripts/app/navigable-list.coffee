@@ -27,6 +27,9 @@ define [ 'marionette'
     attributes:
       tabindex: 0
 
+    options:
+      $scrollContainer: null # pass this to automatically scroll the elements into view if they aren't
+
     events: ->
       'keydown': 'keydown'
       'click .list-item': 'click'
@@ -62,7 +65,14 @@ define [ 'marionette'
     activate: (i, ev = null) ->
       @grabFocus(ev)
       @$('.list-item.active').removeClass('active').trigger('navigate-inactive')
-      @$('.list-item').eq(i).addClass('active').trigger('navigate-active')
+      $active = @$('.list-item').eq(i).addClass('active').trigger('navigate-active')
+      if @options.$scrollContainer
+        offset = $active.offset().top - @$el.offset().top
+        scrollTop = @options.$scrollContainer.scrollTop()
+        if offset < scrollTop
+          $active[0].scrollIntoView(true)
+        else if offset + $active.height() > @options.$scrollContainer.height() + scrollTop
+          $active[0].scrollIntoView(false)
       @trigger 'activate', i
 
     deselect: ->

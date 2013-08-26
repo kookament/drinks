@@ -92,9 +92,13 @@ define [ 'underscore'
         i++
       recipes.reset newRecipes
 
+    # this is gross but I need to have $scrollContainer for below
+    app.drinks.ensureEl()
+
     # initialize views
     mixableRecipesView = new Recipes.ListView
       collection: recipes
+      $scrollContainer: app.drinks.$el
 
     ingredientsSearchView = new Ingredients.SearchSidebar
       model: search
