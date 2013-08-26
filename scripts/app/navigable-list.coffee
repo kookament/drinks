@@ -42,10 +42,12 @@ define [ 'marionette'
       else
         return super
 
-    grabFocus: (ev = null) ->
+    _grabFocus: (ev = null) ->
       # this is gross, but I want it to enterTop when we get focused...
       if ev?.type != 'focus' and ev?.type != 'blur'
+        @_grabbingFocus = true
         @$el.focus()
+        @_grabbingFocus = false
 
     isActive: ->
       return !!@$('.list-item.active').length
@@ -54,7 +56,7 @@ define [ 'marionette'
       if not @isActive()
         @enterTop()
       else
-        @grabFocus(ev)
+        @_grabFocus(ev)
 
     enterTop: (ev = null) ->
       @activate 0, ev
@@ -63,7 +65,7 @@ define [ 'marionette'
       @activate @collection.reject((i) -> i instanceof HeaderModel).length - 1
 
     activate: (i, ev = null) ->
-      @grabFocus(ev)
+      @_grabFocus(ev)
       @$('.list-item.active').removeClass('active').trigger('navigate-inactive')
       $active = @$('.list-item').eq(i).addClass('active').trigger('navigate-active')
       if @options.$scrollContainer
@@ -88,12 +90,11 @@ define [ 'marionette'
       @enterTop()
 
     focus: (ev) ->
-      if ev?.type != 'focus' and ev?.type != 'blur'
-        @enterTop(ev)
+      return if @_grabbingFocus
+      @enterTop(ev)
 
     blur: (ev) ->
-      if ev?.type != 'focus' and ev?.type != 'blur'
-        @deselect(ev)
+      @deselect(ev)
 
     _keyhandlers:
       '9': '_tab'

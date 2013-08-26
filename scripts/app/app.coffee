@@ -153,9 +153,9 @@ define [ 'underscore'
     $(window).keydown (ev) ->
       if ev.which == 38 or ev.which == 40 # arrow up, arrow down
         if globals.recipes.length
-          mixableRecipesView.grabFocus()
+          mixableRecipesView.enter()
         else if searchedIngredients.length
-          ingredientsSearchView.list.currentView.grabFocus()
+          ingredientsSearchView.list.currentView.enter()
         else
           ingredientsSearchView.search.currentView.focusInput()
 
