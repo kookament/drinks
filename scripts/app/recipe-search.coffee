@@ -53,7 +53,8 @@ define [ 'underscore'
       .flatten(true)
       .sortBy('name')
       .uniq(true, (r) -> r.name)
-      .filter((r) -> _countSubset(r.searchableIngredients, ingredients) <= flex)
+      .map((r) -> _.extend { missing: _countSubset(r.searchableIngredients, ingredients) }, r )
+      .filter((r) -> r.missing <= flex)
       .value()
 
   return {

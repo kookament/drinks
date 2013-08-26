@@ -20,6 +20,7 @@
     border-bottom: 1px solid @list-background;
     background-color: @list-item-background;
     color: @list-item-color;
+    font-size: @list-item-font-size;
 
     &.active {
       background-color: @light-selection;
@@ -27,6 +28,19 @@
 
     &:hover {
       cursor: pointer;
+    }
+  }
+
+  .list-header {
+    height: @list-header-height;
+    border-bottom: 1px solid @list-background;
+    background-color: darken(@list-item-background, 5%);
+    color: @list-item-color;
+    text-transform: uppercase;
+    font-size: @list-header-font-size;
+
+    .header-text {
+      padding-left: 10px;
     }
   }
 

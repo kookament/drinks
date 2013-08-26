@@ -10,6 +10,7 @@ define [ 'underscore'
       ingredients: []
       instructions: ''
       notes: ''
+      missing: 0
 
   class ItemView extends NavigableList.ItemView
     className: -> super + ' recipe'

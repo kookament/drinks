@@ -1,5 +1,6 @@
 define [ 'underscore'
          'marionette'
+         'cs!./navigable-list'
          'cs!./filterable-decorator'
          'cs!./ingredients'
          'cs!./recipes'
@@ -7,7 +8,10 @@ define [ 'underscore'
          'cs!./recipe-search'
          'cs!./derivative-search'
          'less!../styles/app.less' ],
-(_, Marionette, filterableDecorator, Ingredients, Recipes, Instructions, RecipeSearch, DerivativeSearch) ->
+(_, Marionette, NavigableList, filterableDecorator, Ingredients, Recipes, Instructions, RecipeSearch, DerivativeSearch) ->
+  # how many ingredients you can be missing and still have something come up
+  _FUDGE_FACTOR = 2
+
   return ->
     # initialize regions
     app = new Marionette.Application
@@ -63,7 +67,22 @@ define [ 'underscore'
       ), 150
     )
     searchController.listenTo availableIngredients, 'add remove reset', ->
-      recipes.reset RecipeSearch.find(availableIngredients.pluck('name'), 1)
+      newRecipes = RecipeSearch.find(availableIngredients.pluck('name'), _FUDGE_FACTOR)
+      newRecipes = _.chain(newRecipes).sortBy('name').sortBy('missing').value()
+      lastMissing = -1
+      i = 0
+      while i < newRecipes.length # we use a while because we'll be adding stuff
+        missing = newRecipes[i].missing
+        if missing > lastMissing
+          text = switch missing
+            when 0 then 'mixable drinks'
+            when 1 then '...with 1 more ingredient'
+            else "...with #{missing} more ingredients"
+          newRecipes.splice i, 0, new NavigableList.HeaderModel { text: text }
+          lastMissing = missing
+          i++
+        i++
+      recipes.reset newRecipes
 
     # initialize views
     mixableRecipesView = new Recipes.ListView

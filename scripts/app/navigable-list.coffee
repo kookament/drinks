@@ -1,10 +1,18 @@
 define [ 'marionette'
          'less!../styles/navigable-list' ],
 (Marionette) ->
-  # understand a click event to mean toggle the selection
+  class HeaderModel extends Backbone.Model
+    defaults:
+      text: ''
+
   class ItemView extends Marionette.ItemView
     tagName: 'tr'
     className: -> 'list-item'
+
+  class HeaderView extends Marionette.ItemView
+    tagName: 'tr'
+    className: -> 'list-header'
+    template: (attr) -> "<td class='header-text'>#{attr.text}</td>"
 
   class EmptyView extends Marionette.ItemView
     tagName: 'tr'
@@ -24,6 +32,12 @@ define [ 'marionette'
       'click .list-item': 'click'
       'focus': 'focus'
       'blur': 'blur'
+
+    getItemView: (item) ->
+      if item instanceof HeaderModel
+        return HeaderView
+      else
+        return super
 
     grabFocus: (ev = null) ->
       # this is gross, but I want it to enterTop when we get focused...
@@ -89,7 +103,7 @@ define [ 'marionette'
 
     _up: (ev) ->
       $items = @$('.list-item')
-      i = $items.filter('.active').index()
+      i = $items.index $items.filter('.active')
       if i > -1
         if i > 0
           @activate i - 1
@@ -98,7 +112,7 @@ define [ 'marionette'
 
     _down: (ev) ->
       $items = @$('.list-item')
-      i = $items.filter('.active').index()
+      i = $items.index $items.filter('.active')
       if i > -1
         if i < $items.length - 1
           @activate i + 1
@@ -106,9 +120,10 @@ define [ 'marionette'
           @exitBottom()
 
     click: (ev) ->
-      @activate $(ev.currentTarget).index()
+      @activate @$('.list-item').index $(ev.currentTarget)
 
   return {
+    HeaderModel: HeaderModel
     ItemView: ItemView
     EmptyView: EmptyView
     ListView: ListView
