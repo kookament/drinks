@@ -25,7 +25,6 @@ define [ 'underscore'
 
   class SearchModel extends Backbone.Model
     defaults:
-      loading: false
       search: ''
 
   class ResultItemView extends SelectableList.ItemView

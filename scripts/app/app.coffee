@@ -25,8 +25,7 @@ define [ 'underscore'
   _FUDGE_FACTOR = 2
   _GLASS_REGEX = /\{g([^\{]*)\}/
 
-  return ->
-    # initialize regions
+  initApp = ->
     app = new Marionette.Application
 
     app.addRegions
@@ -34,11 +33,9 @@ define [ 'underscore'
       drinks: '#drinks'
       instructions: '#instructions'
 
-    # initialize global state
     search = new Ingredients.SearchModel
 
     ingredients = RecipeSearch.ingredients.map (n) -> { tag: n }
-
     ingredients = new Backbone.Collection ingredients,
       model: Ingredients.Model
 
@@ -51,36 +48,48 @@ define [ 'underscore'
     recipes = new Backbone.Collection [],
       model: Recipes.Model
 
-    # initialize glue code
+    return {
+      app: app
+      search: search
+      ingredients: ingredients
+      searchedIngredients: searchedIngredients
+      availableIngredients: availableIngredients
+      recipes: recipes
+    }
+
+  initPersistence = (globals) ->
+    persistence = new Persistence.Ingredients
+      ingredients: globals.ingredients
+    persistence.load()
+
+  initDerivatives = (globals) ->
+    have = globals.ingredients.pluck 'tag'
+    _.chain(have)
+      .map((i) -> DerivativeSearch.computeAdditions i, have)
+      .flatten(true)
+      .each((i) -> globals.ingredients.findWhere(tag: i)?.set 'implied', true)
+    globals.availableIngredients.filter()
+
     derivativeController = _.extend {}, Backbone.Events
-    derivativeController.listenTo ingredients, 'change:implied', _.debounce (
-      -> availableIngredients.filter(availableFilter)
+    derivativeController.listenTo globals.ingredients, 'change:implied', _.debounce (
+      -> globals.availableIngredients.filter()
     ), 0
-    # this was originally debounced but that broke local storage loading: is it a performance problem?
-    derivativeController.listenTo ingredients, 'change:selected', (model, selected) ->
-      availableIngredients.filter(availableFilter)
-      have = availableIngredients.pluck 'tag'
+    derivativeController.listenTo globals.ingredients, 'change:selected', _.debounce((model, selected) ->
+      globals.availableIngredients.filter()
+      have = globals.availableIngredients.pluck 'tag'
       if selected
         additions = DerivativeSearch.computeAdditions model.get('tag'), have
-        for m in ingredients.filter((m) -> m.get('tag') in additions)
+        for m in globals.ingredients.filter((m) -> m.get('tag') in additions)
           m.set 'implied', true
       else
         removals = DerivativeSearch.computeRemovals model.get('tag'), have
-        for m in ingredients.filter((m) -> m.get('tag') in removals)
+        for m in globals.ingredients.filter((m) -> m.get('tag') in removals)
           m.set 'implied', false
+    ), 0
 
-    searchController = _.extend {}, Backbone.Events
-    searchController.listenTo search, 'change:search', -> search.set { loading: true }
-    searchController.listenTo(search, 'change:search', _.debounce (
-      ->
-        searchedIngredients.filter(
-          Ingredients.generateIngredientMatcher(search.get('search'))
-        )
-        search.set { loading: false }
-      ), 150
-    )
-    searchController.listenTo availableIngredients, 'add remove reset', ->
-      newRecipes = RecipeSearch.find(availableIngredients.pluck('tag'), _FUDGE_FACTOR)
+  initSearch = (globals) ->
+    resetRecipes = ->
+      newRecipes = RecipeSearch.find(globals.availableIngredients.pluck('tag'), _FUDGE_FACTOR)
       newRecipes = _.chain(newRecipes).sortBy('name').sortBy('missing').value()
 
       for r in newRecipes
@@ -105,53 +114,36 @@ define [ 'underscore'
           i++
         i++
 
-      recipes.reset newRecipes
+      globals.recipes.reset newRecipes
 
-    # this is gross but I need to have $scrollContainer for below
-    app.drinks.ensureEl()
+    resetRecipes()
 
-    # initialize views
+    searchController = _.extend {}, Backbone.Events
+    searchController.listenTo(globals.search, 'change:search', _.debounce (
+      ->
+        globals.searchedIngredients.filter(
+          Ingredients.generateIngredientMatcher(globals.search.get('search'))
+        )
+      ), 150
+    )
+    searchController.listenTo globals.availableIngredients, 'add remove reset', resetRecipes
+
+  initViews = (globals) ->
+    # we have to initialize these in a weird order cause they reference each other
+    globals.app.drinks.ensureEl()
     mixableRecipesView = new Recipes.ListView
-      collection: recipes
-      $scrollContainer: app.drinks.$el
+      collection: globals.recipes
+      $scrollContainer: globals.app.drinks.$el
 
     ingredientsSearchView = new Ingredients.SearchSidebar
-      model: search
-      collection: searchedIngredients
+      model: globals.search
+      collection: globals.searchedIngredients
       rightArrowKey: -> mixableRecipesView.enterTop()
 
-    # initialize more glue code for views
     mixableRecipesView.left = ->
       ingredientsSearchView.search.currentView.focusInput()
 
-    searchController.listenTo mixableRecipesView, 'activate', ->
-      ingredientsSearchView.list.currentView.deselect()
-
-    searchController.listenTo recipes, 'change:selected remove reset', _.debounce (->
-      selected = recipes.findWhere { selected: true }
-      if selected
-        app.instructions.show(new Instructions.View
-          model: selected
-          available: availableIngredients
-        )
-      else
-        app.instructions.show(new Instructions.EmptyView)
-    ), 0
-
-    # initialize persistence
-    persistence = new Persistence.Ingredients
-      ingredients: ingredients
-    persistence.load()
-
-    # initialize go
-    app.start()
-
-    app.ingredients.show(ingredientsSearchView)
-    app.drinks.show(mixableRecipesView)
-    app.instructions.show(new Instructions.EmptyView)
-
-    $('input.search-input').focus()
-
+    # catch events when nothing is focused
     $(window).keydown (ev) ->
       if ev.which == 38 or ev.which == 40 # arrow up, arrow down
         if recipes.length
@@ -161,4 +153,35 @@ define [ 'underscore'
         else
           ingredientsSearchView.search.currentView.focusInput()
 
-    return app
+    # shove everything into the app
+    globals.app.ingredients.show(ingredientsSearchView)
+    globals.app.drinks.show(mixableRecipesView)
+    globals.app.instructions.show(new Instructions.EmptyView)
+
+    ingredientsSearchView.search.currentView.focusInput()
+
+    # link together some actions between the views
+    viewManager = _.extend {}, Backbone.Events
+    viewManager.listenTo mixableRecipesView, 'activate', ->
+      ingredientsSearchView.list.currentView.deselect()
+    viewManager.listenTo globals.recipes, 'change:selected remove reset', _.debounce (->
+      selected = globals.recipes.findWhere { selected: true }
+      if selected
+        globals.app.instructions.show(new Instructions.View
+          model: selected
+          available: globals.availableIngredients
+        )
+      else
+        globals.app.instructions.show(new Instructions.EmptyView)
+    ), 0
+
+  return ->
+    globals = initApp()
+    initPersistence globals
+    initDerivatives globals
+    initSearch globals
+    initViews globals
+
+    globals.app.start()
+
+    return globals

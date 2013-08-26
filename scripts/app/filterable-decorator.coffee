@@ -5,12 +5,12 @@ define [ 'backbone' ],
     # whoa.
     filtered = new collection.constructor
 
+    filtered._fn = -> true
+
     filtered.filter = (fn) ->
-      filtered._fn = fn
       if fn
-        filtered.reset collection.filter(fn)
-      else
-        filtered.reset collection.models
+        filtered._fn = fn
+      filtered.reset collection.filter(filtered._fn)
 
     filtered.filter()
 
