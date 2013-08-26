@@ -37,7 +37,8 @@
       { "tag": "absinthe", "display": "{q1}{utsp} absinthe" },
       { "display": "{q1-2} {udashes} orange bitters" }
     ],
-    "instructions": "Shake with ice for a long time. Strain into a chilled {gcocktail glass}."
+    "instructions": "Shake with ice for a long time. Strain into a chilled {gcocktail glass}.",
+    "source": "clover-club"
   },
   {
     "name": "Rum & Coke",
@@ -77,6 +78,7 @@
       { "tag": "frangelico", "display": "{q1} {upart} Frangelico" },
       { "tag": "milk", "display": "milk" }
     ],
-    "instructions": "Pour alcohol in a shaker with ice and shake vigorously. Strain into a small glass and fill with milk."
+    "instructions": "Pour alcohol in a shaker with ice and shake vigorously. Strain into a small glass and fill with milk.",
+    "source": "drunken-moogle"
   }
 ]
