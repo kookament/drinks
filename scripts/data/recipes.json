@@ -15,7 +15,7 @@
       { "tag": "gin", "display": "{q1.5}{uoz} gin" },
       { "tag": "tonic", "display": "{q3}{uoz} tonic water" }
     ],
-    "instructions": ""
+    "instructions": "Mix ingredients {ghighball glass} filled with ice. Garnish with a wedge of lime."
   },
   {
     "name": "The Last Word",
@@ -23,10 +23,9 @@
       { "tag": "gin", "display": "{q3/4}{uoz} gin" },
       { "tag": "green chartreuse", "display": "{q3/4}{uoz} green Chartreuse" },
       { "tag": "maraschino liqueur", "display": "{q3/4}{uoz} maraschino liqueur" },
-      { "tag": "lime juice", "display": "{q3/4}{uoz} lime juice" },
-      { "display": "twist of lime" }
+      { "tag": "lime juice", "display": "{q3/4}{uoz} lime juice" }
     ],
-    "instructions": "Shake vigorously with ice. Strain into a {gcocktail glass} and garnish with lime twist."
+    "instructions": "Shake vigorously with ice. Strain into a {gcocktail glass} and garnish with a twist of lime."
   },
   {
     "name": "Ivy",
@@ -116,6 +115,6 @@
       { "tag": "lillet", "display": "{q3/4}{uoz} Lillet" },
       { "tag": "absinthe", "display": "dash of absinthe" }
     ],
-    "instructions": "Shake ingredients together in a mixer with ice. Strain into chilled glass."
+    "instructions": "Shake ingredients together in a mixer with ice. Strain into chilled {gcocktail glass}."
   }
 ]

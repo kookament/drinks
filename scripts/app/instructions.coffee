@@ -6,7 +6,7 @@ define [ 'backbone'
  Marionette
  instructions) ->
   class View extends Marionette.ItemView
-    className: 'instructions'
+    className: 'instructions-container'
     template: instructions
 
     constructor: ({@available}) -> super
@@ -18,7 +18,7 @@ define [ 'backbone'
           $el.addClass 'unavailable'
 
   class EmptyView extends Marionette.ItemView
-    className: 'instructions empty'
+    className: 'instructions-container empty'
     template: -> 'select a recipe on the left'
 
   return {
