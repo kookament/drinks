@@ -6,6 +6,7 @@ define [ 'underscore'
          'cs!./recipes'
          'cs!./instructions'
          'cs!./recipe-search'
+         'cs!./persistence'
          'cs!./derivative-search'
          'less!../styles/app.less' ],
 (_
@@ -16,6 +17,7 @@ define [ 'underscore'
  Recipes
  Instructions
  RecipeSearch
+ Persistence
  DerivativeSearch) ->
   # how many ingredients you can be missing and still have something come up
   _FUDGE_FACTOR = 2
@@ -51,7 +53,8 @@ define [ 'underscore'
     derivativeController.listenTo ingredients, 'change:implied', _.debounce (
       -> availableIngredients.filter(availableFilter)
     ), 0
-    derivativeController.listenTo ingredients, 'change:selected', _.debounce ((model, selected) ->
+    # this was originally debounced but that broke local storage loading: is it a performance problem?
+    derivativeController.listenTo ingredients, 'change:selected', (model, selected) ->
       availableIngredients.filter(availableFilter)
       have = availableIngredients.pluck 'name'
       if selected
@@ -62,7 +65,6 @@ define [ 'underscore'
         removals = DerivativeSearch.computeRemovals model.get('name'), have
         for m in ingredients.filter((m) -> m.get('name') in removals)
           m.set 'implied', false
-    ), 0
 
     searchController = _.extend {}, Backbone.Events
     searchController.listenTo search, 'change:search', -> search.set { loading: true }
@@ -122,6 +124,11 @@ define [ 'underscore'
       else
         app.instructions.show(new Instructions.EmptyView)
     ), 0
+
+    # initialize persistence
+    persistence = new Persistence.Ingredients
+      ingredients: ingredients
+    persistence.load()
 
     # initialize go
     app.start()
