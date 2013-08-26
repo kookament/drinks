@@ -91,7 +91,7 @@ define [ 'marionette'
 
     focus: (ev) ->
       return if @_grabbingFocus
-      @enterTop(ev)
+      @enter(ev)
 
     blur: (ev) ->
       @deselect(ev)
@@ -107,7 +107,6 @@ define [ 'marionette'
       fn = this[@_keyhandlers[ev.which]]
       if fn
         ev.stopPropagation()
-        ev.preventDefault()
         fn.apply this, arguments
 
     _tab: -> # nop; swallow this event
@@ -117,6 +116,7 @@ define [ 'marionette'
     right: -> # nop
 
     _up: (ev) ->
+      ev.preventDefault()
       $items = @$('.list-item')
       i = $items.index $items.filter('.active')
       if i > -1
@@ -126,6 +126,7 @@ define [ 'marionette'
           @exitTop()
 
     _down: (ev) ->
+      ev.preventDefault()
       $items = @$('.list-item')
       i = $items.index $items.filter('.active')
       if i > -1
