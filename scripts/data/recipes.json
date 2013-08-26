@@ -2,9 +2,9 @@
   {
     "name": "Caipirinha",
     "ingredients": [
-      "cachaca | {q2}{uoz} cachaça",
-      "lime | {q1} {ulime}, cut into eighths",
-      "sugar | {q1} {utsp} sugar"
+      { "tag": "cachaca", "display": "{q2}{uoz} cachaça" },
+      { "tag": "lime", "display": "{q1} {ulime}, cut into eighths" },
+      { "tag": "sugar", "display": "{q1} {utsp} sugar" }
     ],
     "instructions": "Muddle lime and sugar in a {glowball glass} until the lime is juiced. Fill to brim with crushed ice and add cachaça. Garnish with sugar cane.",
     "notes": "Proper Brazilian Caipirinhas are unmeasured and the glass is simply filled with cachaça after the ice is added."
@@ -12,78 +12,71 @@
   {
     "name": "Gin and Tonic",
     "ingredients": [
-      "gin | {q1.5}{uoz} gin",
-      "tonic | {q3}{uoz} tonic water"
+      { "tag": "gin", "display": "{q1.5}{uoz} gin" },
+      { "tag": "tonic", "display": "{q3}{uoz} tonic water" }
     ],
-    "instructions": "",
-    "notes": ""
+    "instructions": ""
   },
   {
     "name": "The Last Word",
     "ingredients": [
-      "gin | {q3/4}{uoz} gin",
-      "green chartreuse | {q3/4}{uoz} green Chartreuse",
-      "maraschino liqueur | {q3/4}{uoz} maraschino liqueur",
-      "lime juice | {q3/4}{uoz} lime juice",
-      "twist of lime"
+      { "tag": "gin", "display": "{q3/4}{uoz} gin" },
+      { "tag": "green chartreuse", "display": "{q3/4}{uoz} green Chartreuse" },
+      { "tag": "maraschino liqueur", "display": "{q3/4}{uoz} maraschino liqueur" },
+      { "tag": "lime juice", "display": "{q3/4}{uoz} lime juice" },
+      { "display": "twist of lime" }
     ],
-    "instructions": "Shake vigorously with ice. Strain into a {gcocktail glass} and garnish with lime twist.",
-    "notes": ""
+    "instructions": "Shake vigorously with ice. Strain into a {gcocktail glass} and garnish with lime twist."
   },
   {
     "name": "Ivy",
     "ingredients": [
-      "dry gin | {q1.5}{uoz} dry gin",
-      "dry vermouth | {q0.5}{uoz} dry vermouth",
-      "green chartreuse | {q0.5}{uoz} green Chartreuse",
-      "absinthe | {q1}{utsp} absinthe",
-      "{q1-2} {udashes} orange bitters"
+      { "tag": "dry gin", "display": "{q1.5}{uoz} dry gin" },
+      { "tag": "dry vermouth", "display": "{q0.5}{uoz} dry vermouth" },
+      { "tag": "green chartreuse", "display": "{q0.5}{uoz} green Chartreuse" },
+      { "tag": "absinthe", "display": "{q1}{utsp} absinthe" },
+      { "display": "{q1-2} {udashes} orange bitters" }
     ],
-    "instructions": "Shake with ice for a long time. Strain into a chilled {gcocktail glass}.",
-    "notes": ""
+    "instructions": "Shake with ice for a long time. Strain into a chilled {gcocktail glass}."
   },
   {
     "name": "Rum & Coke",
     "ingredients": [
-      "white rum | {q2}{uoz} white rum",
-      "cola | {q4}{uoz} cola"
+      { "tag": "white rum", "display": "{q2}{uoz} white rum" },
+      { "tag": "cola", "display": "{q4}{uoz} cola" }
     ],
-    "instructions": "Build ingredients in a {glowball glass} filled with ice.",
-    "notes": ""
+    "instructions": "Build ingredients in a {glowball glass} filled with ice."
   },
   {
     "name": "Dark & Stormy",
     "ingredients": [
-      "dark rum | {q1.5}{uoz} dark rum",
-      "ginger beer | {q3}{uoz} ginger beer"
+      { "tag": "dark rum", "display": "{q1.5}{uoz} dark rum" },
+      { "tag": "ginger beer", "display": "{q3}{uoz} ginger beer" }
     ],
-    "instructions": "Pour ginger beer into a {ghighball glass} filled with ice. Top off with rum.",
-    "notes": ""
+    "instructions": "Pour ginger beer into a {ghighball glass} filled with ice. Top off with rum."
   },
   {
     "name": "Long Island Iced Tea",
     "ingredients": [
-      "vodka | {q1} {upart} vodka",
-      "tequila | {q1} {upart} tequila",
-      "gin | {q1} {upart} gin",
-      "white rum | {q1} {upart} white rum",
-      "triple sec | {q1} {upart} triple sec",
-      "lemon juice | {q2} {uparts} lemon juice",
-      "simple syrup | {q1} {upart} simple syrup",
-      "cola | splash of cola"
+      { "tag": "vodka", "display": "{q1} {upart} vodka" },
+      { "tag": "tequila", "display": "{q1} {upart} tequila" },
+      { "tag": "gin", "display": "{q1} {upart} gin" },
+      { "tag": "white rum", "display": "{q1} {upart} white rum" },
+      { "tag": "triple sec", "display": "{q1} {upart} triple sec" },
+      { "tag": "lemon juice", "display": "{q2} {uparts} lemon juice" },
+      { "tag": "simple syrup", "display": "{q1} {upart} simple syrup" },
+      { "tag": "cola", "display": "splash of cola" }
     ],
-    "instructions": "Mix ingredients in a {ghighball glass} over ice.",
-    "notes": ""
+    "instructions": "Mix ingredients in a {ghighball glass} over ice."
   },
   {
     "name": "Chateau Romani",
     "ingredients": [
-      "honey whiskey | {q1} {upart} honey whiskey",
-      "amaretto | {q1} {upart} amaretto",
-      "frangelico | {q1} {upart} Frangelico",
-      "milk | milk"
+      { "tag": "honey whiskey", "display": "{q1} {upart} honey whiskey" },
+      { "tag": "amaretto", "display": "{q1} {upart} amaretto" },
+      { "tag": "frangelico", "display": "{q1} {upart} Frangelico" },
+      { "tag": "milk", "display": "milk" }
     ],
-    "instructions": "Pour alcohol in a shaker with ice and shake vigorously. Strain into a small glass and fill with milk.",
-    "notes": ""
+    "instructions": "Pour alcohol in a shaker with ice and shake vigorously. Strain into a small glass and fill with milk."
   }
 ]
