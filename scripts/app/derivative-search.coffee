@@ -1,6 +1,7 @@
 define [ 'underscore'
          'json!../data/derivatives.json' ],
-(_, derivatives) ->
+(_
+ derivatives) ->
   # derivatives are the mapping of have -> can make
   # this computes the inverse: claim can make -> must have one of
   # it's used for computing what things are no longer possible when source ingredients are removed

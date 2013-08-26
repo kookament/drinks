@@ -8,7 +8,15 @@ define [ 'underscore'
          'cs!./recipe-search'
          'cs!./derivative-search'
          'less!../styles/app.less' ],
-(_, Marionette, NavigableList, filterableDecorator, Ingredients, Recipes, Instructions, RecipeSearch, DerivativeSearch) ->
+(_
+ Marionette
+ NavigableList
+ filterableDecorator
+ Ingredients
+ Recipes
+ Instructions
+ RecipeSearch
+ DerivativeSearch) ->
   # how many ingredients you can be missing and still have something come up
   _FUDGE_FACTOR = 2
 

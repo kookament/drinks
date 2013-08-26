@@ -1,6 +1,7 @@
 define [ 'underscore'
          'json!../data/recipes.json' ],
-(_, recipes) ->
+(_
+ recipes) ->
   first = (i) ->
     if _.indexOf(i, '|') != -1
       return i.split('|')[0].trim()

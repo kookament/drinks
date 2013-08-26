@@ -2,7 +2,9 @@ define [ 'underscore'
          'backbone'
          'cs!./navigable-list'
          'less!../styles/selectable-list' ],
-(_, Backbone, NavigableList) ->
+(_
+ Backbone
+ NavigableList) ->
   # understand a click event to mean toggle the selection
   class ItemView extends NavigableList.ItemView
     className: -> super + ' selectable'

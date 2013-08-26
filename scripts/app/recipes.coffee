@@ -3,7 +3,10 @@ define [ 'underscore'
          'cs!./navigable-list'
          'hbs!../templates/recipe-list-item'
          'less!../styles/recipes' ],
-(_, Backbone, NavigableList, recipe_list_item) ->
+(_
+ Backbone
+ NavigableList
+ recipe_list_item) ->
   class Model extends Backbone.Model
     defaults: ->
       name: ''

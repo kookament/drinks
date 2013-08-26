@@ -2,7 +2,9 @@ define [ 'backbone'
          'marionette'
          'hbs!../templates/instructions'
          'less!../styles/instructions' ],
-(Backbone, Marionette, instructions) ->
+(Backbone
+ Marionette
+ instructions) ->
   class View extends Marionette.ItemView
     className: 'instructions'
     template: instructions

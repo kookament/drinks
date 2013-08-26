@@ -2,13 +2,18 @@ define [ 'underscore'
          'backbone'
          'marionette'
          'cs!./selectable-list'
-         'cs!./drink'
          'hbs!../templates/ingredient-list-item'
          'hbs!../templates/search-box'
          'hbs!../templates/search-sidebar'
          'backbone.mutators'
          'less!../styles/ingredients' ],
-(_, Backbone, Marionette, SelectableList, Drink, ingredient_list_item, search_box, search_sidebar) ->
+(_
+ Backbone
+ Marionette
+ SelectableList
+ ingredient_list_item
+ search_box
+ search_sidebar) ->
   class Model extends Backbone.Model
     defaults: ->
       name: ''
