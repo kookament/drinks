@@ -93,5 +93,27 @@
     "instructions": "Muddle the lime, simple syrup, and mint together in a shaker. Add ice and the alcohol and shake well. Pour the mixture into a {glowball glass}.",
     "notes": "Brinstar is a zone overgrown with vegetation. Having very recently been introduced to a lime-y cocktail known as a caipirinha, I decided to try combining it with another leafy drink - namely, a mojito. The resulting combination, plus a little extra, wound up being a tasty creation that I’m rather proud of.",
     "source": "drunken-moogle"
+  },
+  {
+    "name": "Vesper Martini",
+    "ingredients": [
+      { "tag": "gin", "display": "{q3} {uparts} gin" },
+      { "tag": "vodka", "display": "{q1} {upart} vodka" },
+      { "tag": "lillet", "display": "{q1/2} {upart} Lillet" },
+      { "display": "thin slice of lemon peel" }
+    ],
+    "instructions": "Shake over ice until well chilled, then strain into a deep {ggoblet} and garnish with lemon peel.",
+    "notes": "This is what James Bond used to drink before he switched to vodka martinis."
+  },
+  {
+    "name": "Corpse Reviver #2",
+    "ingredients": [
+      { "tag": "gin", "display": "{q3/4}{uoz} gin" },
+      { "tag": "lemon juice", "display": "{q3/4}{uoz} lemon juice" },
+      { "tag": "triple sec", "display": "{q3/4}{uoz} Cointreau" },
+      { "tag": "lillet", "display": "{q3/4}{uoz} Lillet" },
+      { "tag": "absinthe", "display": "dash of absinthe" }
+    ],
+    "instructions": "Shake ingredients together in a mixer with ice. Strain into chilled glass."
   }
 ]
