@@ -122,6 +122,7 @@ define [ 'underscore'
     searchController.listenTo(globals.search, 'change:search', _.debounce (
       ->
         globals.searchedIngredients.filter(
+          # this is pretty inefficient
           Ingredients.generateIngredientMatcher(globals.search.get('search'))
         )
       ), 150

@@ -1,4 +1,4 @@
-# drinks #
+# drinks
 
 Requires `bower` and `npm`.
 
@@ -11,23 +11,22 @@ http-server
 
 Then go to [http://localhost:8080/](http://localhost:8080/).
 
-## Features ##
+## Features
 
 - search by recipes you can make based on ingredients you have
 - returns recipes you can almost make (and calls out which ingredients are missing)
 - understands simple relationships between ingredients: if you have "lime", you must also have "lime juice"
 - customizable recipe collection by editing recipes.json
 
-## Future ##
+## Future
 
 - support for different types of search, including drinks for a given ingredient or an all-drinks browse mode
-- support for synonyms ("Baileys" comes up with "Irish cream")
 
-## Adding Recipes ##
+## Adding Recipes
 
-Adding recipes consists of adding things to `recipes.json` and possibly two other data files.
+Adding recipes consists of adding things to `recipes.json` and possibly other data files.
 
-### `recipes.json` ###
+### `recipes.json`
 
 This file is an array of objects with the following fields:
 
@@ -38,7 +37,7 @@ This file is an array of objects with the following fields:
 - `source`: where the drink originally came from (optional, see `sources.json` section)
 - `url`: override the URL for this source provided by `sources.json`, if any (optional, see `sources.json` section)
 
-#### Ingredients ####
+#### Ingredients
 
 Ingredient search works because all ingredients are tagged with a canonical version of the ingredient in the data. This means that, for instance, '1.5oz Baileys' might be tagged as 'irish cream' so that you can search 'Irish Cream' and still get this recipe. Not all ingredients are searchable: garnishes or common ingredients like water may be left untagged. An ingredient is a simple object with the following fields:
 
@@ -52,7 +51,7 @@ Additionally, the `display` field understands some simple formatting to embellis
 
 For now, the canonical name is exposed to the user as the searchable name, but this may change in the future.
 
-### `derivatives.json` ###
+### `derivatives.json`
 
 When adding new ingredients, check `derivatives.json` to make sure any derivatives of the new ingredient are included as such. A "derivative" is any ingredient that can be assumed given the first, e.g., "lime juice" is a derivative of "lime" and "rum" is a derivative of "white rum". This makes it easier for the user when they search specific ingredients to receive results that are less specific. Use canonical names (as described in Ingredients, above) when declaring derivatives.
 
@@ -62,3 +61,7 @@ If you'd like to add attribution for a drink, add a value for the `source` field
 
 - `name`: the name of the source
 - `url`: the URL of the source's site (optional)
+
+### `synonyms.json`
+
+This file is a map from canonical name to arrays of synonyms. A user is able to search for any synonyms and the canonical name will come up instead.

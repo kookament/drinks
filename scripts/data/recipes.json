@@ -74,7 +74,7 @@
     "ingredients": [
       { "tag": "honey whiskey", "display": "{q1} {upart} honey whiskey" },
       { "tag": "amaretto", "display": "{q1} {upart} amaretto" },
-      { "tag": "frangelico", "display": "{q1} {upart} Frangelico" },
+      { "tag": "noisette", "display": "{q1} {upart} Frangelico" },
       { "tag": "milk", "display": "milk" }
     ],
     "instructions": "Pour alcohol in a shaker with ice and shake vigorously. Strain into a small glass and fill with milk.",

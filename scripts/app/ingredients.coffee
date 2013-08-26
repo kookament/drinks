@@ -2,6 +2,7 @@ define [ 'underscore'
          'backbone'
          'marionette'
          'cs!./selectable-list'
+         'json!../data/synonyms.json'
          'hbs!../templates/ingredient-list-item'
          'hbs!../templates/search-box'
          'hbs!../templates/search-sidebar'
@@ -11,6 +12,7 @@ define [ 'underscore'
  Backbone
  Marionette
  SelectableList
+ synonyms
  ingredient_list_item
  search_box
  search_sidebar) ->
@@ -120,15 +122,18 @@ define [ 'underscore'
         @search.currentView.$('input').val('')
         @search.currentView.focusInput()
 
-  # todo: clean this code up a bit once the model fields have stabilized
   generateIngredientMatcher = (searchString) ->
     if not searchString
       return -> return true
     else
       searchString = searchString.toLowerCase()
       return (m) ->
-        if m.get('tag').indexOf(searchString) != -1
+        tag = m.get('tag')
+        if tag.indexOf(searchString) != -1
           return true
+        for s in synonyms[tag] ? []
+          if s.indexOf(searchString) != -1
+            return true
         return false
 
   return {

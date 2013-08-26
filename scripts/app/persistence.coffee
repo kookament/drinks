@@ -19,7 +19,8 @@ define [ 'underscore'
     load: ->
       if localStorage[_LOCAL_STORAGE_NAME]
         for tag in JSON.parse localStorage[_LOCAL_STORAGE_NAME]
-          @ingredients.findWhere(tag: tag).set 'selected', true
+          # we qualify with ? because it's possible our ingredient set has changed since we stored it
+          @ingredients.findWhere(tag: tag)?.set 'selected', true
 
   return {
     Ingredients: Ingredients
