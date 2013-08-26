@@ -14,7 +14,7 @@ define [ 'backbone'
     onRender: ->
       @$('.ingredient[data-tag]').each (i, el) =>
         $el = $(el)
-        if $el.data('tag') and not @available.findWhere(name: $el.data('tag'))
+        if $el.data('tag') and not @available.findWhere(tag: $el.data('tag'))
           $el.addClass 'unavailable'
 
   class EmptyView extends Marionette.ItemView

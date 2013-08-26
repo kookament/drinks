@@ -13,12 +13,13 @@ define [ 'underscore'
     save: ->
       localStorage[_LOCAL_STORAGE_NAME] = JSON.stringify _.chain(@ingredients.models)
         .filter((m) -> m.get 'selected')
-        .map((m) -> m.get 'name')
+        .map((m) -> m.get 'tag')
         .value()
 
     load: ->
-      for name in JSON.parse localStorage[_LOCAL_STORAGE_NAME]
-        @ingredients.findWhere(name: name).set 'selected', true
+      if localStorage[_LOCAL_STORAGE_NAME]
+        for tag in JSON.parse localStorage[_LOCAL_STORAGE_NAME]
+          @ingredients.findWhere(tag: tag).set 'selected', true
 
   return {
     Ingredients: Ingredients

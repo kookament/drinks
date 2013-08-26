@@ -16,7 +16,7 @@ define [ 'underscore'
  search_sidebar) ->
   class Model extends Backbone.Model
     defaults: ->
-      name: ''
+      tag: ''
       selected: false
       implied: false
 
@@ -128,7 +128,7 @@ define [ 'underscore'
     else
       searchString = searchString.toLowerCase()
       return (m) ->
-        if m.get('name').indexOf(searchString) != -1
+        if m.get('tag').indexOf(searchString) != -1
           return true
         return false
 

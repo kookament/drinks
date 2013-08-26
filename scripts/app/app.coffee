@@ -34,7 +34,7 @@ define [ 'underscore'
     # initialize global state
     search = new Ingredients.SearchModel
 
-    ingredients = RecipeSearch.ingredients.map (n) -> { name: n }
+    ingredients = RecipeSearch.ingredients.map (n) -> { tag: n }
 
     ingredients = new Backbone.Collection ingredients,
       model: Ingredients.Model
@@ -56,14 +56,14 @@ define [ 'underscore'
     # this was originally debounced but that broke local storage loading: is it a performance problem?
     derivativeController.listenTo ingredients, 'change:selected', (model, selected) ->
       availableIngredients.filter(availableFilter)
-      have = availableIngredients.pluck 'name'
+      have = availableIngredients.pluck 'tag'
       if selected
-        additions = DerivativeSearch.computeAdditions model.get('name'), have
-        for m in ingredients.filter((m) -> m.get('name') in additions)
+        additions = DerivativeSearch.computeAdditions model.get('tag'), have
+        for m in ingredients.filter((m) -> m.get('tag') in additions)
           m.set 'implied', true
       else
-        removals = DerivativeSearch.computeRemovals model.get('name'), have
-        for m in ingredients.filter((m) -> m.get('name') in removals)
+        removals = DerivativeSearch.computeRemovals model.get('tag'), have
+        for m in ingredients.filter((m) -> m.get('tag') in removals)
           m.set 'implied', false
 
     searchController = _.extend {}, Backbone.Events
@@ -71,13 +71,13 @@ define [ 'underscore'
     searchController.listenTo(search, 'change:search', _.debounce (
       ->
         searchedIngredients.filter(
-          Ingredients.generateIngredientMatcher(search.get('search'), 'name')
+          Ingredients.generateIngredientMatcher(search.get('search'))
         )
         search.set { loading: false }
       ), 150
     )
     searchController.listenTo availableIngredients, 'add remove reset', ->
-      newRecipes = RecipeSearch.find(availableIngredients.pluck('name'), _FUDGE_FACTOR)
+      newRecipes = RecipeSearch.find(availableIngredients.pluck('tag'), _FUDGE_FACTOR)
       newRecipes = _.chain(newRecipes).sortBy('name').sortBy('missing').value()
       lastMissing = -1
       i = 0
