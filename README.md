@@ -1,6 +1,6 @@
 # drinks
 
-Requires `bower` and `npm`.
+Requires `npm` and `bower` (`npm install -g bower`).
 
 To run:
 ```
