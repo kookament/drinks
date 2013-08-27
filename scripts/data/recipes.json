@@ -116,5 +116,18 @@
       { "tag": "absinthe", "display": "dash of absinthe" }
     ],
     "instructions": "Shake ingredients together in a mixer with ice. Strain into chilled {gcocktail glass}."
+  },
+  {
+    "name": "Improved Whiskey Cocktail",
+    "ingredients": [
+      { "tag": "bourbon", "display": "{q2}{uoz} bourbon" },
+      { "tag": "simple syrup", "display": "{q1}{utsp} simple syrup" },
+      { "tag": "maraschino liqueur", "display": "{q1/2}{utsp} maraschino liqueur" },
+      { "display": "{q2} {udashes} Angostura bitters" },
+      { "tag": "absinthe", "display": "{q1} {udash} absinthe" }
+    ],
+    "instructions": "Combine liquid ingredients in an ice-filled mixing glass and stir until cold. Strain into a chilled {gcocktail glass}. Cut a thin slice of lemon zest over the surface of the drink and drop it into the glass.",
+    "source": "cocktalia",
+    "url": "http://www.cocktailia.com/cocktail-recipes/improved-whiskey-cocktail"
   }
 ]
