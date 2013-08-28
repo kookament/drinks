@@ -129,5 +129,15 @@
     "instructions": "Combine liquid ingredients in an ice-filled mixing glass and stir until cold. Strain into a chilled {gcocktail glass}. Cut a thin slice of lemon zest over the surface of the drink and drop it into the glass.",
     "source": "cocktalia",
     "url": "http://www.cocktailia.com/cocktail-recipes/improved-whiskey-cocktail"
+  },
+  {
+    "name": "Mudslide",
+    "ingredients": [
+      { "tag": "irish cream", "display": "{q1} {upart} Baileys" },
+      { "tag": "kahlua", "display": "{q1} {upart} Kahlua" },
+      { "tag": "vodka", "display": "{q1} {upart} vodka" },
+      { "tag": "milk", "display": "{q1} {upart} milk" }
+    ],
+    "instructions": "Shake all ingredients with ice and pour over ice in a {gcocktail glass}. Garnish with a little chocolate syrup on the inside of the glass."
   }
 ]
