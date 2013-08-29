@@ -28,7 +28,7 @@ define [ 'underscore'
         missed++
     return missed
 
-  find = (ingredients, flex = 0) ->
+  withAny = (ingredients, flex = 0) ->
     return _.chain(ingredients)
       .map((i) -> recipesForIngredients[i])
       .flatten(true)
@@ -38,8 +38,19 @@ define [ 'underscore'
       .filter((r) -> r.missing <= flex)
       .value()
 
+  withAll = (ingredients) ->
+    return _.chain(ingredients)
+      .map((i) -> recipesForIngredients[i])
+      .flatten(true)
+      .groupBy('name')
+      .values()
+      .filter((a) -> a.length == ingredients.length)
+      .pluck('0')
+      .value()
+
   return {
     recipes: recipes
     ingredients: ingredients
-    find: find
+    withAny: withAny
+    withAll: withAll
   }

@@ -92,7 +92,7 @@ define [ 'underscore'
 
   initSearch = (globals) ->
     resetRecipes = ->
-      newRecipes = RecipeSearch.find(globals.availableIngredients.pluck('tag'), _FUDGE_FACTOR)
+      newRecipes = RecipeSearch.withAny(globals.availableIngredients.pluck('tag'), _FUDGE_FACTOR)
       newRecipes = _.chain(newRecipes).sortBy('name').sortBy('missing').value()
 
       for r in newRecipes
