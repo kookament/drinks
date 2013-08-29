@@ -10,5 +10,9 @@
   "cocktalia": {
     "name": "Cocktalia",
     "url": "http://cocktalia.com"
+  },
+  "saveur": {
+    "name": "Saveur",
+    "url": "http://www.saveur.com"
   }
 }

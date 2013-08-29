@@ -25,7 +25,9 @@
       { "tag": "maraschino liqueur", "display": "{q3/4}{uoz} maraschino liqueur" },
       { "tag": "lime juice", "display": "{q3/4}{uoz} lime juice" }
     ],
-    "instructions": "Shake vigorously with ice. Strain into a {gcocktail glass} and garnish with a twist of lime."
+    "instructions": "Shake vigorously with ice. Strain into a {gcocktail glass} and garnish with a twist of lime.",
+    "source": "saveur",
+    "url": "http://www.saveur.com/article/Recipes/The-Last-Word-Cocktail"
   },
   {
     "name": "Ivy",
@@ -139,5 +141,18 @@
       { "tag": "milk", "display": "{q1} {upart} milk" }
     ],
     "instructions": "Shake all ingredients with ice and pour over ice in a {gcocktail glass}. Garnish with a little chocolate syrup on the inside of the glass."
+  },
+  {
+    "name": "Lumière",
+    "ingredients": [
+      { "tag": "gin", "display": "{q1.5}{uoz} gin" },
+      { "tag": "elderflower liqueur", "display": "{q1}{uoz} St. Germain" },
+      { "tag": "lime juice", "display": "{q3/4}{uoz} fresh lime juice" },
+      { "tag": "green chartreuse", "display": "{q3/4}{uoz} green Chartreuse" },
+      { "display": "{udash} of orange bitters" }
+    ],
+    "instructions":"Combine all ingredients in a large glass filled with ice. Stir thoroughly and strain the mixture into a {gcoupe}. Garnish with a lime twist.",
+    "source": "saveur",
+    "url": "http://www.saveur.com/article/Recipes/The-Lumiere"
   }
 ]
