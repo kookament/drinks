@@ -151,8 +151,19 @@
       { "tag": "green chartreuse", "display": "{q3/4}{uoz} green Chartreuse" },
       { "display": "{udash} of orange bitters" }
     ],
-    "instructions":"Combine all ingredients in a large glass filled with ice. Stir thoroughly and strain the mixture into a {gcoupe}. Garnish with a lime twist.",
+    "instructions": "Combine all ingredients in a large glass filled with ice. Stir thoroughly and strain the mixture into a {gcoupe}. Garnish with a lime twist.",
     "source": "saveur",
     "url": "http://www.saveur.com/article/Recipes/The-Lumiere"
+  },
+  {
+    "name": "Margarita",
+    "ingredients": [
+      { "tag": "tequila", "display": "{q1} {upart} blanco tequila" },
+      { "tag": "triple sec", "display": "{q1} {upart} triple sec" },
+      { "tag": "lime juice", "display": "{q1} {upart} lime juice" },
+      { "tag": "simple syrup", "display": "{q1/2} {upart} simple syrup" },
+      { "tag": "salt", "display": "salt" }
+    ],
+    "instructions": "Rim a {gmargarita glass} with salt. Shake all ingredients with ice and strain into the glass. Garnish with a wheel of lime."
   }
 ]
