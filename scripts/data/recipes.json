@@ -165,5 +165,22 @@
       { "tag": "salt", "display": "salt" }
     ],
     "instructions": "Rim a {gmargarita glass} with salt. Shake all ingredients with ice and strain into the glass. Garnish with a wheel of lime."
+  },
+  {
+    "name": "Bee's Knees",
+    "ingredients": [
+      { "tag": "gin", "display": "{q1.5}{uoz} gin" },
+      { "tag": "lemon juice", "display": "{q0.5}{uoz} lemon juice" },
+      { "tag": "honey syrup", "display": "{q0.75}{uoz} honey syrup" }
+    ],
+    "instructions": "Shake ingredients well with ice. Strain into a chilled {gcocktail glass} and garnish with a wedge of lemon."
+  },
+  {
+    "name": "Death in the Afternoon",
+    "ingredients": [
+      { "tag": "absinthe", "display": "{q1} {ushot} absinthe" },
+      { "tag": "sparkling wine", "display": "Champagne" }
+    ],
+    "instructions": "Pour one jigger absinthe into a Champagne glass. Add iced Champagne until it attains the proper opalescent milkiness. Drink three to five of these slowly."
   }
 ]
