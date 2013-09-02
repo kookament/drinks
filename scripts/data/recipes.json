@@ -182,5 +182,17 @@
       { "tag": "sparkling wine", "display": "Champagne" }
     ],
     "instructions": "Pour one jigger absinthe into a Champagne glass. Add iced Champagne until it attains the proper opalescent milkiness. Drink three to five of these slowly."
+  },
+  {
+    "name": "Angostura Sour",
+    "ingredients": [
+      { "tag": "egg white", "display": "{q1} egg white" },
+      { "tag": "angostura bitters", "display": "{q1.5}{uoz} Angostura bitters" },
+      { "tag": "lime juice", "display": "{q3/4}{uoz} lime juice" },
+      { "tag": "simple syrup", "display": "{q1}{uoz} simple syrup" }
+    ],
+    "instructions": "Pour the egg white and lime juice into a cocktail shaker and shake for 30 seconds. Add the bitters and syrup, fill with ice and shake hard for another 30 seconds. Strain into a chilled {gcocktail glass}.",
+    "source": "nytimes",
+    "url": "http://www.nytimes.com/2010/12/01/dining/01partiesrex3.html"
   }
 ]

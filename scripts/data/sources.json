@@ -14,5 +14,9 @@
   "saveur": {
     "name": "Saveur",
     "url": "http://www.saveur.com"
+  },
+  "nytimes": {
+    "name": "NY Times",
+    "url": "http://nytimes.com/pages/dining/"
   }
 }
