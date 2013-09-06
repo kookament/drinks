@@ -194,5 +194,44 @@
     "instructions": "Pour the egg white and lime juice into a cocktail shaker and shake for 30 seconds. Add the bitters and syrup, fill with ice and shake hard for another 30 seconds. Strain into a chilled {gcocktail glass}.",
     "source": "nytimes",
     "url": "http://www.nytimes.com/2010/12/01/dining/01partiesrex3.html"
+  },
+  {
+    "name": "Manhattan",
+    "ingredients": [
+      { "tag": "whiskey", "display": "{q2 1/2}{uoz} whiskey" },
+      { "tag": "sweet vermouth", "display": "{q1}{uoz} sweet vermouth" },
+      { "display": "{q1} {udash} Angostura bitters" }
+    ],
+    "instructions": "Stir gently over ice. Strain into a chilled {gcocktail glass} and garnish with a Maraschino cherry."
+  },
+  {
+    "name": "Brooklyn",
+    "ingredients": [
+      { "tag": "whiskey", "display": "{q2}{uoz} whiskey" },
+      { "tag": "dry vermouth", "display": "{q1}{uoz} dry vermouth" },
+      { "tag": "maraschino liqueur", "display": "{q1/4}{uoz} Maraschino liqueur" },
+      { "display": "{q2-3} {udashes} Angostura bitters" }
+    ],
+    "instructions": "Stir gently over ice. Strain into a chilled {gcocktail glass}.",
+    "notes": "The bitters may be replaced with 1/4oz Amer Picon, a French version of Italy's Amaro."
+  },
+  {
+    "name": "White Lady",
+    "ingredients": [
+      { "tag": "dry gin", "display": "{q2}{uoz} London dry gin" },
+      { "tag": "triple sec", "display": "{q1/2}{uoz} Cointreau" },
+      { "tag": "lemon juice", "display": "{q1/2}{uoz} lemon juice" },
+      { "tag": "egg white", "display": "{q1} egg white" }
+    ],
+    "instructions": "Shake well with cracked ice, then strain into a chilled {gcocktail glass}."
+  },
+  {
+    "name": "B-52",
+    "ingredients": [
+      { "tag": "kahlua", "display": "{q1} {upart} Kahlua" },
+      { "tag": "irish cream", "display": "{q1} {upart} Baileys" },
+      { "tag": "grand marnier", "display": "{q1} {upart} Grand Marnier" }
+    ],
+    "instructions": "Layer ingredients into a shot glass (Kahlua, then Baileys, then Grand Marnier)."
   }
 ]
