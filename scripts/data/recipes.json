@@ -233,5 +233,18 @@
       { "tag": "grand marnier", "display": "{q1} {upart} Grand Marnier" }
     ],
     "instructions": "Layer ingredients into a shot glass (Kahlua, then Baileys, then Grand Marnier)."
+  },
+  {
+    "name": "La Palabra",
+    "ingredients": [
+      { "tag": "mezcal", "display": "{q1}{uoz} mezcal" },
+      { "tag": "green chartreuse", "display": "{q1 1/4}{uoz} green Chartreuse" },
+      { "tag": "triple sec", "display": "{q1}{uoz} Combier" },
+      { "tag": "lime juice", "display": "{q3/4}{uoz} lime juice" }
+    ],
+    "instructions": "Shake ingredients with ice, then strain into a {gcocktail glass}.",
+    "notes": "A variant on the Last Word.",
+    "source": "serious-eats",
+    "url": "http://www.seriouseats.com/recipes/2011/07/la-palabra-no-9-park-cocktail-recipe.html"
   }
 ]

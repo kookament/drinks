@@ -18,5 +18,9 @@
   "nytimes": {
     "name": "NY Times",
     "url": "http://nytimes.com/pages/dining/"
+  },
+  "serious-eats": {
+    "name": "serious eats",
+    "url": "http://www.seriouseats.com"
   }
 }
