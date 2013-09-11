@@ -258,5 +258,18 @@
     "notes": "A rye-heavy bourbon such as Bulleit, Buffalo Trace or Basil Hayden is recommended.",
     "source": "serious-eats",
     "url": "http://www.seriouseats.com/recipes/2011/03/time-for-a-drink-the-revolver-bourbon-cocktail-tia-maria-kahlua-orange.html"
+  },
+  {
+    "name": "Geek Squad",
+    "ingredients": [
+      { "tag": "mezcal", "display": "{q4} {uparts} mezcal" },
+      { "tag": "green chartreuse", "display": "{q2} {uparts} green Chartreuse" },
+      { "tag": "lime juice", "display": "{q4} {upart} lime juice" },
+      { "tag": "simple syrup", "display": "{q1} {upart} simple syrup" },
+      { "tag": "cynar", "display": "{q?} {upart} Cynar" }
+    ],
+    "notes": "Work in progress.",
+    "instructions": "",
+    "source": "clover-club"
   }
 ]
