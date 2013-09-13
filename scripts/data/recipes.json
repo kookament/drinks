@@ -271,5 +271,14 @@
     "notes": "Work in progress.",
     "instructions": "",
     "source": "clover-club"
+  },
+  {
+    "name": "Chrysanthemum",
+    "ingredients": [
+      { "tag": "dry vermouth", "display": "{q2}{uoz} dry vermouth" },
+      { "tag": "benedictine", "display": "{q1}{uoz} Bénédictine" },
+      { "tag": "absinthe", "display": "{q3} {udashes} absinthe" }
+    ],
+    "instructions": "Stir ingredients with ice until well chilled, then strain into a chilled {gcocktail glass} and garnish with an orange peel."
   }
 ]
