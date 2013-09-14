@@ -19,12 +19,18 @@
   }
 
   .list-item.ingredient {
+    white-space: nowrap;
+
     .list-icon-container {
       width: 26px;
       .list-icon {
         padding-left: 8px;
         visibility: hidden;
       }
+    }
+
+    .match {
+      font-weight: bold;
     }
 
     &.selected, &.implied, &:hover, &.active {

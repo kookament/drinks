@@ -1,2 +1,10 @@
-<td class="list-icon-container"><i class="list-icon"/></td>
-<td class="tag">{{tag}}</td>
+<td class="list-icon-container">
+  <i class="list-icon"/>
+</td>
+<td class="list-label match-string">
+  {{#if synonym}}
+  <span class="tag">{{tag}}</span>
+  (as{{/if}}
+  {{! One giant line so we don't have weird whitespace. }}
+  <span class="prefix">{{prefix}}</span><span class="match">{{match}}</span><span class="suffix">{{suffix}}</span>{{#if synonym}}){{/if}}
+</td>

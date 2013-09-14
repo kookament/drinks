@@ -25,6 +25,15 @@ define [ 'underscore'
     mutators:
       available: -> @get('selected') or @get('implied')
 
+  class MatchModel extends Model
+    defaults: ->
+      _.extend super, {
+        synonym: false
+        prefix: ''
+        match: ''
+        suffix: ''
+      }
+
   class SearchModel extends Backbone.Model
     defaults:
       search: ''
@@ -124,20 +133,39 @@ define [ 'underscore'
 
   generateIngredientMatcher = (searchString) ->
     if not searchString
-      return -> return true
+      return (m) ->
+        return {
+          synonym: false
+          prefix: m.get('tag')
+          match: ''
+          suffix: ''
+        }
     else
       searchString = searchString.toLowerCase()
       return (m) ->
         tag = m.get('tag')
-        if tag.indexOf(searchString) != -1
-          return true
+        i = tag.indexOf(searchString)
+        if i != -1
+          return {
+            synonym: false
+            prefix: tag.slice(0, i)
+            match: tag.slice(i, i + searchString.length)
+            suffix: tag.slice(i + searchString.length)
+          }
         for s in synonyms[tag] ? []
-          if s.indexOf(searchString) != -1
-            return true
+          i = s.indexOf(searchString)
+          if i != -1
+            return {
+              synonym: true
+              prefix: s.slice(0, i)
+              match: s.slice(i, i + searchString.length)
+              suffix: s.slice(i + searchString.length)
+            }
         return false
 
   return {
     Model: Model
+    MatchModel: MatchModel
     SearchModel: SearchModel
     SearchSidebar: SearchSidebar
     generateIngredientMatcher: generateIngredientMatcher

@@ -39,7 +39,8 @@ define [ 'underscore'
     ingredients = new Backbone.Collection ingredients,
       model: Ingredients.Model
 
-    searchedIngredients = filterableDecorator ingredients
+    searchedIngredients = new Backbone.Collection [],
+      model: Ingredients.MatchModel
 
     availableFilter = (m) -> m.get('available')
     availableIngredients = filterableDecorator ingredients
@@ -72,6 +73,11 @@ define [ 'underscore'
       .flatten(true)
       .each((i) -> globals.ingredients.findWhere(tag: i)?.set 'implied', true)
     globals.availableIngredients.filter()
+
+    globals.searchedIngredients.reset(
+      globals.ingredients.map (m) ->
+        return _.defaults { prefix: m.get('tag') }, m.attributes
+    )
 
     derivativeController = _.extend {}, Backbone.Events
     derivativeController.listenTo globals.ingredients, 'change:implied', _.debounce (
@@ -124,12 +130,17 @@ define [ 'underscore'
     searchController = _.extend {}, Backbone.Events
     searchController.listenTo(globals.search, 'change:search', _.debounce (
       ->
-        globals.searchedIngredients.filter(
-          # this is pretty inefficient
-          Ingredients.generateIngredientMatcher(globals.search.get('search'))
-        )
+        # this is pretty inefficient
+        globals.searchedIngredients.reset _.chain(globals.ingredients.models)
+          .map(Ingredients.generateIngredientMatcher(globals.search.get('search')))
+          .zip(globals.ingredients.models)
+          .filter(([match, model]) -> !!match)
+          .map(([match, model]) -> new Ingredients.MatchModel _.defaults match, model.attributes)
+          .value()
       ), 150
     )
+    searchController.listenTo globals.searchedIngredients, 'change:selected', (m) ->
+      globals.ingredients.findWhere(tag: m.get('tag')).set 'selected', m.get('selected')
     searchController.listenTo globals.availableIngredients, 'add remove reset', resetRecipes
 
   initViews = (globals) ->
