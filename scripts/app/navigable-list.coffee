@@ -33,8 +33,6 @@ define [ 'marionette'
     events: ->
       'keydown': 'keydown'
       'click .list-item': 'click'
-      'focus': 'focus'
-      'blur': 'blur'
 
     getItemView: (item) ->
       if item instanceof HeaderModel
@@ -43,11 +41,7 @@ define [ 'marionette'
         return super
 
     _grabFocus: (ev = null) ->
-      # this is gross, but I want it to enterTop when we get focused...
-      if ev?.type != 'focus' and ev?.type != 'blur'
-        @_grabbingFocus = true
-        @$el.focus()
-        @_grabbingFocus = false
+      @$el.focus()
 
     isActive: ->
       return !!@$('.list-item.active').length
@@ -88,13 +82,6 @@ define [ 'marionette'
     exitBottom: ->
       @deselect()
       @enterTop()
-
-    focus: (ev) ->
-      return if @_grabbingFocus
-      @enter(ev)
-
-    blur: (ev) ->
-      @deselect(ev)
 
     _keyhandlers:
       '9': '_tab'
