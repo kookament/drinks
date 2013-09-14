@@ -230,7 +230,7 @@
     "ingredients": [
       { "tag": "coffee liqueur", "display": "{q1} {upart} Kahlua" },
       { "tag": "irish cream", "display": "{q1} {upart} Baileys" },
-      { "tag": "grand marnier", "display": "{q1} {upart} Grand Marnier" }
+      { "tag": "triple sec", "display": "{q1} {upart} Grand Marnier" }
     ],
     "instructions": "Layer ingredients into a shot glass (Kahlua, then Baileys, then Grand Marnier)."
   },
@@ -280,5 +280,19 @@
       { "tag": "absinthe", "display": "{q3} {udashes} absinthe" }
     ],
     "instructions": "Stir ingredients with ice until well chilled, then strain into a chilled {gcocktail glass} and garnish with an orange peel."
+  },
+  {
+    "name": "El Presidente",
+    "ingredients": [
+      { "tag": "white rum", "display": "{q1 1/2}{uoz} white rum" },
+      { "tag": "white vermouth", "display": "{q1}{uoz} white vermouth" },
+      { "tag": "triple sec", "display": "{q1/2} {uoz} orange curaçao" },
+      { "tag": "grenadine", "display": "{q1} {ubarspoon} grenadine" },
+      { "display": "{q1} {udash} orange bitters" }
+    ],
+    "instructions": "Combine ingredients in an ice-filled mixing glass and stir until cold. Strain into a chilled {gcocktail glass}. Optionally garnish with an orange zest and piece of pineapple.",
+    "notes": "Dry vermouth also works. When using dry vermouth, the drink benefits from increasing the amount of rum by 1/4 ounce or so, but it works well either way.",
+    "source": "cocktalia",
+    "url": "http://www.cocktailia.com/cocktail-recipes/el-presidente"
   }
 ]
