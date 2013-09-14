@@ -139,9 +139,14 @@ define [ 'underscore'
           .value()
       ), 150
     )
+    # propagate selection from us to the backing models
     searchController.listenTo globals.searchedIngredients, 'change:selected', (m) ->
       globals.ingredients.findWhere(tag: m.get('tag')).set 'selected', m.get('selected')
-    searchController.listenTo globals.availableIngredients, 'add remove reset', resetRecipes
+    # accept any and all backing model changes to our displayed models
+    searchController.listenTo globals.ingredients, 'change', (m) ->
+      globals.searchedIngredients.findWhere(tag: m.get('tag')).set m.changed
+    # deboucne to avoid double-updates, which can happen when we add implied ingredients
+    searchController.listenTo globals.availableIngredients, 'add remove reset', _.debounce resetRecipes, 25
 
   initViews = (globals) ->
     # we have to initialize these in a weird order cause they reference each other
@@ -191,6 +196,8 @@ define [ 'underscore'
       else
         globals.app.instructions.show(new Instructions.EmptyView)
     ), 0
+
+  console.log "Searching #{RecipeSearch.recipes.length} cocktails with #{RecipeSearch.ingredients.length} ingredients."
 
   return ->
     globals = initApp()
