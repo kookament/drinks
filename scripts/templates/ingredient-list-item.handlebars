@@ -4,7 +4,8 @@
 <td class="list-label match-string">
   {{#if synonym}}
   <span class="tag">{{tag}}</span>
-  (as{{/if}}
+  <br>
+  <div class="match-subscript">(as{{/if}}
   {{! One giant line so we don't have weird whitespace. }}
-  <span class="prefix">{{prefix}}</span><span class="match">{{match}}</span><span class="suffix">{{suffix}}</span>{{#if synonym}}){{/if}}
+  <span class="prefix">{{prefix}}</span><span class="match">{{match}}</span><span class="suffix">{{suffix}}</span>{{#if synonym}})</div>{{/if}}
 </td>
