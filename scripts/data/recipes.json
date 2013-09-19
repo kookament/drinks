@@ -294,5 +294,17 @@
     "notes": "Dry vermouth also works. When using dry vermouth, the drink benefits from increasing the amount of rum by 1/4 ounce or so, but it works well either way.",
     "source": "cocktalia",
     "url": "http://www.cocktailia.com/cocktail-recipes/el-presidente"
+  },
+  {
+    "name": "Derby",
+    "ingredients": [
+      { "tag": "bourbon", "display": "{q1}{uoz} bourbon" },
+      { "tag": "lime juice", "display": "{q3/4}{uoz} lime juice" },
+      { "tag": "sweet vermouth", "display": "{q1/2}{uoz} sweet vermouth" },
+      { "tag": "triple sec", "display": "{q1/2}{uoz} Grand Marnier" }
+    ],
+    "instructions": "Shake ingredients over ice and strain into a chilled {gcocktail glass}. Garnish with lime wedge or mint leaf.",
+    "source": "serious-eats",
+    "url": "http://www.seriouseats.com/recipes/2011/10/derby-cocktail-bourbon-vermouth-grand-marnier-lime-recipe.html"
   }
 ]
