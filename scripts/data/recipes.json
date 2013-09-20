@@ -306,5 +306,17 @@
     "instructions": "Shake ingredients over ice and strain into a chilled {gcocktail glass}. Garnish with lime wedge or mint leaf.",
     "source": "serious-eats",
     "url": "http://www.seriouseats.com/recipes/2011/10/derby-cocktail-bourbon-vermouth-grand-marnier-lime-recipe.html"
+  },
+  {
+    "name": "Ginger Gold Rush",
+    "ingredients": [
+      { "tag": "bourbon", "display": "{q3} {uparts} bourbon" },
+      { "tag": "ginger liqueur", "display": "{q2} {uparts} Domaine de Canton" },
+      { "tag": "lemon juice", "display": "{q1} {upart} lemon juice" }
+    ],
+    "instructions": "Put a brandied cherry in the bottom of a {gmartini glass}. Combine all ingredients in a cocktail shaker filled with ice. Shake vigorously and strain over the cherry into the glass.",
+    "notes": "The original recipe has the reverse proportions for the ginger and bourbon, which makes for a significantly sweeter drink.",
+    "source": "saveur",
+    "url": "http://www.saveur.com/article/Recipes/Ginger-Gold-Rush-Cocktail"
   }
 ]
