@@ -318,5 +318,21 @@
     "notes": "The original recipe has the reverse proportions for the ginger and bourbon, which makes for a significantly sweeter drink.",
     "source": "saveur",
     "url": "http://www.saveur.com/article/Recipes/Ginger-Gold-Rush-Cocktail"
+  },
+  {
+    "name": "Alamagoozlum",
+    "ingredients": [
+      { "tag": "gin", "display": "{q1}{uoz} genever" },
+      { "display": "{q1}{uoz} water" },
+      { "tag": "rum", "display": "{q3/4}{uoz} Jamacian rum" },
+      { "tag": "chartreuse", "display": "{q3/4}{uoz} yellow or green Chartreuse" },
+      { "tag": "simple syrup", "display": "{q3/4}{uoz} simple syrup" },
+      { "tag": "triple sec", "display": "{q1/4}{uoz} orange curaçao" },
+      { "tag": "angostura bitters", "display": "{q1/4}{uoz} Angostura bitters" },
+      { "tag": "egg white", "display": "{q1/4} egg white" }
+    ],
+    "instructions": "Shake very hard over ice and strain into a chilled {gcocktail glass}.",
+    "source": "sloshed",
+    "url": "http://sloshed.hyperkinetic.org/2009/10/23/alamagoozlum-cocktail/"
   }
 ]

@@ -26,5 +26,9 @@
   "serious-eats": {
     "name": "serious eats",
     "url": "http://www.seriouseats.com"
+  },
+  "sloshed": {
+    "name": "Sloshed!",
+    "url": "http://sloshed.hyperkinetic.org/"
   }
 }
