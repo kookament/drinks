@@ -334,5 +334,16 @@
     "instructions": "Shake very hard over ice and strain into a chilled {gcocktail glass}.",
     "source": "sloshed",
     "url": "http://sloshed.hyperkinetic.org/2009/10/23/alamagoozlum-cocktail/"
+  },
+  {
+    "name": "Martinez",
+    "ingredients": [
+      { "tag": "gin", "display": "{q2}{uoz} Old Tom gin" },
+      { "tag": "sweet vermouth", "display": "{q1}{uoz} sweet vermouth" },
+      { "tag": "maraschino liqueur", "display": "{q1} {uteaspoon} Maraschino liqueur" },
+      { "display": "{q2} {udashes} orange bitters" }
+    ],
+    "instructions": "Stir with ice until very cold and strain into a chilled {gcocktail glass}. Garnish with a twist of lemon.",
+    "notes": "Predecessor to the Martini."
   }
 ]
