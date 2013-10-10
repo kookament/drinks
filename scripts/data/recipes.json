@@ -345,5 +345,17 @@
     ],
     "instructions": "Stir with ice until very cold and strain into a chilled {gcocktail glass}. Garnish with a twist of lemon.",
     "notes": "Predecessor to the Martini."
+  },
+  {
+    "name": "Chartreuse Smash",
+    "ingredients": [
+      { "tag": "mint", "display": "{q10} mint leaves" },
+      { "tag": "lemon juice", "display": "{q1}{uoz} lemon juice" },
+      { "tag": "sugar", "display": "{q2}{utsp.} turbinado sugar" },
+      { "tag": "green chartreuse", "display": "{q2}{uoz} green Chartreuse" }
+    ],
+    "instructions": "Place mint, lemon and sugar in a cocktail shaker and muddle. Add Chartreuse and fill with ice. Shake thoroughly, and strain into a glass filled with crushed ice. Garnish with mint sprig.",
+    "source": "saveur",
+    "url": "http://www.saveur.com/article/Recipes/Chartreuse-Smash"
   }
 ]
