@@ -357,5 +357,18 @@
     "instructions": "Place mint, lemon and sugar in a cocktail shaker and muddle. Add Chartreuse and fill with ice. Shake thoroughly, and strain into a glass filled with crushed ice. Garnish with mint sprig.",
     "source": "saveur",
     "url": "http://www.saveur.com/article/Recipes/Chartreuse-Smash"
+  },
+  {
+    "name": "Perfect Margarita",
+    "ingredients": [
+      { "tag": "tequila", "display": "{q1} {upart} reposado tequila" },
+      { "tag": "tequila", "display": "{q1} {upart} jalapeño tequila" },
+      { "tag": "mezcal", "display": "{q1} {upart} mezcal" },
+      { "tag": "triple sec", "display": "{q3} {uparts} Grand Marnier" },
+      { "tag": "lime juice", "display": "{q3} {uparts} fresh squeezed lime juice" },
+      { "tag": "agave nectar", "display": "{q1} {upart} agave nectar" },
+      { "display": "high-quality salt" }
+    ],
+    "instructions": "Rim a {gmargarita glass} with salt. Briefly shake all ingredients with ice and strain with a fine mesh strainer into the glass. Garnish with lime or a slice of jalapeño."
   }
 ]
