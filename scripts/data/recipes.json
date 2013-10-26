@@ -322,7 +322,7 @@
   {
     "name": "Alamagoozlum",
     "ingredients": [
-      { "tag": "gin", "display": "{q1}{uoz} genever" },
+      { "tag": "genever", "display": "{q1}{uoz} genever" },
       { "display": "{q1}{uoz} water" },
       { "tag": "rum", "display": "{q3/4}{uoz} Jamacian rum" },
       { "tag": "chartreuse", "display": "{q3/4}{uoz} yellow or green Chartreuse" },
@@ -370,5 +370,18 @@
       { "display": "high-quality salt" }
     ],
     "instructions": "Rim a {gmargarita glass} with salt. Briefly shake all ingredients with ice and strain with a fine mesh strainer into the glass. Garnish with lime or a slice of jalapeño."
+  },
+  {
+    "name": "Improved Holland Gin Cocktail",
+    "ingredients": [
+      { "tag": "genever", "display": "{q2}{uoz} genever" },
+      { "tag": "absinthe", "display": "{q1/8} {utsp} absinthe" },
+      { "tag": "simple syrup", "display": "{q1/4}{uoz} simple syrup" },
+      { "tag": "maraschino liqueur", "display": "{q1/4}{uoz} maraschino liqueur" },
+      { "display": "{q2} {udashes} Angostura bitters" }
+    ],
+    "instructions": "Combine ingredients in bar glass, add good solid ice and stir until well chilled. Strain the mixture over a 2\" square ice cube in a frosted {gold fashioned glass}. Garnish with fresh lemon peel.",
+    "source": "loungerati",
+    "url": "http://loungerati.blogspot.com/2010/10/what-were-drinking-do-dutch-with-bols.html"
   }
 ]
