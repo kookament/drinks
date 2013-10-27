@@ -1,5 +1,5 @@
 define [ 'underscore'
-         'json!../data/recipes.json' ],
+         'yml!data/recipes.yml' ],
 (_
  recipes) ->
   ingredients = _.chain(recipes)

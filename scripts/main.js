@@ -32,6 +32,7 @@ require.config({
     fontawesome: '../bower_components/font-awesome/less',
     text: '../bower_components/text/text',
     json: '../bower_components/requirejs-plugins/src/json',
+    'js-yaml': '../bower_components/js-yaml/js-yaml',
     // for require-handlebars-plugin
     hbs: '../bower_components/require-handlebars-plugin/hbs',
     i18nprecompile: '../bower_components/require-handlebars-plugin/hbs/i18nprecompile',
