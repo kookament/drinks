@@ -383,5 +383,16 @@
     "instructions": "Combine ingredients in bar glass, add good solid ice and stir until well chilled. Strain the mixture over a 2\" square ice cube in a frosted {gold fashioned glass}. Garnish with fresh lemon peel.",
     "source": "loungerati",
     "url": "http://loungerati.blogspot.com/2010/10/what-were-drinking-do-dutch-with-bols.html"
+  },
+  {
+    "name": "Diamondback",
+    "ingredients": [
+      { "tag": "whiskey", "display": "{q2} {uparts} rye whiskey" },
+      { "tag": "applejack", "display": "{q1} {upart} applejack" },
+      { "tag": "chartreuse", "display": "{q1} {upart} Chartreuse" }
+    ],
+    "instructions": "Add all ingredients to a mixing glass filled with ice. Stir well, strain into a chilled cocktail glass and serve.",
+    "source": "sloshed",
+    "url": "http://sloshed.hyperkinetic.org/2011/10/21/diamondback/"
   }
 ]
