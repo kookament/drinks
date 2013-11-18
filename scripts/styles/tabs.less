@@ -1,0 +1,37 @@
+@import './theme.less';
+
+@switcher-height : 30px;
+
+.tab-switcher {
+  height       : @switcher-height;
+  width        : 100%;
+  display      : table;
+  table-layout : fixed;
+
+  .tab-option {
+    height  : 100%;
+    width   : 0;
+    display : table-cell;
+
+    .tab-name {
+      line-height    : @switcher-height;
+      color          : @almost-black;
+      text-transform : uppercase;
+      text-align     : center;
+    }
+
+    &:hover {
+      background-color : @lighter-grey;
+      cursor           : pointer;
+    }
+
+    &.selected {
+      background-color : @light-grey;
+    }
+  }
+}
+
+.tab-content {
+  height     : ~"calc(100% - @{switcher-height})";
+  overflow-y : scroll;
+}

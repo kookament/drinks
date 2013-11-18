@@ -8,6 +8,7 @@ define [ 'underscore'
          'cs!./persistence'
          'cs!./recipe-search'
          'cs!./derivative-search'
+         'cs!./tab-switcher'
          'json!../data/sources.json'
          'less!../styles/app.less' ],
 (_
@@ -20,6 +21,7 @@ define [ 'underscore'
  Persistence
  RecipeSearch
  DerivativeSearch
+ TabSwitcher
  sources) ->
   # how many ingredients you can be missing and still have something come up
   _FUDGE_FACTOR = 2
@@ -29,8 +31,7 @@ define [ 'underscore'
     app = new Marionette.Application
 
     app.addRegions
-      ingredients: '#ingredients'
-      drinks: '#drinks'
+      tabs: '#tabs'
       instructions: '#instructions'
 
     search = new Ingredients.SearchModel
@@ -150,17 +151,17 @@ define [ 'underscore'
 
   initViews = (globals) ->
     # we have to initialize these in a weird order cause they reference each other
-    globals.app.drinks.ensureEl()
+    # globals.app.drinks.ensureEl()
     mixableRecipesView = new Recipes.ListView
       collection: globals.recipes
-      $scrollContainer: globals.app.drinks.$el
+      # $scrollContainer: globals.app.tabs.$el
 
     ingredientsSearchView = new Ingredients.SearchSidebar
       model: globals.search
       collection: globals.searchedIngredients
       rightArrowKey: ->
         ingredientsSearchView.list.currentView.deselect()
-        mixableRecipesView.enter()
+        # mixableRecipesView.enter()
 
     mixableRecipesView.left = ->
       ingredientsSearchView.search.currentView.focusInput()
@@ -169,23 +170,36 @@ define [ 'underscore'
     $(window).keydown (ev) ->
       if ev.which == 38 or ev.which == 40 # arrow up, arrow down
         if globals.recipes.length
-          mixableRecipesView.enter()
+          # mixableRecipesView.enter()
+          ;
         else if searchedIngredients.length
           ingredientsSearchView.list.currentView.enter()
         else
           ingredientsSearchView.search.currentView.focusInput()
 
     # shove everything into the app
-    globals.app.ingredients.show(ingredientsSearchView)
-    globals.app.drinks.show(mixableRecipesView)
+    tabModel = new Backbone.Model
+      options : [
+        name : 'Ingredients'
+        key  : 'ingredients'
+        view : ingredientsSearchView
+      ,
+        name : 'Recipes'
+        key  : 'recipes'
+        view : mixableRecipesView
+      ]
+    tabModel.set 'selected', tabModel.get('options')[0]
+
     globals.app.instructions.show(new Instructions.EmptyView)
+    globals.app.tabs.show new TabSwitcher.TabPaneView
+      model : tabModel
 
     ingredientsSearchView.search.currentView.focusInput()
 
     # link together some actions between the views
     viewManager = _.extend {}, Backbone.Events
-    viewManager.listenTo mixableRecipesView, 'activate', ->
-      ingredientsSearchView.list.currentView.deselect()
+    # viewManager.listenTo mixableRecipesView, 'activate', ->
+    #   ingredientsSearchView.list.currentView.deselect()
     viewManager.listenTo globals.recipes, 'change:selected remove reset', _.debounce (->
       selected = globals.recipes.findWhere { selected: true }
       if selected
