@@ -36,6 +36,7 @@ define [ 'underscore'
     template: -> '<td>no recipes :(</td>'
 
   class ListView extends NavigableList.ListView
+    className : -> super + ' recipe-list'
     itemView: ItemView
     emptyView: NoRecipesView
 

@@ -6,23 +6,19 @@ define [ 'marionette'
       text: ''
 
   class ItemView extends Marionette.ItemView
-    tagName: 'tr'
     className: -> 'list-item'
 
   class HeaderView extends Marionette.ItemView
-    tagName: 'tr'
     className: -> 'list-header'
     template: (attr) -> "<td class='header-text'>#{attr.text}</td>"
 
   class EmptyView extends Marionette.ItemView
-    tagName: 'tr'
     className: -> 'empty-message'
 
   # understands keyboard navigation, can enter/exit navigation from top or bottom
   # of list, and will set the 'selected' flag on any model that is highlighted when
   # Enter is pressed
   class ListView extends Marionette.CollectionView
-    tagName: 'table'
     className: -> 'navigable-list'
     attributes:
       tabindex: 0

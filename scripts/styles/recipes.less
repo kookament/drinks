@@ -1,11 +1,41 @@
 @import './theme.less';
 
-#drinks {
+@title-font-size : 20px;
+@image-size : 60px;
+
+.navigable-list.recipe-list {
   background-color: @list-background;
 
-  .navigable-list {
-    .list-item .name {
-      padding-left: 10px;
+  .list-item {
+    padding : 4px;
+
+    .image-container, .name {
+      vertical-align: top;
+      display : inline-block;
+    }
+
+    .image-container {
+
+      img {
+        width  : @image-size;
+        height : @image-size;
+      }
+    }
+
+    .name {
+      vertical-align: top;
+      font-size : @title-font-size;
+      margin-left : 10px;
+      margin-top: (@image-size - @title-font-size) / 2;
+    }
+
+    .expandable-content {
+      height : 0;
+      overflow : hidden;
+    }
+
+    &.active .expandable-content {
+      height : initial;
     }
   }
 }
