@@ -1,15 +1,22 @@
 @import './theme.less';
+@import './utils.less';
 
 @title-font-size : 20px;
-@image-size : 60px;
+@image-size : 150px;
+@list-item-padding : 4px;
+@image-text-padding : 10px;
+
+@mobile-image-size : 60px;
+@mobile-subtitle-font-size : 12px;
+@mobile-header-font-size : 18px;
 
 .navigable-list.recipe-list {
-  background-color: @list-background;
+  background-color: @almost-white;
 
   .list-item {
-    padding : 4px;
+    padding : @list-item-padding;
 
-    .image-container, .name {
+    .image-container, .preview {
       vertical-align: top;
       display : inline-block;
     }
@@ -22,11 +29,30 @@
       }
     }
 
-    .name {
+    .preview {
+      margin-left : @image-text-padding;
+      width       : ~"calc(100% - "@image-size + @list-item-padding + @image-text-padding~")";
+    }
+
+    .drink-name {
       vertical-align: top;
       font-size : @title-font-size;
-      margin-left : 10px;
-      margin-top: (@image-size - @title-font-size) / 2;
+      margin-top: 10px;
+    }
+
+    .ingredient-list {
+      margin: 0;
+      margin-left : 18px;
+      padding : 0;
+      list-style: none;
+
+      .ingredient {
+        color: @ingredient-color;
+
+        &.unavailable {
+          color: lighten(@ingredient-color, 50%);
+        }
+      }
     }
 
     .expandable-content {
@@ -36,6 +62,56 @@
 
     &.active .expandable-content {
       height : initial;
+    }
+  }
+}
+
+// TODO: Replace this with media queries.
+body.mobile .navigable-list.recipe-list {
+  .list-header {
+    background-color : @light-grey;
+    font-size : @mobile-header-font-size;
+    line-height : @mobile-header-font-size * 2;
+    padding-left : @list-item-padding;
+    height : initial;
+    text-transform : lowercase;
+  }
+
+  .list-item {
+    &.active, &:hover {
+      background-color : inherit;
+    }
+
+    .image-container img {
+      width : @mobile-image-size;
+      height : @mobile-image-size;
+    }
+
+    .preview {
+      width : ~"calc(100% - "@mobile-image-size + @list-item-padding + @image-text-padding~")";
+    }
+
+    .drink-name {
+      .ellipsis;
+      margin-top : @list-item-padding;
+    }
+
+    .ingredient-count, .ingredient-subtitle {
+      font-size : @mobile-subtitle-font-size;
+    }
+
+    .ingredient-count {
+      color : gray;
+    }
+
+    .ingredient-subtitle {
+      .ellipsis;
+
+      span.ingredient-name {
+        &:not(:last-child):after {
+          content : ', ';
+        }
+      }
     }
   }
 }

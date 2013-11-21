@@ -1,12 +1,17 @@
-define [ 'underscore'
-         'backbone'
-         'cs!./navigable-list'
-         'hbs!../templates/recipe-list-item'
-         'less!../styles/recipes' ],
-(_
- Backbone
- NavigableList
- recipe_list_item) ->
+define [
+  'underscore'
+  'backbone'
+  'cs!./navigable-list'
+  'hbs!../templates/recipe-list-item'
+  'hbs!../templates/m/recipe-list-item'
+  'less!../styles/recipes'
+], (
+  _
+  Backbone
+  NavigableList
+  recipeListItemTemplate
+  recipeListItemTemplateMobile
+) ->
   class Model extends Backbone.Model
     defaults: ->
       name: ''
@@ -20,7 +25,7 @@ define [ 'underscore'
 
   class ItemView extends NavigableList.ItemView
     className: -> super + ' recipe'
-    template: recipe_list_item
+    template: recipeListItemTemplate
 
     events:
       'navigate-active': '_select'
@@ -31,6 +36,9 @@ define [ 'underscore'
 
     _deselect: ->
       @model.set 'selected', false
+
+  class MobileItemView extends ItemView
+    template : recipeListItemTemplateMobile
 
   class NoRecipesView extends NavigableList.EmptyView
     template: -> '<td>no recipes :(</td>'
@@ -43,6 +51,8 @@ define [ 'underscore'
     blur: -> # nop: want to keep .active when this happens
 
   return {
-    Model: Model
-    ListView: ListView
+    Model
+    ItemView
+    MobileItemView
+    ListView
   }

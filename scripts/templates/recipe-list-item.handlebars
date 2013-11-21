@@ -1,5 +1,12 @@
 <div class="image-container">
   <img>
 </div>
-<div class="name">{{name}}</div>
+<div class="preview">
+  <div class="name">{{name}}</div>
+  <ul class="ingredient-list">
+    {{#each ingredients}}
+    {{ingredient this}}
+    {{/each}}
+  </ul>
+</div>
 <div class="expandable-content">test test test</div>

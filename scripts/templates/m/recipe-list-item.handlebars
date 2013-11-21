@@ -1,0 +1,12 @@
+<div class="image-container">
+  <img>
+</div>
+<div class="preview">
+  <div class="drink-name">{{name}}</div>
+  <div class="ingredient-count">{{ingredients.length}} ingredients</div>
+  <div class="ingredient-subtitle">
+    {{#each ingredients}}
+    <span class="ingredient-name">{{this.tag}}</span>
+    {{/each}}
+  </div>
+</div>

@@ -10,7 +10,7 @@ define [ 'marionette'
 
   class HeaderView extends Marionette.ItemView
     className: -> 'list-header'
-    template: (attr) -> "<td class='header-text'>#{attr.text}</td>"
+    template: (attr) -> "<div class='header-text'>#{attr.text}</div>"
 
   class EmptyView extends Marionette.ItemView
     className: -> 'empty-message'
