@@ -3,7 +3,7 @@ define [
   'marionette'
   'hbs!../templates/tab-switcher'
   'hbs!../templates/tab-pane'
-  'less!../styles/tabs'
+  'less!../../styles/tabs'
 ], (
   _
   Marionette

@@ -3,7 +3,7 @@ define [
   'backbone'
   'marionette'
   'cs!./list'
-  'less!../styles/sticky-header-list'
+  'less!../../styles/sticky-header-list'
 ], (
   _
   Backbone
@@ -29,8 +29,6 @@ define [
         @header.show new (@_listView.getItemView(m))(model : m)
 
   class ListView extends List.ListView
-    className : -> super + ' sticky-header-list'
-
     getItemView : (m) ->
       if m instanceof HeaderModel
         return @options.headerView ? HeaderView

@@ -1,13 +1,15 @@
 define [
   'underscore'
   'backbone'
+  'cs!../shared/list'
   'cs!./navigable-list'
   'hbs!../templates/recipe-list-item'
   'hbs!../templates/m/recipe-list-item'
-  'less!../styles/recipes'
+  'less!../../styles/recipes'
 ], (
   _
   Backbone
+  List
   NavigableList
   recipeListItemTemplate
   recipeListItemTemplateMobile
@@ -37,12 +39,6 @@ define [
     _deselect: ->
       @model.set 'selected', false
 
-  class MobileItemView extends ItemView
-    template : recipeListItemTemplateMobile
-
-  class NoRecipesView extends NavigableList.EmptyView
-    template: -> '<td>no recipes :(</td>'
-
   class ListView extends NavigableList.ListView
     className : -> super + ' recipe-list'
     itemView: ItemView
@@ -50,9 +46,16 @@ define [
 
     blur: -> # nop: want to keep .active when this happens
 
+  class MobileListItemView extends List.ListItemView
+    className : -> super + ' recipe mobile'
+    template  : recipeListItemTemplateMobile
+
+  class NoRecipesView extends List.EmptyListView
+    template : -> '<td>no recipes :(</td>'
+
   return {
     Model
     ItemView
-    MobileItemView
+    MobileListItemView
     ListView
   }

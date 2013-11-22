@@ -1,7 +1,7 @@
 define [ 'underscore'
          'backbone'
          'cs!./navigable-list'
-         'less!../styles/selectable-list' ],
+         'less!../../styles/selectable-list' ],
 (_
  Backbone
  NavigableList) ->

@@ -7,7 +7,7 @@ define [ 'underscore'
          'hbs!../templates/search-box'
          'hbs!../templates/search-sidebar'
          'backbone.mutators'
-         'less!../styles/ingredients' ],
+         'less!../../styles/ingredients' ],
 (_
  Backbone
  Marionette

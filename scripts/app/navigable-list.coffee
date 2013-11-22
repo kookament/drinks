@@ -1,5 +1,5 @@
 define [ 'marionette'
-         'less!../styles/navigable-list' ],
+         'less!../../styles/navigable-list' ],
 (Marionette) ->
   class HeaderModel extends Backbone.Model
     defaults:

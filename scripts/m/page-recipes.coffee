@@ -9,6 +9,7 @@ define [
   'cs!../app/recipes'
   'cs!../app/navigable-list'
   'cs!../shared/sticky-header-list'
+  'less!../../styles/m/page-recipes'
 ], (
   Backbone
   Marionette
@@ -63,7 +64,7 @@ define [
       className  : -> super + ' recipe-list'
     ) {
       collection : globals.recipes
-      itemView   : Recipes.MobileItemView
+      itemView   : Recipes.MobileListItemView
     }
 
   return ->

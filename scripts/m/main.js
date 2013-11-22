@@ -64,7 +64,7 @@ require.config({
 });
 
 (function(w) {
-  require([ 'cs!./' + pagetype ], function(main) {
+  require([ 'cs!./page-' + pagetype ], function(main) {
     w.globals = main();
   });
 })(window);

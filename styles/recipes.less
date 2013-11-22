@@ -66,51 +66,48 @@
   }
 }
 
-// TODO: Replace this with media queries.
-body.mobile .recipe-list {
-  .list-header {
-    background-color : @light-grey;
-    font-size : @mobile-header-font-size;
-    line-height : @mobile-header-font-size * 2;
-    padding-left : @list-item-padding;
-    height : initial;
-    text-transform : lowercase;
+// TODO: Replace this with media queries?
+  // .list-header {
+  //   background-color : @light-grey;
+  //   font-size : @mobile-header-font-size;
+  //   line-height : @mobile-header-font-size * 2;
+  //   padding-left : @list-item-padding;
+  //   height : initial;
+  //   text-transform : lowercase;
+  // }
+.list-item.recipe.mobile {
+  &.active, &:hover {
+    background-color : inherit;
   }
 
-  .list-item {
-    &.active, &:hover {
-      background-color : inherit;
-    }
+  .image-container img {
+    width : @mobile-image-size;
+    height : @mobile-image-size;
+  }
 
-    .image-container img {
-      width : @mobile-image-size;
-      height : @mobile-image-size;
-    }
+  .preview {
+    width : ~"calc(100% - "@mobile-image-size + @list-item-padding + @image-text-padding~")";
+  }
 
-    .preview {
-      width : ~"calc(100% - "@mobile-image-size + @list-item-padding + @image-text-padding~")";
-    }
+  .drink-name {
+    .ellipsis;
+    margin-top : @list-item-padding;
+  }
 
-    .drink-name {
-      .ellipsis;
-      margin-top : @list-item-padding;
-    }
+  .ingredient-count, .ingredient-subtitle {
+    font-size : @mobile-subtitle-font-size;
+  }
 
-    .ingredient-count, .ingredient-subtitle {
-      font-size : @mobile-subtitle-font-size;
-    }
+  .ingredient-count {
+    color : gray;
+  }
 
-    .ingredient-count {
-      color : gray;
-    }
+  .ingredient-subtitle {
+    .ellipsis;
 
-    .ingredient-subtitle {
-      .ellipsis;
-
-      span.ingredient-name {
-        &:not(:last-child):after {
-          content : ', ';
-        }
+    span.ingredient-name {
+      &:not(:last-child):after {
+        content : ', ';
       }
     }
   }

@@ -1,7 +1,7 @@
 define [ 'backbone'
          'marionette'
          'hbs!../templates/instructions'
-         'less!../styles/instructions' ],
+         'less!../../styles/instructions' ],
 (Backbone
  Marionette
  instructions) ->

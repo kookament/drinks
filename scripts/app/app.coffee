@@ -10,7 +10,7 @@ define [ 'underscore'
          'cs!./derivative-search'
          'cs!./tab-switcher'
          'json!../data/sources.json'
-         'less!../styles/app.less' ],
+         'less!../../styles/app.less' ],
 (_
  Marionette
  NavigableList
