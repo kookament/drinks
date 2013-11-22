@@ -32,3 +32,38 @@
     color : @lighter-grey;
   }
 }
+
+@next-header-height : @list-item-height;
+
+.page-header {
+  width : 100%;
+  height : @next-header-height;
+
+  background-color : @very-light-selection;
+  color : @almost-black;
+  line-height : @next-header-height;
+
+  cursor : pointer;
+
+  .counter, .next-button {
+    display : inline-block;
+  }
+
+  .counter {
+    padding-left : 12px;
+  }
+
+  .next-button {
+    font-size : 24px;
+    text-align : right;
+
+    text-transform : uppercase;
+    padding-right : 12px;
+
+    float : right;
+  }
+}
+
+#list {
+  height : ~"calc(100% -"@next-header-height~");"
+}

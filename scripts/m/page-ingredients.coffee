@@ -47,10 +47,35 @@ define [
     className : -> super + ' ingredient-list'
     itemView  : IngredientItemView
 
+  class PageHeader extends Marionette.ItemView
+    className : 'page-header'
+    template  : -> '<div class="counter"></div><div class="next-button">recipes&nbsp;&#10217;</div>'
+
+    ui :
+      $counter : '.counter'
+
+    collectionEvents :
+      'change:selected' : '_updateCounter'
+
+    events :
+      'click' : '_goToRecipes'
+
+    onRender : ->
+      @_updateCounter()
+
+    _updateCounter : ->
+      selected = @collection.where({ selected : true }).length
+      total = @collection.length
+      @ui.$counter.text "#{selected}/#{total} ingredients"
+
+    _goToRecipes : ->
+      window.location = 'recipes.html'
+
   initializeGlobals = ->
     app = new Marionette.Application
     app.addRegions
-      body : 'body'
+      header : '#page-header'
+      list   : '#list'
 
     ingredients = new Backbone.Collection(
       RecipeSearch.ingredients.map((n) -> { tag : n })
@@ -71,7 +96,9 @@ define [
     globals.availableIngredients.filter()
 
   initializeViews = (globals) ->
-    globals.app.body.show new IngredientList
+    globals.app.header.show new PageHeader
+      collection : globals.ingredients
+    globals.app.list.show new IngredientList
       collection : globals.ingredients
 
   return ->
