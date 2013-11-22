@@ -1,0 +1,34 @@
+@import '../m/mobile-theme.less';
+
+@list-item-font-size : 24px;
+@list-item-height : 48px;
+
+@icon-size : 24px;
+@icon-spacing : 10px;
+@icon-container-width : 36px;
+
+.ingredient-list .list-item {
+  height : @list-item-height;
+  line-height : @list-item-height;
+
+  font-size : @list-item-font-size;
+
+  .ingredient-icon-wrapper, .label {
+    display : inline-block;
+  }
+
+  .ingredient-icon-wrapper {
+    width : @icon-container-width;
+
+    .icon {
+      font-size : @icon-size;
+      position : relative;
+      top : 2px;
+      left : @icon-spacing;
+    }
+  }
+
+  &:not(.selected) .icon {
+    color : @lighter-grey;
+  }
+}

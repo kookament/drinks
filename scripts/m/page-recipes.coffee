@@ -22,7 +22,6 @@ define [
   NavigableList
   StickyHeaderList
 ) ->
-
   initializeGlobals = ->
     app = new Marionette.Application
     app.addRegions

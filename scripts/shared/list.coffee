@@ -6,11 +6,6 @@ define [
 ], (
   Marionette
 ) ->
-  class ListView extends Marionette.CollectionView
-    className : -> 'list'
-    itemView  : ListItemView
-    emptyView : EmptyListView
-
   class ListItemView extends Marionette.ItemView
     className : -> 'list-item'
     template  : -> ''
@@ -18,6 +13,11 @@ define [
   class EmptyListView extends Marionette.ItemView
     className : -> 'empty-list-item'
     template  : -> ''
+
+  class ListView extends Marionette.CollectionView
+    className : -> 'list'
+    itemView  : ListItemView
+    emptyView : EmptyListView
 
   return {
     ListView
