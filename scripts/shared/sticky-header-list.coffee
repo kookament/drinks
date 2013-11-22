@@ -2,11 +2,13 @@ define [
   'underscore'
   'backbone'
   'marionette'
+  'cs!./list'
   'less!../styles/sticky-header-list'
 ], (
   _
   Backbone
   Marionette
+  List
 ) ->
   class HeaderedLayout extends Marionette.Layout
     className : -> 'sticky-headered-layout'
@@ -26,14 +28,14 @@ define [
       if first
         @header.show new (@_listView.getItemView(m))(model : m)
 
-  class ListView extends Marionette.CollectionView
-    className : -> 'sticky-header-list'
+  class ListView extends List.ListView
+    className : -> super + ' sticky-header-list'
 
     getItemView : (m) ->
       if m instanceof HeaderModel
         return @options.headerView ? HeaderView
       else
-        return @options.itemView ? ItemView
+        return @options.itemView ? List.ListItemView
 
     onShow : ->
       # Can't delegate scroll (i.e. doesn't work in the events hash).
@@ -52,9 +54,6 @@ define [
         @_firstHeaderModel = newFirst
         @_firstHeaderModel?.set 'first', true
 
-  class ItemView extends Marionette.ItemView
-    className : -> 'list-item'
-
   class HeaderView extends Marionette.ItemView
     className : -> 'header-item'
     template : (m) -> m.header
@@ -66,7 +65,6 @@ define [
   return {
     HeaderedLayout
     ListView
-    ItemView
     HeaderView
     HeaderModel
   }
