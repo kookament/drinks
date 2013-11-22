@@ -8,6 +8,7 @@ define [
   'cs!../app/ingredients'
   'cs!../app/recipes'
   'cs!../app/navigable-list'
+  'cs!../shared/sticky-header-list'
 ], (
   Backbone
   Marionette
@@ -18,6 +19,7 @@ define [
   Ingredients
   Recipes
   NavigableList
+  StickyHeaderList
 ) ->
 
   initializeGlobals = ->
@@ -51,15 +53,18 @@ define [
     mixable = RecipeSearchResults.recomputeMixableRecipes(globals.availableIngredients)
     globals.recipes.reset mixable.map((r) ->
       if r.header?
-        return new NavigableList.HeaderModel { text : r.header }
+        return new StickyHeaderList.HeaderModel { header : r.header }
       else
         return r
     )
 
   initializeViews = (globals) ->
-    globals.app.body.show  new Recipes.ListView
+    globals.app.body.show new (class L extends StickyHeaderList.HeaderedLayout
+      className  : -> super + ' recipe-list'
+    ) {
       collection : globals.recipes
       itemView   : Recipes.MobileItemView
+    }
 
   return ->
     globals = initializeGlobals()
