@@ -63,6 +63,8 @@ require.config({
   }
 });
 
-require([ 'cs!./recipes' ], function(main) {
-  main();
-});
+(function(w) {
+  require([ 'cs!./' + pagetype ], function(main) {
+    w.globals = main();
+  });
+})(window);

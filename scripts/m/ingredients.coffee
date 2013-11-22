@@ -3,23 +3,22 @@ define [
   'marionette'
   'cs!../app/filterable-decorator'
   'cs!../app/recipe-search'
-  'cs!../shared/recipe-search-results'
   'cs!../app/persistence'
   'cs!../app/ingredients'
-  'cs!../app/recipes'
   'cs!../app/navigable-list'
+  'cs!../app/selectable-list'
+  'hbs!../templates/default-ingredient-list-item'
 ], (
   Backbone
   Marionette
   filterableDecorator
   RecipeSearch
-  RecipeSearchResults
   Persistence
   Ingredients
-  Recipes
   NavigableList
+  SelectableList
+  defaultIngredientListItemTemplate
 ) ->
-
   initializeGlobals = ->
     app = new Marionette.Application
     app.addRegions
@@ -33,33 +32,21 @@ define [
     availableIngredients = filterableDecorator(ingredients)
     availableIngredients.filter((m) -> m.get('available'))
 
-    recipes = new Backbone.Collection(
-      []
-      model : Recipes.Model
-    )
-
     return {
       app
       ingredients
       availableIngredients
-      recipes
     }
 
   initializePersistence = (globals) ->
     new Persistence.Ingredients(ingredients : globals.ingredients).load()
     globals.availableIngredients.filter()
-    mixable = RecipeSearchResults.recomputeMixableRecipes(globals.availableIngredients)
-    globals.recipes.reset mixable.map((r) ->
-      if r.header?
-        return new NavigableList.HeaderModel { text : r.header }
-      else
-        return r
-    )
 
   initializeViews = (globals) ->
-    globals.app.body.show  new Recipes.ListView
-      collection : globals.recipes
-      itemView   : Recipes.MobileItemView
+    globals.app.body.show new NavigableList.ListView
+      collection : globals.ingredients
+      itemView   : class L extends SelectableList.ItemView
+        template : defaultIngredientListItemTemplate
 
   return ->
     globals = initializeGlobals()
