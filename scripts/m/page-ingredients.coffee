@@ -1,4 +1,5 @@
 define [
+  'underscore'
   'backbone'
   'marionette'
   'cs!../app/filterable-decorator'
@@ -6,9 +7,11 @@ define [
   'cs!../app/persistence'
   'cs!../app/ingredients'
   'cs!../shared/list'
+  'cs!../shared/clickable-header'
   'hbs!../templates/default-ingredient-list-item'
   'less!../../styles/m/page-ingredients'
 ], (
+  _
   Backbone
   Marionette
   filterableDecorator
@@ -16,6 +19,7 @@ define [
   Persistence
   Ingredients
   List
+  ClickableHeader
   defaultIngredientListItemTemplate
 ) ->
   class IngredientItemView extends List.ListItemView
@@ -47,28 +51,20 @@ define [
     className : -> super + ' ingredient-list'
     itemView  : IngredientItemView
 
-  class PageHeader extends Marionette.ItemView
-    className : 'page-header'
-    template  : -> '<div class="counter"></div><div class="next-button">recipes&nbsp;&#10217;</div>'
-
-    ui :
-      $counter : '.counter'
-
+  class PageHeader extends ClickableHeader.View
     collectionEvents :
       'change:selected' : '_updateCounter'
 
-    events :
-      'click' : '_goToRecipes'
-
-    onRender : ->
+    onShow : ->
+      @ui.$right.html 'recipes&nbsp;&#10217;'
       @_updateCounter()
 
     _updateCounter : ->
       selected = @collection.where({ selected : true }).length
       total = @collection.length
-      @ui.$counter.text "#{selected}/#{total} ingredients"
+      @ui.$left.text "#{selected}/#{total} ingredients"
 
-    _goToRecipes : ->
+    onClick : ->
       window.location = 'recipes.html'
 
   initializeGlobals = ->

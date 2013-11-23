@@ -1,0 +1,26 @@
+@import 'mobile-theme.less';
+
+@header-height : 36px;
+
+.clickable-header {
+  width : 100%;
+  height : @header-height;
+
+  background-color : @very-light-selection;
+  color : @almost-black;
+  line-height : @header-height;
+
+  cursor : pointer;
+
+  .left, .right {
+    display : inline-block;
+  }
+
+  .left {
+    padding-left : 12px;
+  }
+
+  .right {
+    padding-right : 12px;
+  }
+}
