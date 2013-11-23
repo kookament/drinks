@@ -8,6 +8,7 @@ define [
   'cs!../app/ingredients'
   'cs!../shared/list'
   'cs!../shared/clickable-header'
+  'cs!../shared/sticky-header-list'
   'hbs!../templates/default-ingredient-list-item'
   'less!../../styles/m/page-ingredients'
 ], (
@@ -20,6 +21,7 @@ define [
   Ingredients
   List
   ClickableHeader
+  StickyHeaderList
   defaultIngredientListItemTemplate
 ) ->
   class IngredientItemView extends List.ListItemView
@@ -46,10 +48,6 @@ define [
       @$el.toggleClass 'selected', selected
       @ui.$icon.toggleClass 'icon-check', selected
       @ui.$icon.toggleClass 'icon-check-empty', not selected
-
-  class IngredientList extends List.ListView
-    className : -> super + ' ingredient-list'
-    itemView  : IngredientItemView
 
   class PageHeader extends ClickableHeader.View
     collectionEvents :
@@ -81,10 +79,24 @@ define [
     availableIngredients = filterableDecorator(ingredients)
     availableIngredients.filter((m) -> m.get('available'))
 
+    headeredIngredients = ingredients.models.slice()
+    lastLetter = ''
+    i = 0
+    while i < headeredIngredients.length
+      letter = headeredIngredients[i].get('tag')[0].toLowerCase()
+      if letter != lastLetter
+        headeredIngredients.splice i, 0, new StickyHeaderList.HeaderModel { header : letter }
+        lastLetter = letter
+        i++
+      i++
+
+    headeredIngredients = new Backbone.Collection(headeredIngredients)
+
     return {
       app
       ingredients
       availableIngredients
+      headeredIngredients
     }
 
   initializePersistence = (globals) ->
@@ -94,8 +106,12 @@ define [
   initializeViews = (globals) ->
     globals.app.header.show new PageHeader
       collection : globals.ingredients
-    globals.app.list.show new IngredientList
-      collection : globals.ingredients
+    globals.app.list.show new (class L extends StickyHeaderList.HeaderedLayout
+      className : -> super + ' ingredient-list'
+    ) {
+      collection : globals.headeredIngredients
+      itemView   : IngredientItemView
+    }
 
   return ->
     globals = initializeGlobals()

@@ -2,43 +2,54 @@
 
 @list-item-font-size : 24px;
 @list-item-height : 48px;
+@list-header-height : 36px;
 
 @icon-size : 24px;
 @icon-spacing : 10px;
 @icon-container-width : 36px;
 
-.ingredient-list .list-item {
-  height : @list-item-height;
-  line-height : @list-item-height;
+.ingredient-list {
+  .header-item {
+    background-color : @almost-white;
+    height : @list-header-height;
+    line-height: @list-header-height;
 
-  font-size : @list-item-font-size;
+    font-size : @list-item-font-size;
 
-  .ingredient-icon-wrapper, .label {
-    display : inline-block;
+    text-transform: uppercase;
+    padding-left : 12px;
   }
 
-  .ingredient-icon-wrapper {
-    width : @icon-container-width;
+  .list-item {
+    height : @list-item-height;
+    line-height : @list-item-height;
 
-    .icon {
-      font-size : @icon-size;
-      position : relative;
-      top : 2px;
-      left : @icon-spacing;
+    font-size : @list-item-font-size;
+
+    .ingredient-icon-wrapper, .label {
+      display : inline-block;
     }
-  }
 
-  &:not(.selected) .icon {
-    color : @lighter-grey;
+    .ingredient-icon-wrapper {
+      width : @icon-container-width;
+
+      .icon {
+        font-size : @icon-size;
+        margin-top  : 2px;
+        margin-left : @icon-spacing;
+      }
+    }
+
+    &:not(.selected) .icon {
+      color : @lighter-grey;
+    }
   }
 }
 
-@next-header-height : @list-item-height;
+@next-header-height : 36px;
 
 #page-header .clickable-header {
-  .left {
-
-  }
+  height : @next-header-height;
 
   .right {
     font-size : 20px;

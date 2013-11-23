@@ -44,7 +44,13 @@ define [
     _onScroll : =>
       headerModels = @collection.filter((m) -> m instanceof HeaderModel)
       newFirst = _.chain(headerModels)
-        .map((m) => { model : m, offset : @children.findByModel(m).$el.offset().top })
+        .map((m) =>
+          $view = @children.findByModel(m).$el
+          return {
+            model  : m
+            offset : $view.offset().top - $view.height()
+          }
+        )
         .find((v, i, a) -> i < a.length - 1 and v.offset < 0 and  a[i + 1].offset >= 0)
         .value()?.model ? headerModels[0]
       if newFirst != @_firstHeaderModel
